@@ -88,17 +88,10 @@ public class Star {
 				System.out.print(" ");
 			}
 			
-			if(i<=4) {
-				for(int j=1; j<=2*i-1; j++) {
-					System.out.print("*");
-				}
-				System.out.println();
-			} else {
-				for(int j = 14 - 2*i; j>=0; j--) {
-					System.out.print("*");
-				}
-				System.out.println();
+			for(int j=1; j <= 7 - 2*jmax; j++) {
+				System.out.print("*");
 			}
+			System.out.println();
 		}
 		System.out.println();
 		
