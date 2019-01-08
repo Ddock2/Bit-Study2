@@ -115,7 +115,7 @@ public class Star {
 					System.out.print(" ");
 				}
 				
-				for(int k = 11 - 2*j - 2*i; k<=11; k++) {
+				for(int k = 11 - 2*(j + i); k<=11; k++) {
 					System.out.print("*");
 				}
 				System.out.println();
