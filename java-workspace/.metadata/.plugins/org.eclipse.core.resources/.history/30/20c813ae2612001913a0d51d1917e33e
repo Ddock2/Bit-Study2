@@ -1,9 +1,0 @@
-package com.bit.day01;
-
-public class ConstantMain {
-	
-	public static void main(String[] args) {
-		
-	}
-	
-}
