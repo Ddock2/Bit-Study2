@@ -1,4 +1,4 @@
-package com.bit.day01.hw01;
+package com.bit.day01.prob;
 
 public class Prob02 {
 	

@@ -113,6 +113,20 @@ public class ArithMain {
 		int iiNum2 = 2050000000;
 		System.out.println((iiNum1 + iiNum2) / 2);
 		System.out.println((iiNum1 + iiNum2) >>> 1);
+		System.out.println();
+		
+		System.out.println("===========================================");
+		
+		// 조건 연산자
+		int i = 0, j = 0, res = 0;
+		i = 3;
+		j = 4;
+		res = (i > j) ? i : j;
+		System.out.println("result : " + res);
+		
+		res = (i < j) ? i++ + --j : i-- + ++j;
+		System.out.println("result : " + res);
+		System.out.println("i : " + i + ", j : " + j);
 	}
 	
 }

@@ -1,4 +1,4 @@
-package com.bit.day02.example;
+package com.bit.day02.exam;
 
 import java.util.Scanner;
 
