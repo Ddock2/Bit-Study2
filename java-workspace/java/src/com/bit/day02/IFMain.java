@@ -21,9 +21,10 @@ public class IFMain {
 			System.out.println("용돈 좀 줄까?");
 		}
 		System.out.println("입력한 금액 : " + money);
+		System.out.println();
 		
 		int num = 10;
-		System.out.println("입력된 수는 ");
+		System.out.println("입력된 수는 " + num);
 		if(num < 0) {
 			System.out.println("0미만");
 		}else {
