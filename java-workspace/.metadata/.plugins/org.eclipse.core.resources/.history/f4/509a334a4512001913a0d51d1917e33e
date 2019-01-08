@@ -1,0 +1,43 @@
+package com.bit.day01;
+
+public class ArithMain {
+	
+	public static void main(String[] args) {
+		// 산술 연산자
+		int n1 = 7;
+		int n2 = 3;
+		int result = n1 + n2;
+		System.out.println("덧셈 결과 : " + result);
+		
+		result = n1 - n2;
+		System.out.println("뺄셈 결과 : " + result);
+		
+		System.out.println("곱셈 결과 : " + n1 * n2);
+		System.out.println("나눗셈 몫 결과 : " + n1 / n2);
+		System.out.println("나눗셈 나머지 결과 : " + n1 % n2);
+		System.out.println();
+		
+		// 나누기 연산
+		System.out.println(10 / 3);
+		System.out.println(10. / 3.);
+		System.out.println(10. / 3);
+		System.out.println();
+
+		// 나머지 연산
+		System.out.println(44 % 3);
+		System.out.println(-7 % 3);
+		System.out.println(7 % -3);
+		System.out.println();
+		
+		// 복합대입 연산자
+		double e = 3.1;
+		e += 2.1;
+		e *= 2;
+		System.out.println(e);
+		
+		// 관계 연산자
+		int a = 10, b = 20;
+		System.out.println("a > b : " + (a > b));
+	}
+	
+}

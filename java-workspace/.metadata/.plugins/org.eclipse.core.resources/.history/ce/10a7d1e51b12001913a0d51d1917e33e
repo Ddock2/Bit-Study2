@@ -1,0 +1,18 @@
+package com.bit.day01;
+
+/*
+ * 1. System.out.println()	: print() + 개행문자
+ * 2. System.out.print()	: 정수, 실수, 문자열
+ * 3. System.out.printf()	: 
+ */
+
+public class PrintMain {
+	
+	public static void main(String[] args) {
+		System.out.println(12);
+		System.out.print(12.34);
+		System.out.println('A');
+		System.out.print("ABC");
+	}
+	
+}

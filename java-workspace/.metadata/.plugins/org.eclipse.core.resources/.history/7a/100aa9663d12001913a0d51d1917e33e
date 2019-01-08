@@ -1,0 +1,12 @@
+package com.bit.day01;
+
+public class CastMain {
+	
+	public static void main(String[] args) {
+		double a = 10;
+		int b;
+		b = a;
+		System.out.println(b);
+	}
+	
+}

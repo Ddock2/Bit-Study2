@@ -1,0 +1,9 @@
+package com.bit.day01;
+
+public class NamingMain {
+	
+	public static void main(String[] args) {
+		
+	}
+	
+}

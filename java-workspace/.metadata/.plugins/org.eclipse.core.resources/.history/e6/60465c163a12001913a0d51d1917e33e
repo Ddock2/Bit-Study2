@@ -1,0 +1,13 @@
+package com.bit.day01;
+
+public class TypeMain {
+	
+	public static void main(String[] args) {
+		boolean bool = true;
+		System.out.println(bool);
+		
+		char c = 'A';
+		System.out.println(c);
+	}
+	
+}
