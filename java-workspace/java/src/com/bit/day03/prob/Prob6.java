@@ -1,7 +1,5 @@
 package com.bit.day03.prob;
 
-import java.util.Arrays;
-
 public class Prob6 {
 	
 	public static void main(String[] args) {

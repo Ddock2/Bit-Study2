@@ -22,7 +22,7 @@ public class Hanoi {
 	
 	
 	public static void main(String[] args) {
-		move('a', 'b', 'c', 4);
+		move('a', 'b', 'c', 3);
 		System.out.println("count : " + cnt);
 	}
 	
