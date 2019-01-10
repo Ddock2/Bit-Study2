@@ -51,6 +51,17 @@ public class VariableMain {
 		System.out.println("ch1 : " + ch1);
 		System.out.println("ch2 : " + ch2);
 		System.out.println("ch3 : " + ch3);
+		
+		// reference type (참조형, 참조변수)
+		Circle circle = new Circle();
+		circle.radius = 5;
+		circle.area = 5 * 5 * 3.14;
+		System.out.println(circle.area);
 	}
 	
+}
+
+class Circle {
+	int radius;
+	double area;
 }
