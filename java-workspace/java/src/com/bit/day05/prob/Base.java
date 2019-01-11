@@ -1,0 +1,21 @@
+package com.bit.day05.prob;
+
+// Prob5, MyBase
+
+public class Base {
+	public void service(String state) {
+		if(state.equals("낮")) {
+			day();
+		}else {
+			night();
+		}
+	}
+	
+	public void day() {
+		System.out.println("낮");
+	}
+	
+	public void night() {
+		System.out.println("night");
+	}
+}
