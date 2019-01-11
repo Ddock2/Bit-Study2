@@ -13,11 +13,14 @@ public class Prob6 {
 		String temp = s.nextLine();
 		temp = temp.replaceAll(" ", "");
 		int a, b;
-		char operator = 'X';
+		char operator = ' ';
 		char[] cTemp = temp.toCharArray();
 		
 		for(int i=0; i<temp.length(); i++) {
-			if(cTemp[i] == '+' || cTemp[i] == '-' || cTemp[i] == '*' || cTemp[i] == '/') operator = cTemp[i];
+			if(cTemp[i] == '+' || cTemp[i] == '-' || cTemp[i] == '*' || cTemp[i] == '/') {
+				operator = cTemp[i];
+				break;
+			}
 		}
 		String[] temp2 = temp.split("\\" + operator);
 		
