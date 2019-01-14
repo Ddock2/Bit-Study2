@@ -19,14 +19,23 @@ public class BookShop {
 		
 		System.out.print("대여 하고 싶은 책의 번호를 입력하세요 : ");
 		int bookNo = sc.nextInt();
-		books[bookNo-1].rent();
+		for(Book b : books) {
+			if(b.bookNo == bookNo) {
+				b.rent();
+				break;
+			}
+		}
 		
 		System.out.println("*****도서 정보 출력하기*****");
+		displayBooks(books);
+		
+		sc.close();
+	}
+	
+	public static void displayBooks(Book[] books) {
 		for(Book b : books) {
 			b.print();
 		}
-		
-		sc.close();
 	}
 	
 }
