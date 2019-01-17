@@ -21,14 +21,17 @@ public class ArrayUtilMain {
 		}
 		System.out.println();
 		
-		int[] a = {1, 2, 3, 4, 5};
-		int[] b = {6, 7, 8, 9, 10};
+		Integer[] a = {1, 2, 3, 4, 5};
+		Double[] b = {6.6, 7.7, 8.8, 9.9, 10.1};
 		
-		int[] result = ArrayUtil.concat(a, b);
-		for(int i : result) {
+		ArrayUtil au = new ArrayUtil();
+		Object[] result = au.<Integer, Double>concat(a, b);
+		for(Object i : result) {
 			System.out.print(i + " ");
 		}
 		System.out.println();
+		
+		
 	}
 	
 }

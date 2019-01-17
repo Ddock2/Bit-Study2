@@ -32,12 +32,29 @@ public class ArrayUtil {
 		return result;
 	}
 	
-	public static int[] concat(int[] a, int[] b) {
+//	public static int[] concat(int[] a, int[] b) {
+//		int aLength = (a == null) ? 0 : a.length;
+//		int bLength = (b == null) ? 0 : b.length;
+//		
+//		int length = aLength + bLength;
+//		int[] result = new int[length];
+//		
+//		for(int i=0; i<aLength; i++) {
+//			result[i] = a[i];
+//		}
+//		for(int i=0; i<bLength; i++) {
+//			result[i+aLength] = b[i];
+//		}
+//		
+//		return result;
+//	}
+	
+	public <T extends Object, U extends Object> Object[] concat(T[] a, U[] b){
 		int aLength = (a == null) ? 0 : a.length;
 		int bLength = (b == null) ? 0 : b.length;
 		
 		int length = aLength + bLength;
-		int[] result = new int[length];
+		Object[] result = new Object[length];
 		
 		for(int i=0; i<aLength; i++) {
 			result[i] = a[i];
