@@ -133,6 +133,7 @@ class Program {
 	
 	// 회원 목록 조회
 	private void viewMemberList() {
+		System.out.println("회원 목록 (" + mList.size() + ")");
 		for(Member m : mList) {
 			System.out.println(m);
 		}
