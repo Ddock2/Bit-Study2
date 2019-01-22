@@ -45,6 +45,7 @@ public class SetMain {
 		
 		System.out.println("--------------------------------");
 		
+		// 사전식 정렬
 		set = new TreeSet<String>();
 		set.add("one");
 		set.add("two");
@@ -52,7 +53,6 @@ public class SetMain {
 		set.add("four");
 		set.add("five");
 		
-		// 사전식 정렬
 		Iterator<String> ite = set.iterator();
 		while(ite.hasNext()) {
 			System.out.print(ite.next() + " ");
