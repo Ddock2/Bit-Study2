@@ -1,0 +1,6 @@
+insert=board.ui.InsertUI
+update=board.ui.UpdateUI
+delete=board.ui.DeleteUI
+selectOne=board.ui.SelectOneUI
+select=board.ui.SelectUI
+exit=board.ui.ExitUI
