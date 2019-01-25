@@ -1,0 +1,161 @@
+>sqlplus / as sysdba
+>create user [계정명] identified by [비밀번호] :
+// 계정명은 c##으로 시작, c##bit
+>alter user [계정명] account unlock;
+>grant connect, resource to [계정명]
+>conn [계정명]/[비밀번호]
+[형태]
+[테이블 스페이스 생성]
+// 권한 문제로 c가 아닌 d에 경로를 잡도록 하자
+경로 : D:\app\oracle\oradata\orcl
+
+[옵션]
+AUTOEXTEND ON NEXT 크기 MAXSIZE UNLIMITED
+	: 기존 생성된 크기를 넘어섰을 때 자동 증가할 용량, 제한 없음
+LOGGING
+	: 테이블 스페이스의 테이블, 인덱스, 분할 영역 등에 대한 기록
+ONLINE
+	: 생성된 테이블 스페이스를 바로 사용가능하도록
+// OFFLINE일 경우 생성하나 바로 사용할 수 없음
+PERMANENT
+	: 영구 객체를 보유할 수 있도록. 
+EXTENT MANAGEMENT LOCAL AUTOALLOCATE
+	EXTENT	MANAGEMENT : 확장 관리  
+	LOCAL		        : Locally Managed 방식으로 공간 정보를 관리
+				(메모리를 얼만큼 잡고 확장하고 하는 설정을 시스템에 맡긴다는 뜻)
+	AUTOALLOCATE	        : 확장 관리 시스템에서 다루도록 설정
+BLOCKSIZE
+	: 테이블 스페이스의 비표준 Block 크기 지정 (지금은 버퍼의 크기라고 이해하자) 
+
+[DATA Tablespace]
+> CREATE TABLESPACE HELLO_DATA
+DATAFILE 'D:\app\oracle\oradata\orcl\HELLO_DATA.DBF' SIZE 1G
+AUTOEXTEND ON NEXT 20M MAXSIZE UNLIMITED
+LOGGING
+ONLINE
+PERMANENT
+EXTENT MANAGEMENT LOCAL AUTOALLOCATE
+BLOCKSIZE 8K
+SEGMENT SPACE MANAGEMENT AUTO
+FLASHBACK ON;
+
+[Temp TableSpace] - Indexing을 위한 작업
+>CREATE TEMPORARY TABLESPACE HELLO_TMP
+TEMPFILE 'D:\app\oracle\oradata\orcl\HELLO_TMP.DBF' SIZE 50M
+AUTOEXTEND ON NEXT 5M MAXSIZE UNLIMITED;
+
+[Index TableSpace]\
+> CREATE TABLESPACE HELLO_IDX
+DATAFILE 'D:\app\oracle\oradata\orcl\HELLO_IDX.DBF' SIZE 100M
+AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED
+LOGGING
+ONLINE
+PERMANENT
+EXTENT MANAGEMENT LOCAL AUTOALLOCATE
+BLOCKSIZE 8K
+SEGMENT SPACE MANAGEMENT AUTO
+FLASHBACK ON;
+
+[테이블 스페이스 삭제]
+DROP TABLESPACE [테이블 스페이스 명] 
+INCLUDING CONTENTS AND DATAFILES
+CASCADE CONSTRAINS;
+
+[옵션]
+//INCLUDING CONTENTS AND DATAFILES
+//CASCADE CONSTRAINS;
+// 이 둘도 옵션이나 사실상 필수적으로 필요하기때문에 기본이라고 생각하자
+
+CASCADE CONSTRAINS
+	: DROP TABLESPACE는 테이블 스페이스만 삭제
+	: 파일 삭제로 이어지지 않기에 사용
+
+//////////////////////////////////////////////////////////////////
+
+접속이름 : 자유롭게
+사용자 이름, 비밀번호 : 아까전에 HELLO_DATA를 만들 때 같이 생성한 그 계정과 비밀번호
+[사용자 계정 생성]
+CREATE USER [계정명]  IDENTIFIED BY [비밀번호]
+DEFAULT TABLESPACE HELLO_DATA
+TEMPORARY TABLESPACE HELLO_TMP
+PROFILE DEFAULT
+
+// 실사용
+CREATE USER c##bit IDENTIFIED BY bitr36
+DEFAULT TABLESPACE HELLO_DATA
+TEMPORARY TABLESPACE HELLO_TMP
+PROFILE DEFAULT
+ACCOUNT UNLOCK;
+
+[계정생성]
+CREATE USER c##bit IDENTIFIED BY bit;
+
+[계정 삭제]
+DROP USER [계정명] CASCADE;
+
+[테이블 스페이스 설정]
+ALTER USER c##bit DEFAULT TABLESPACE users;
+
+[권한 부여]
+[로그온 권한]
+GRANT CREATE session TO c##bit;
+
+GRANT connect TO c##bit;
+GRANT resource TO c##bit;
+
+//GRANT connect, resource TO c##bit;
+
+// INSERT INTO t_member(num, title, content) VALUES (1, 'Hello', 'World Good Bye')
+// 오류 보고 -
+// ORA-01950: 테이블스페이스 'USERS'에 대한 권한이 없습니다.????
+
+권한을 줬는데 왜 터질까?
+[레코드 삽입]
+[테이블 스페이스 설정]
+ALTER USER c##bit QUOTA UNLIMITED ON users; // 컬럼을 변경할 수 있는 권한을 줘야한다
+
+D:\app\oracle\product\12.2.0\dbhome_1\network\admin\tnsnames.ora
+
+이름과 서비스네임을 ORCLPDB로 변경
+
+ORCLPDB =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = ORCLPDB)
+    )
+  )
+
+  select name, con_id from v$active_services where con_id = 3;
+
+  확인 쿼리 후 세션 변경
+
+  alter session set container = orclpdb;
+
+유저 변경 및 계정 언락
+
+alter user hr identified by hr account unlock;
+
+와 변경!
+
+비슷한 방법으로 세션을 변경하면 우리가 첫 시간에 했던 PDB공간에 유저 만들기도 가능하다
+
+
+/////////////////////////////////////////////////////////////////////////////////
+
+계정생성
+CREATE USER c##bit IDENTIFIED BY bit
+
+권환부여
+GRANT CREATE session TO c##bit;
+
+GRANT connect, resource TO c##bit;
+
+컬럼변경 권한 부여
+ALTER USER c##bit QUOTA UNLIMITED ON users;
+
+파일에 가서 서비스 이름 변경을 수행한 뒤
+
+sqldeveloper에서 접속유형이 SID가 아닌 서비스이름 orclpdb 로 설정
+계정명 비밀번호 입력후 테스트 -> 접속

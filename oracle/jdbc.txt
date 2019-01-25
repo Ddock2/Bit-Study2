@@ -1,0 +1,4 @@
+< JDBC 설정 >
+
+ojdbc8.jar
+properties -  libraries - add library - user library - new - ojdbc 생성 - add jars - ojdbc8.jar 추가
