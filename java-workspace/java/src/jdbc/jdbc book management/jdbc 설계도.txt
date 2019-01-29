@@ -1,0 +1,59 @@
+﻿- jdbc.project
+	Program
+	ManageBook - 메인 메뉴
+
+
+- jdbc.project.vo
+	BookVO
+		String isbn
+		String title
+		String author
+		int price
+		int usable
+
+
+- jdbc.project.service
+	BookService
+
+
+- jdbc.project.dao
+	BookDAO
+
+
+- jdbc.project.ui
+	SelectRunUI	- 상속 x, mapping 역활
+
+	InterfaceUI
+		void process() throws Exception
+	
+	SuperClassUI
+		ScanHelper sh
+		BookService bs
+
+	InsertBookUI
+	DeleteBookUI
+	ViewBookAllUI
+
+	ViewBookByWhatUI
+		viewBookByIsbn()
+		viewBookByTitle()
+
+	RentBookUI
+		rentBook()
+		returnBook()
+	
+
+- jdbc.project.util
+	BookServiceFactory
+		getBookService()
+
+	ConnectionFactory
+		getConnection()
+
+	ScanHelper
+		scanStr()
+		scanInt()
+
+	JDBCClose
+		closeConnection()
+		closePreparedStatement()

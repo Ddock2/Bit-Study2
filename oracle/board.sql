@@ -6,3 +6,14 @@ CREATE TABLE super_board(
 );
 
 CREATE SEQUENCE seq_super_board_no;
+
+CREATE TABLE book_table(
+    isbn        NUMBER(13)      PRIMARY KEY,
+    title       VARCHAR2(100)   NOT NULL,
+    author      VARCHAR2(100),
+    price       NUMBER(6),
+    usable      NUMBER(1)       DEFAULT 1
+);
+
+select * from book_table;
+delete from book_table;
