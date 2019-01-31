@@ -10,3 +10,7 @@ java-workspace/java/doc/
 java-workspace/java/.settings/org.eclipse.jdt.core.prefs
 java-workspace/java/.project
 java-workspace/.recommenders/
+java-workspace/Servers/
+java-workspace/java-web/.settings/
+java-workspace/RemoteSystemsTempFiles/
+*.project

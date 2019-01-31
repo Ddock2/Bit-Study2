@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		GET Method
+			1. 파라미터가 URL에 표시되도 상관없는 경우
+				ex) 검색어, 페이지 번호같은 일반적인 상황에 적합
+			2. 4KB보다 적은 데이터를 보내는 경우
+			
+		POST Method
+			1. 파라미터가 URL에 표시되면 안되는 경우
+				ex) 비밀번호, 계좌번호, 등 개인정보에 적합
+			2. 4KB보다 많은 데이터를 보내는 경우
+			3. 파일 전송의 용도로도 사용
+	 -->
+<!-- 	 <form action="java-web/method" method="get"> -->
+	 <form action="/java-web/method"> <!-- get 방식은 생략 가능 -->
+	 	id : <input type="text" size="10" name="id"/>
+	 	<input type="submit" value="GET호출"/>
+	 </form>
+	 
+	 <form action="/java-web/method" method="POST">
+	 	id : <input type="text" size="10" name="id"/>
+	 	<input type="submit" value="POST호출"/>
+	 </form>
+</body>
+</html>

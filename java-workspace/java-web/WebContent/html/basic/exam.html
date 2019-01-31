@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML Basic</title>
+</head>
+<body>
+	<!-- 
+		HTML (HyperText Mark-up Language)
+			- 웹페이지의 구조를 담당하는 마크업 언어
+			- 태그 문법을 통해 문서 구조를 작성
+			
+		특징
+			1. 태그의 대소문자 구분이 없음
+			2. 확장자는 htm, html로 생성
+			3. Enter, Space, Tab 등이 적용되지 않음
+		
+		구성 요소
+			태그(Tag)
+				- "<"와 ">"로 묶은 명령어
+				- 형태 : <태그명> ... </태그명>
+		
+			요소(Element)
+				<body>Hello</body>
+				- <body>	: 시작 태그
+				- </body>	: 종료 태그
+				- body		: 요소 명 (태그명)
+				- Hello		: 요소 내용
+			
+			속성(Attribute)
+				- 각각의 시작 태그는 필요에 따라 속성을 가질 수 있다
+				- 속성은 존재하지 않을 수 있고, 여러 개 설정도 가능하다
+				
+			값(Value)
+				- 속성에 대한 값
+	 -->
+	 
+	 <!-- a 태그 -->
+	 <a href="/java-web/html/basic/hello.html">Hello</a>
+	 <a href="http://www.naver.com">네이버</a>
+	 <a href="http://www.google.com">구글</a>
+	 <a href="http://www.itfind.or.kr">IT FIND</a>
+	 
+	 <!-- div, span 태그  -->
+	 <div style="background-color:yellow">div 1</div>
+	 <div style="background-color:green">div 2</div>
+	 <span style="background-color:red">span 1</span>
+	 <span>span 2</span>
+	 <br>
+	 
+	 <!-- 개행 태그 -->
+	 br을 사용하면 줄바꿈(개행)이 가능
+	 개행이 되었나?
+	 <br>
+	 br을 사용하면 줄바꿈(개행)이 가능<br>
+	 개행이 되었나?
+	 
+	 <!-- 공백 문자(특수문자), 2칸 이상 공백 사용 -->
+	 반가워~               HTML             !!!<br>
+	 한칸&nbsp;한칸<br>
+	 두칸&nbsp;&nbsp;두칸<br>
+	 세칸&nbsp;&nbsp;&nbsp;세칸<br>
+	 
+	 <!-- 글자 크기 태그 (제목 태그) -->
+	 <h1 align="center">Header 1</h1>
+	 <h2 align="center">Header 2</h2>
+	 <h3 align="center">Header 3</h3>
+	 <h4 align="center">Header 4</h4>
+	 
+	 <!-- img 태그 (이미지 삽입) -->
+	 <a href="http://www.naver.com">
+	 	<img src="./good.png" width="100" height="100" border="3" style="border-color: gray" alt="good">
+	 </a>
+</body>
+</html>
