@@ -14,3 +14,5 @@ java-workspace/Servers/
 java-workspace/java-web/.settings/
 java-workspace/RemoteSystemsTempFiles/
 *.project
+java-workspace/mvc-web/.settings/
+java-workspace/jboard/.settings/

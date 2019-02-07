@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>mvc-web</display-name>
+  
+  <!-- 서블릿 클래스의 이름을 web.xml 내부에서 FrontController로 사용 -->
+  <servlet>
+  	<servlet-name>FrontController</servlet-name>
+  	<servlet-class>com.bit.controller.FrontController</servlet-class>
+  </servlet>
+  
+  <!-- list.do와 write.do의 요청을 받아 맵핑 -->
+  <!-- *.do 패턴은 .do로 끝나는 요청을 모두 받겠다 -->
+  <!-- 요청 받은 패턴을 서블릿 이름이 FrontController로 연결 -->
+  <servlet-mapping>
+  	<servlet-name>FrontController</servlet-name>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
