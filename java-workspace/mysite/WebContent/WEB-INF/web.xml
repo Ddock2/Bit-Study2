@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
-  <display-name>jboard</display-name>
+  <display-name>mysite</display-name>
   
   <servlet>
   	<servlet-name>FrontController</servlet-name>
-  	<servlet-class>com.bit.controller.FrontController</servlet-class>
-  	<init-param>
-  		<param-name>configName</param-name>
-  		<param-value>D:/git/bit2/java-workspace/jboard/bean.properties</param-value>
-  	</init-param>
+  	<servlet-class>com.bit2015.mysite.controller.FrontController</servlet-class>
   </servlet>
   
   <servlet-mapping>
   	<servlet-name>FrontController</servlet-name>
-  	<url-pattern>*.do</url-pattern>
+  	<url-pattern>/</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

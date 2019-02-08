@@ -22,7 +22,8 @@
 	</tr>
 	<tr align="center">
 		<th>
-			do something... (메뉴 작성)
+			<a href="/jboard/jsp/member/signUpForm.jsp">회원가입</a>
+			<a href="/jboard/loginForm.do">로그인</a>
 		</th>
 	</tr>
 </table>
