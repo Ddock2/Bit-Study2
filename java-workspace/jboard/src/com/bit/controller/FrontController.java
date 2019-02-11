@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sun.rmi.server.Dispatcher;
-
 // 모든 요청을 받아 요청에 맞는 Controller를 Mapping하는 역할
 public class FrontController extends HttpServlet{
 	private static final long serialVersionUID = 1L;

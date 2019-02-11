@@ -17,13 +17,13 @@ public class FileVO {
 	private int board_no;
 	private String file_ori_name;
 	private String file_save_name;
-	private String file_size;
+	private int file_size;
 	
 	public FileVO() {
 		super();
 	}
 	
-	public FileVO(int no, int board_no, String file_ori_name, String file_save_name, String file_size) {
+	public FileVO(int no, int board_no, String file_ori_name, String file_save_name, int file_size) {
 		super();
 		this.no = no;
 		this.board_no = board_no;
@@ -56,10 +56,10 @@ public class FileVO {
 	public void setFile_save_name(String file_save_name) {
 		this.file_save_name = file_save_name;
 	}
-	public String getFile_size() {
+	public int getFile_size() {
 		return file_size;
 	}
-	public void setFile_size(String file_size) {
+	public void setFile_size(int file_size) {
 		this.file_size = file_size;
 	}
 	

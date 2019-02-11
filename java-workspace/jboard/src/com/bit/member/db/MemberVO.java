@@ -23,7 +23,7 @@ public class MemberVO {
 	private String name;
 	private String password;
 	private String email_id;
-	private String dmail_domain;
+	private String email_domain;
 	private String tel1;
 	private String tel2;
 	private String tel3;
@@ -37,7 +37,7 @@ public class MemberVO {
 		super();
 	}
 
-	public MemberVO(String id, String name, String password, String email_id, String dmail_domain, String tel1,
+	public MemberVO(String id, String name, String password, String email_id, String email_domain, String tel1,
 			String tel2, String tel3, String post, String basic_addr, String detail_addr, String type,
 			String reg_date) {
 		super();
@@ -45,7 +45,7 @@ public class MemberVO {
 		this.name = name;
 		this.password = password;
 		this.email_id = email_id;
-		this.dmail_domain = dmail_domain;
+		this.email_domain = email_domain;
 		this.tel1 = tel1;
 		this.tel2 = tel2;
 		this.tel3 = tel3;
@@ -80,11 +80,11 @@ public class MemberVO {
 	public void setEmail_id(String email_id) {
 		this.email_id = email_id;
 	}
-	public String getDmail_domain() {
-		return dmail_domain;
+	public String getEmail_domain() {
+		return email_domain;
 	}
-	public void setDmail_domain(String dmail_domain) {
-		this.dmail_domain = dmail_domain;
+	public void setEmail_domain(String email_domain) {
+		this.email_domain = email_domain;
 	}
 	public String getTel1() {
 		return tel1;
@@ -138,7 +138,7 @@ public class MemberVO {
 	@Override
 	public String toString() {
 		return "MemberVO [id=" + id + ", name=" + name + ", password=" + password + ", email_id=" + email_id
-				+ ", dmail_domain=" + dmail_domain + ", tel1=" + tel1 + ", tel2=" + tel2 + ", tel3=" + tel3 + ", post="
+				+ ", email_domain=" + email_domain + ", tel1=" + tel1 + ", tel2=" + tel2 + ", tel3=" + tel3 + ", post="
 				+ post + ", basic_addr=" + basic_addr + ", detail_addr=" + detail_addr + ", type=" + type
 				+ ", reg_date=" + reg_date + "]";
 	}
