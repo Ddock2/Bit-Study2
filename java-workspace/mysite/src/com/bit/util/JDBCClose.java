@@ -21,14 +21,4 @@ public class JDBCClose {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void close(PreparedStatement pstmt) {
-		try {
-			if(pstmt != null) {
-				pstmt.close();
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
 }

@@ -18,6 +18,7 @@ CREATE TABLE book_table(
 select * from book_table;
 delete from book_table;
 
+------------------------------------------------------------------
 CREATE TABLE J_BOARD (
 		no			NUMBER(6)		PRIMARY KEY,
 		title		VARCHAR2(200)	NOT NULL,
@@ -39,5 +40,32 @@ CREATE TABLE J_BOARD_FILE (
 	
 CREATE SEQUENCE seq_j_board_file_no;
 
-drop sequence seq_j_board_no;
-drop sequence seq_j_board_file_no;
+------------------------------------------------------------------
+
+CREATE TABLE mysite_member(
+		id			VARCHAR2(20)	PRIMARY KEY,
+		password	VARCHAR2(20)	NOT NULL,
+		name		VARCHAR2(20)	NOT NULL,
+		reg_date	DATE			DEFAULT SYSDATE
+);
+
+CREATE TABLE mysite_board(
+		no			NUMBER(6)		PRIMARY KEY,
+		title		VARCHAR2(30)	NOT NULL,
+		writer		VARCHAR2(20)	NOT NULL,
+		content		VARCHAR2(500)	NOT NULL,
+		reg_date	DATE			DEFAULT SYSDATE,
+		view_cnt	NUMBER(6)		DEFAULT 0
+);
+	
+CREATE SEQUENCE seq_mysite_board_no;
+
+CREATE TABLE mysite_board_file (
+ 		no				NUMBER(6)		PRIMARY KEY,
+ 		board_no		NUMBER(6)		NOT NULL,
+ 		file_ori_name	VARCHAR2(200)	NOT NULL,
+ 		file_save_name	VARCHAR2(200)	NOT NULL,
+ 		file_size		NUMBER(6)		NOT NULL
+);
+ 	
+CREATE SEQUENCE seq_mysite_board_file_no;

@@ -29,7 +29,7 @@
 				<tr>
 					<th width="25%">이름</td>
 					<td>
-						<input type="text" size="10" maxlength="10" name="name"/>
+						<input type="text" size="10" maxlength="10" name="name" value="${ userVO.name }"/>
 					</td>
 				</tr>
 				<tr>

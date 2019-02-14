@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bit.util.ConnectionFactory;
+import com.bit.util.ConnectionPool;
 import com.bit.util.JDBCClose;
 
 public class BoardDAO {
@@ -114,10 +115,10 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = new ConnectionFactory().getConnection();
+			con = ConnectionPool.getConnection();
 			StringBuilder sql = new StringBuilder();
 			
-			sql.append(" SELECT no, title, writer, content, view_cnt, reg_date ");
+			sql.append(" SELECT no, title, writer, content, view_cnt, TO_CHAR(reg_date, 'YYYY-MM-DD') as reg_date ");
 			sql.append("   FROM j_board ");
 			sql.append("   ORDER BY no DESC ");
 			
@@ -138,7 +139,8 @@ public class BoardDAO {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			JDBCClose.close(con, pstmt);
+			JDBCClose.close(pstmt);
+			ConnectionPool.close(con);
 		}
 		
 		return list;
@@ -157,7 +159,7 @@ public class BoardDAO {
 			con = new ConnectionFactory().getConnection();
 			StringBuilder sql = new StringBuilder();
 			
-			sql.append(" SELECT no, title, writer, content, view_cnt, reg_date ");
+			sql.append(" SELECT no, title, writer, content, view_cnt, TO_CHAR(reg_date, 'YYYY-MM-DD') as reg_date ");
 			sql.append("   FROM j_board ");
 			sql.append("   WHERE no = ? ");
 			
@@ -220,5 +222,30 @@ public class BoardDAO {
 		}
 		
 		return files;
+	}
+
+	public void updateViewCnt(int no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = new ConnectionFactory().getConnection();
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append(" UPDATE j_board ");
+			sql.append("    SET view_cnt = view_cnt + 1 ");
+			sql.append("   WHERE no = ? ");
+			
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, no);
+			
+			pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCClose.close(con, pstmt);
+		}
+		
 	}
 }

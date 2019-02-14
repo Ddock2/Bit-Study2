@@ -1,4 +1,4 @@
-package com.bit2015.mysite.controller;
+package com.bit.mysite.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

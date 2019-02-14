@@ -4,13 +4,14 @@
   
   <servlet>
   	<servlet-name>FrontController</servlet-name>
-  	<servlet-class>com.bit2015.mysite.controller.FrontController</servlet-class>
+  	<servlet-class>com.bit.mysite.controller.FrontController</servlet-class>
   </servlet>
   
   <servlet-mapping>
   	<servlet-name>FrontController</servlet-name>
-  	<url-pattern>/</url-pattern>
+  	<url-pattern>/controller/*</url-pattern>
   </servlet-mapping>
+  
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

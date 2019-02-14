@@ -7,6 +7,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
+	function doAction(boardNo){
+		<c:choose>
+			<c:when test="${ not empty userVO }">
+				location.href= "/jboard/boardDetail.do?no=" + boardNo;
+			</c:when>
+			<c:otherwise>
+				if(confirm('로그인 후 사용 가능합니다.\n로그인 페이지로 이동하시겠습니까?'));
+				location.href= "/jboard/loginForm.do";
+			</c:otherwise>
+		</c:choose>
+	}
+
 	function moveWriteForm() {
 		location.href = "/jboard/writeForm.do";
 	}
@@ -35,7 +47,7 @@
 				<tr>
 					<td align="center">${ board.no }</td>
 					<th align="center">
-						<a href="/jboard/jsp/board/boardDetail.jsp?no=${ board.no }">
+						<a href="javascript:doAction('${board.no}')">
 							<c:out value="${ board.title }"/>
 						</a>
 					</th>
