@@ -22,7 +22,11 @@
 	</div>
 	
 	<div id="contents" align="center" style="min-height: 15em;">
-		<form action="/mysite/controller/board?a=writeProcess" method="post">
+		<h2>글 등록</h2>
+		<hr width="80%">
+		<br>
+		
+		<form action="/mysite/controller/board?a=writeProcess" method="post" enctype="multipart/form-data">
 			<table style="width: 70%; border: 1px solid;" id="write-table">
 				<tr>
 					<th width="25%">제목</th>

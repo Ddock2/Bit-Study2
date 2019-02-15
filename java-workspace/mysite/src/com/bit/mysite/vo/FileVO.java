@@ -23,6 +23,14 @@ public class FileVO {
 		super();
 	}
 	
+	public FileVO(int board_no, String file_ori_name, String file_save_name, int file_size) {
+		super();
+		this.board_no = board_no;
+		this.file_ori_name = file_ori_name;
+		this.file_save_name = file_save_name;
+		this.file_size = file_size;
+	}
+
 	public FileVO(int no, int board_no, String file_ori_name, String file_save_name, int file_size) {
 		super();
 		this.no = no;

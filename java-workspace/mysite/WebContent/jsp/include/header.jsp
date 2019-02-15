@@ -45,10 +45,11 @@
 					<a href="/mysite/controller/member?a=login" class="click">로그인</a>
 				</c:when>
 				<c:otherwise>
-					<a onclick="alert('${ userVO.reg_date}에 가입하셨죠?')" class="click">
-						<c:out value="${ userVO.name }"/>
-					</a>&nbsp;님 ||
-					<a href="/mysite/controller/member?a=logoutProcess" class="click">로그아웃</a>
+					<a onclick="alert('${ userVO.id}(${ userVO.name})님은 ${ userVO.reg_date}에 가입하셨답니다아')" style="font-size: 20px;" class="click">
+						<c:out value="${ userVO.id }"/>
+					</a>
+					<br>
+					<a href="/mysite/controller/member?a=logoutProcess" class="click" style="font-size: 12px;">로그아웃</a>
 				</c:otherwise>
 			</c:choose>
 		</td>

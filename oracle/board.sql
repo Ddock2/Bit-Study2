@@ -69,3 +69,13 @@ CREATE TABLE mysite_board_file (
 );
  	
 CREATE SEQUENCE seq_mysite_board_file_no;
+
+CREATE TABLE mysite_comment (
+		no				NUMBER(6)		PRIMARY KEY,
+		board_no		NUMBER(6)		NOT NULL,
+		writer			VARCHAR2(20)	NOT NULL,
+		content			VARCHAR2(200)	NOT NULL,
+		reg_date		DATE			DEFAULT SYSDATE
+);
+	
+CREATE SEQUENCE seq_mysite_comment_no;

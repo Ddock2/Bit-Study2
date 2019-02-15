@@ -25,8 +25,9 @@ public class BoardVO {
 		super();
 	}
 	
-	public BoardVO(String title, String writer, String content) {
+	public BoardVO(int no, String title, String writer, String content) {
 		super();
+		this.no = no;
 		this.title = title;
 		this.writer = writer;
 		this.content = content;
