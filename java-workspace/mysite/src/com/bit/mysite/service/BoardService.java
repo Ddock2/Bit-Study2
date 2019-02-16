@@ -20,23 +20,44 @@ public class BoardService {
 	private BoardVO boardVO = null;
 	
 	// 게시판 페이지
-	public void selectBoardList(HttpServletRequest request, HttpServletResponse response) {
+	public void selectBoardList(HttpServletRequest request, HttpServletResponse response){
 		List<BoardVO> boardList = null;
 		String paramKeyword = request.getParameter("keyword");
+		String paramPage = request.getParameter("page");
+		int curPage = 1;
+		int boardCntInOnePage = 10;	// 페이지당 글 수
+		int lastPage = 1;
 		
 		if(paramKeyword == null || paramKeyword.equals("")) {	// 전체 게시글 조회
-			boardList = dao.selectAllBoard();
+			// 페이지 정리
+			lastPage = dao.selectBoardLastPage(boardCntInOnePage);
+			curPage = curPageCheck(paramPage, lastPage);
+			
+			//게시글 조회
+			boardList = dao.selectBoardListByPage(curPage);
+			
 			request.setAttribute("boardList", boardList);
 		}else {													// 검색 게시글 조회
 			String searchType = request.getParameter("searchType");
 			String keyword = request.getParameter("keyword");
 			
-			boardList = dao.selectBoardListByKeyword(searchType, keyword);
+			// 페이지 정리
+			lastPage = dao.selectBoardLastPageWithKeyword(searchType, keyword, boardCntInOnePage);
+			curPage = curPageCheck(paramPage, lastPage);
+			
+			//게시글 조회
+			boardList = dao.selectBoardListByKeyword(searchType, keyword, curPage);
 			
 			request.setAttribute("boardList", boardList);
+			request.setAttribute("searchType", searchType);
+			request.setAttribute("keyword", keyword);
 		}
+		
+		request.setAttribute("curPage", curPage);
+		request.setAttribute("lastPage", lastPage);
 	}
 	
+
 	// 게시글 상세
 	public void selectBoardByNo(HttpServletRequest request, HttpServletResponse response) {
 		int no = Integer.parseInt(request.getParameter("no"));
@@ -44,7 +65,7 @@ public class BoardService {
 		String id = (userVO == null) ? "" : userVO.getId();
 		
 		// 조회수 올리기
-		dao.upViewCnt(no, id);
+		dao.upViewCnt(no, id);	// 로그인 후 자신이 쓴 글은 조회해도 조회수 안올라감
 		
 		// 게시글 정보
 		boardVO = dao.selectBoardByNo(no);
@@ -110,6 +131,8 @@ public class BoardService {
 		
 		// 첨부파일 제거
 		deleteFileInFolder(saveFolder, no);
+		// 댓글 삭제
+		dao.deleteCommentByBoardNo(no);
 	}
 	
 	// 게시글 수정
@@ -194,5 +217,22 @@ public class BoardService {
 		
 		dao.deleteFileByBoardNo(boardNo);
 	}
-
+	
+	// 페이지 범위 넘어간지 확인 후 정정
+	private int curPageCheck(String paramPage, int lastPage) {
+		int result = 1;
+		
+		if(paramPage != null) {
+			try {
+				result = Integer.parseInt(paramPage);
+				result = (result<1) ? 1 : result;
+				result = (result>lastPage) ? lastPage : result;
+			}catch(Exception e) {
+				e.printStackTrace();
+				result = 1;
+			}			
+		}
+		
+		return result;
+	}
 }

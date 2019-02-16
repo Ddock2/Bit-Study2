@@ -47,20 +47,26 @@ public class BoardDAO {
 	}
 	
 	/**
-	 * 게시글 전체 조회
+	 * 페이지로 게시글 리스트 조회
 	 */
-	public List<BoardVO> selectAllBoard() {
+	public List<BoardVO> selectBoardListByPage(int page) {
 		List<BoardVO> boardList = new ArrayList<>();
 		
 		try {
 			con = new ConnectionFactory().getConnection();
 			sql = new StringBuilder();
 			
-			sql.append(" SELECT no, title, writer, content, TO_CHAR(reg_date, 'YYYY-MM-DD') reg_date, view_cnt ");
-			sql.append("   FROM mysite_board ");
-			sql.append("   ORDER BY no DESC ");
+			sql.append(" SELECT * ");
+			sql.append("   FROM ( ");
+			sql.append(" 		SELECT rownum r, no, title, writer, content, TO_CHAR(reg_date, 'YYYY-MM-DD') reg_date, view_cnt ");
+			sql.append(" 		  FROM mysite_board ");
+			sql.append(" 		  ORDER BY no DESC ");
+			sql.append(" 		) ");
+			sql.append("   WHERE r > ? AND r <= ? ");
 			
 			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, (page-1)*10);
+			pstmt.setInt(2, page*10);
 			
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -89,7 +95,7 @@ public class BoardDAO {
 	/**
 	 * 게시글 검색 조회
 	 */
-	public List<BoardVO> selectBoardListByKeyword(String searchType, String keyword) {
+	public List<BoardVO> selectBoardListByKeyword(String searchType, String keyword, int page) {
 		List<BoardVO> boardList = new ArrayList<>();
 		keyword = "%" + keyword + "%";
 		
@@ -97,19 +103,28 @@ public class BoardDAO {
 			con = new ConnectionFactory().getConnection();
 			sql = new StringBuilder();
 			
-			sql.append(" SELECT no, title, writer, content, TO_CHAR(reg_date, 'YYYY-MM-DD') reg_date, view_cnt ");
-			sql.append("   FROM mysite_board ");
+			sql.append(" SELECT * ");
+			sql.append("   FROM ( ");
+			sql.append(" 		SELECT rownum r, no, title, writer, content, TO_CHAR(reg_date, 'YYYY-MM-DD') reg_date, view_cnt ");
+			sql.append(" 		  FROM mysite_board ");
 			if(searchType.equals("title+content")) {
-				sql.append(" WHERE title LIKE ? OR content LIKE ? ");
+				sql.append(" 	  WHERE title LIKE ? OR content LIKE ? ");
 			}else {
-				sql.append(" WHERE " + searchType + " LIKE ? ");
+				sql.append(" 	  WHERE " + searchType + " LIKE ? ");
 			}
-			sql.append("   ORDER BY no DESC ");
+			sql.append(" 		  ORDER BY no DESC ");
+			sql.append(" 		) ");
+			sql.append("   WHERE r > ? AND r <= ? ");
+			
+			int index = 1;
 			
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, keyword);
+			
+			pstmt.setString(index++, keyword);
 			if(searchType.equals("title+content"))
-				pstmt.setString(2, keyword);
+				pstmt.setString(index++, keyword);
+			pstmt.setInt(index++, (page-1)*10);
+			pstmt.setInt(index++, page*10);
 			
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -171,6 +186,80 @@ public class BoardDAO {
 		}
 		
 		return boardVO;
+	}
+	
+	/**
+	 * 전체 게시판 마지막 페이지 조회
+	 */
+	public int selectBoardLastPage(int boardCntInOnePage) {
+		int lastPage = 1;
+		
+		try {
+			con = new ConnectionFactory().getConnection();
+			sql = new StringBuilder();
+			
+			sql.append(" SELECT COUNT(*) FROM mysite_board ");
+			
+			pstmt = con.prepareStatement(sql.toString());
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				lastPage = rs.getInt(1);
+				lastPage = (lastPage % boardCntInOnePage == 0) ? lastPage/boardCntInOnePage : (lastPage/boardCntInOnePage + 1);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			lastPage = 1;
+		}finally {
+			JDBCClose.close(con, pstmt);
+		}
+		
+		return lastPage;
+	}
+	
+	/**
+	 * 검색 시 게시판 마지막 페이지 조회
+	 */
+	public int selectBoardLastPageWithKeyword(String searchType, String keyword, int boardCntInOnePage) {
+		int lastPage = 1;
+		
+		keyword = "%" + keyword + "%";
+		
+		try {
+			con = new ConnectionFactory().getConnection();
+			sql = new StringBuilder();
+			
+			sql.append(" SELECT COUNT(*) ");
+			sql.append("   FROM mysite_board ");
+			if(searchType.equals("title+content")) {
+				sql.append(" WHERE title LIKE ? OR content LIKE ? ");
+			}else {
+				sql.append(" WHERE " + searchType + " LIKE ? ");
+			}
+			sql.append("   ORDER BY no DESC ");
+			
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, keyword);
+			if(searchType.equals("title+content"))
+				pstmt.setString(2, keyword);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				lastPage = rs.getInt(1);
+				lastPage = (lastPage % boardCntInOnePage == 0) ? lastPage/boardCntInOnePage : (lastPage/boardCntInOnePage + 1);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			lastPage = 1;
+		}finally {
+			JDBCClose.close(con, pstmt);
+		}
+		
+		return lastPage;
 	}
 	
 	/**
@@ -249,6 +338,7 @@ public class BoardDAO {
 		
 		return commentList;
 	}
+	
 	
 	//--------------------------------INSERT--------------------------------
 	/**
@@ -376,6 +466,29 @@ public class BoardDAO {
 			StringBuilder sql = new StringBuilder();
 			
 			sql.append(" DELETE FROM mysite_board_file ");
+			sql.append("   WHERE board_no = ? ");
+			
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, boardNo);
+			
+			pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCClose.close(con, pstmt);
+		}
+	}
+	
+	/**
+	 * 게시글 번호로 댓글 삭제
+	 */
+	public void deleteCommentByBoardNo(int boardNo) {
+		try {
+			con = new ConnectionFactory().getConnection();
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append(" DELETE FROM mysite_comment ");
 			sql.append("   WHERE board_no = ? ");
 			
 			pstmt = con.prepareStatement(sql.toString());

@@ -11,6 +11,15 @@
 		border: 1px solid;
 	}
 	
+	#detail-table{
+		width: 60%;
+		border: 1px solid;
+	}
+	
+	#detail-table td {
+		padding: 0 5px;
+	}
+	
 	#comment-input {
 		width: 50%;
 	}
@@ -21,6 +30,7 @@
 	
 	.right {
 		float: right;
+		font-weight: lighter;
 	}
 	
 	#input-comment-content {
@@ -86,24 +96,24 @@
 		<hr width="80%">
 		<br>
 		<div id="board-detail">
-			<table style="width: 70%; border: 1px solid;" id="detail-table">
+			<table id="detail-table">
 				<tr>
 					<th width="25%">제목</th>
-					<td width="45%">
+					<td width="40%">
 						<c:out value="${ boardVO.title }"/>
 					</td>
 					<th width="10%">조회수</th>
-					<td width="10%" align="center">
+					<td width="15%" align="center">
 						${ boardVO.view_cnt }
 					</td>
 				</tr>
 				<tr>
 					<th width="25%">작성자</th>
-					<td width="45%">
+					<td width="40%">
 						${ boardVO.writer }
 					</td>
 					<th width="10%">등록일</th>
-					<td width="10%" align="center">
+					<td width="15%" align="center">
 						${ boardVO.reg_date }
 					</td>
 				</tr>
@@ -164,7 +174,7 @@
 		<div id="board-comments">
 			<c:forEach var="comment" items="${ commentList }">
 				<div class="board-comment">
-					<div class="comment-writer">${ comment.writer } <a class="right">(${ comment.reg_date })</a></div>
+					<div class="comment-writer">${ comment.writer } <a class="right">${ comment.reg_date }</a></div>
 					<div style="clear: both;"></div>
 					<div class="comment-content">&nbsp;&nbsp;<c:out value="${ comment.content }"/></div>
 				</div>

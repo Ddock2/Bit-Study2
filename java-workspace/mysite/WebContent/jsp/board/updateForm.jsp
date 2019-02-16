@@ -6,13 +6,38 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	#write-table {
+		width: 60%;
+		border: 1px solid;
+	}
+
 	#write-table th, td {
 		border: 1px solid;
+	}
+	
+	#write-table td {
+		padding: 0 5px;
 	}
 </style>
 <script>
 	function goToBack(){
 		location.href = '/mysite/controller/board?a=boardDetail&no=' + ${ param.no }
+	}
+	
+	function checkForm(){
+		if(document.getElementById('title').value == ""){
+			alert('제목도 입력 안하고??');
+			document.getElementById('title').focus();
+			return false;
+		}
+		
+		if(document.getElementById('content').value == ""){
+			alert('글도 입력 안하고??');
+			document.getElementById('content').focus();
+			return false;
+		}
+		
+		return true;
 	}
 </script>
 </head>
@@ -26,13 +51,13 @@
 		<hr width="80%">
 		<br>
 		
-		<form action="/mysite/controller/board?a=updateProcess" method="post" enctype="multipart/form-data">
-			<table style="width: 70%; border: 1px solid;" id="write-table">
+		<form action="/mysite/controller/board?a=updateProcess" method="post" onsubmit="return checkForm()" enctype="multipart/form-data">
+			<table id="write-table">
 				<input type="hidden" name="no" value="${ boardVO.no }"/>
 				<tr>
 					<th width="25%">제목</th>
 					<td>
-						<input type="text" size="80" name="title" value="${ boardVO.title }"/>
+						<input type="text" size="80" name="title" id="title" value="${ boardVO.title }"/>
 					</td>
 				</tr>
 				<tr>
@@ -43,7 +68,7 @@
 				<tr>
 					<th width="25%">내용</th>
 					<td>
-						<textarea rows="8" cols="80" name="content">${ boardVO.content }</textarea>
+						<textarea rows="8" cols="80" name="content" id="content">${ boardVO.content }</textarea>
 					</td>
 				</tr>
 				<tr>
