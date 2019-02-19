@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	// 객체 생성과 동시에 속성과 메소드 초기화
+	var Person = {
+		name : '박신혜',
+		age : 30,
+		phone : '010-3333-4444',
+		addr : '서울시 서초구',
+		
+		info : function(){
+			var list = '';
+			for(var key in this){	// this : 나 자신 (Person) -> 자신의 value 들 돌림
+				if(key != 'info') {
+					list += key + ' : ' + this[key] + '\n';
+				}
+			}
+			console.log(list);
+		}
+	}
+	
+	Person.info();
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	// 프로토 타입 객체
+	function Animal(name, age){
+		this.name = name;
+		this.age = age;
+// 		this.walk = function(speed){
+// 			console.log('%s가 %d의 속도로 걸어갑니다.', this.name, speed);
+// 		}
+	}
+	
+	// 프로토 타입을 이용한 함수 추가
+	Animal.prototype.walk = function(speed) {
+		console.log('%s가 %d의 속도로 걸어갑니다.', this.name, speed);		
+	}
+	
+	/*
+		-	property(프로퍼티)는 프로토 타입 객체를 이용하여 객체를 생성했을 때,
+			객체들이 참고할 수 있는 객체의 원형을 참조
+		-	프로토 타입 객체인 function의 객체를 참조
+		-	Animal.prototype 은 프로토 타입 객체인 function Animal(name, age)를 참조 중이다
+		-	Animal 함수를 이용해 객체를 만들면 (new Animal),
+			모든 객체는 walk라는 특성이 해당 메소드를 참조하는 형태로 인스턴스 생성
+			
+		-	반면에, Animal.walk = function(speed) {...}와 같은 형태로
+			메소드 추가 시에는 Animal을 생성할 때 마다 walk 특성이 포함된 형태로 생성
+		-	Animal을 생성할 때 마다 walk도 중복되어 생성된다
+	*/
+	
+	var a1 = new Animal('강아지', 2);
+	var a2 = new Animal('고양이', 3);
+	a1.walk(3);
+	a2.walk(4);
+	
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

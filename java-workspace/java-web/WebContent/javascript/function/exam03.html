@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+/*
+	window.onload = function(){	// 브라우저가 로드되었다면, 담은 함수를 실행
+		var list = '';
+		list += '<ul>';
+		list += '<li>Hello</li>';
+		list += '<li>JavaScript</li>';
+		list += '</ul>';
+		
+		// HTML 태그 인식이 포함된 방법
+// 		document.body.innerHTML = list;
+		
+		// 일반 Text 형식
+		document.body.innerText = list;
+		
+		document.body.innerHTML += ('<br>' + list);
+	}
+*/
+	
+/*
+	var willEval = '';
+	willEval = 'var number = 10;';
+	willEval = 'console.log(number);';
+	willEval = 'var arr = ["1", "2"];';
+	willEval = 'console.log(arr);';
+	
+	eval(willEval);
+*/
+
+	var won = '2000원';
+	var dollar = '1.5$';
+	
+	console.log(parseInt(won) + ' : ' + parseInt(dollar));
+	console.log(parseFloat(won) + ' : ' + parseFloat(dollar));
+	
+	window.open('https://www.naver.com'
+			   , 'child'	// 자식
+			   , 'width=600, height=300, scrollbar=yes, resizable=yes'	// 속성
+	); // 팝업 창
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

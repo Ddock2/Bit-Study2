@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	/*
+		BOM (Browser Object Model): 브라우저 객체 모델
+			window 객체
+				: 브라우저 창의 자바 스크립트 인터페이스 객체 역할
+			- location
+			- navigator
+			- history
+			- screen
+			- document
+	*/
+// 	location.href = 'https://www.naver.com';
+// 	location = 'https://www.daum.net';
+// 	location.assign('http://www.itworld.co.kr');
+	
+	window.alert('Hello');
+	window.prompt('이름을 입력하세요', '여기에');
+	
+	var sub = window.open(
+		'',
+		'',
+		'width=400, height=300, scrollbar=yes, resizable=yes'
+	);
+	sub.moveTo(0, 0);
+	
+	setInterval(function() {
+		sub.moveBy(10, 10)
+	}, 500);
+	
+	var child = window.open(
+		'',
+		'',
+		'width=300, height=200'
+	);
+	var width = screen.width;
+	var height = screen.height;
+	
+	child.moveTo(0, 0);
+	child.resizeTo(width, height);
+	
+	setInterval(function(){
+		child.resizeBy(-30, -30);
+		child.moveBy(10, 10);
+	}, 500);
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	/*
+		JSON (JavaScript Object Notation)
+			attribute(속성) - value(값),
+			key(키) - value(값)
+			으로 이루어진 데이터 저장 양식
+			
+			JSON.stringify()
+				: 자바 스크립트 객체 값 -> JSON 형태의 문자열로 반환
+			JSON.parse()
+				: JSON 형태의 문자열 -> 자바 스크립트 객체
+	*/
+	var member = {
+			name : '박신혜',
+			age : 30,
+			addr : '서울시 서초구',
+			info : function() {
+				var list = '';
+				for(var key in this){
+					if(key != 'info'){
+						list += key + ' : ' + this[key] + '<br>';
+					}
+				}
+				document.write(list);
+			}
+	};
+	
+	member.info();
+	
+	var str = JSON.stringify(member);
+	document.write(str + '<br>');
+	
+	var p = JSON.parse(str);
+	document.write(p + '<br>');
+	
+	// 객체로 변환 됐는지 확인, 멤버 연산자 사용
+	document.write('name : ' + p.name
+			      + ', age : ' + p.age
+			      + ', addr : ' + p.addr
+			      + '<br>');
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

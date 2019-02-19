@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	/*
+		자바의 객체 생성
+			- 클래스를 기반으로 생성할 객체를 정의
+			- 클래스는 그 '클래스로 만들어 낼 인스턴스'들의 원형
+			  (프로토 타입 객체, prototype)
+			- 프로토 타입 객체 비교
+				자바 (class)
+				class Person{
+					private String name;
+					private int age;
+					public Person(String name, int age){
+						this.name = name;
+						this.age = age;
+					}
+				}
+				
+				자바 스크립트 (function)
+				function Person(name, age) {
+					this.name = name;
+					this.age = age;
+				}
+	*/
+	function Person (name, phone, addr) {
+		this.name = name;
+		this.phone = phone;
+		this.addr = addr;
+	}
+	
+	// 프로토타입을 활용한 메소드 추가
+	//	: prototype 특성에 info라는 속성을 추가하여 함수 정의
+	Person.prototype.info = function() {
+		var list = '';
+		for(var key in this){
+			if(key != 'info'){
+				list += key + ' : ' + this[key] + '\n';
+			}
+		}
+		console.log(list);
+	}
+	
+	var p = new Person('매머드', '010-1111-2222', '서울시 서초구');
+	console.log(p.name);
+	console.log(p.phone);
+	console.log(p.addr);
+	p.info();
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

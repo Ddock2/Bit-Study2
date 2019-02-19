@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	// 자바 스크립트의 배열 특징
+	// 	: 데이터 변수의 자료 형이 정해져 있지 않기에, 자유롭게 데이터를 넣을 수 있다.
+	var persons = [ { name : 'AAA', age : 20 },
+					{ name : 'BBB', age : 30 },
+					{ name : 'CCC', age : 40 } ];
+	persons.push( { name : 'DDD', age : 50} );
+	
+	console.log('persons length : %d', persons.length);
+	console.log('첫번째 객체의 이름 : %s', persons[0].name);
+	
+	var add = function(a, b) {
+		return a + b;
+	}
+	persons.push(add);
+	
+	console.log('add function Called : %d', persons[4](10, 20)); // 배열 내부의 함수 호출
+	
+	// for문을 이용한 출력
+	for(var i=0; i<persons.length; i++){
+		console.log('string : %s, typeof : %s', persons[i], typeof persons[i]);
+	}
+	
+	// forEach 함수를 이용한 출력
+	persons.forEach(function(item, index){
+		console.log('index:%d, item:%s', index, item);
+	})
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	var nums = [10, 20, 30, 40, 50];
+	
+	nums.forEach(function(element, index, nums){
+		document.write((index+1) + '번째 정수 : ' + element + '<br>');
+	});
+	
+	var newNums = nums.map(function(element){
+		return element + 5; // 각 요소 값 5 증ㅇ가
+	});
+	document.write('새로운 배열 : ' + newNums + '<br>');
+</script>
+</head>
+<body>
+
+</body>
+</html>

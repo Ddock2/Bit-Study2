@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function whenSubmit(){
+		var f = document.mForm;	// name="mForm" 요소
+		var pw = f.pw.value;	// form의 name="pw"인 요소의 value
+		var pw_check = f.pw_check.value;	// input에 입력된 값
+		
+		if(pw === pw_check){
+			alert('성공');
+			return true;
+		}
+		
+		alert('실패');
+		return false;
+	}
+
+	function countIncrease(){
+		var spanObj = document.getElementById('cntSpan');
+		
+		spanObj.innerHTML = parseInt(spanObj.innerHTML) + 1;
+	}
+</script>
+</head>
+<body>
+	<form name="mForm" action="" method="post" onsubmit="return whenSubmit()">
+		아이디<input type="text" name="id" size="20"><br>
+		비밀번호<input type="password" name="pw" size="20"><br>
+		비밀번호 확인<input type="password" name="pw_check" size="20"><br>
+		<input type="submit" value="가입">
+	</form>
+	
+	<!-- 
+		1. span 태그에 id 설정 및 출력
+		2. input 버튼 생성, onclick 이벤트 함수 호출
+	-->
+	<span id="cntSpan">0</span>번 클릭
+	<input type="button" value="click" onclick="countIncrease()">
+</body>
+</html>

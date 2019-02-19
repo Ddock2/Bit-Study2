@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	var date = new Date();
+	var hour = date.getHours();
+	
+	if(hour < 12){
+		console.log("오전입니다");
+	}else{
+		console.log("오후입니다");
+	}
+	
+	
+	// switch
+	var num = Number(prompt('정수를 입력하세요')); // 프롬프트 입력
+	
+	switch(num % 2){
+		case 0:
+			alert('짝수');
+			break;
+		case 1:
+			alert('홀수');
+			break;
+	}
+	
+	console.log(30 > 20 && 20 > 10);
+	console.log(typeof(30 > 20 && 20 > 10));
+	
+	var number = 10;
+	console.log(number++);
+	console.log(number++);
+	console.log(number++);
+	
+	(number > 10) ? console.log('10보다 크다') : console.log('10보다 작거나 같다');
+</script>
+</head>
+<body>
+
+</body>
+</html>

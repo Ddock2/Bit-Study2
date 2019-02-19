@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	var book = new Array(
+		'JavaScript',
+		'HTML5/CSS3',
+		'Angular/js',
+		'Vue.js'
+	);
+	
+	for(var i=0; i<book.length; i++) {
+		document.write((i+1) + '번째책 : ' + book[i] + '<br>');
+	}
+	
+	var nums = [12, 32, 7, 3, 24];
+	document.write('nums : ' + nums + '<br>');
+	nums.sort();
+	document.write('nums : ' + nums + '<br>');
+	
+	
+	nums.sort(function(left, right){
+		return left - right
+	});
+	document.write('오름차순 정렬 : ' + nums + '<br>');
+	
+	nums.sort(function(left, right){
+		return right - left
+	});
+	document.write('내림차순 정렬 : ' + nums + '<br>');
+	
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

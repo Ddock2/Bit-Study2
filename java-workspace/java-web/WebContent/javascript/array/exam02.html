@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	var names = ['박신혜', '한채영', '임시완', '송민호'];
+	for(var i=0; i<names.length; i++){
+		console.log((i+1) + '번째 이름 : ' + names[i]);
+	}
+	
+	// foreach
+	for(var i in names){
+		console.log(names[i]);
+	}
+	
+	for(var i=0; true; i++){
+		console.log(i);
+		if(!confirm('계속 할텨?')){
+			break;
+		}
+	}
+	console.log('루프 종료');
+</script>
+</head>
+<body>
+
+</body>
+</html>

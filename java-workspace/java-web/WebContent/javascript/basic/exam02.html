@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	// var : 유연한 변수
+	var radius = 10;
+	var pi = 3.14159254;
+	
+	console.log(2 * radius * pi);
+	pi = 3.14;
+	console.log(2 * radius * pi);
+	
+	var hobby = 'coding';
+	var hobby = 'sleep';
+	var hobby = 'music';
+	console.log(hobby);
+	
+	var num = 10;
+	console.log(num);
+	
+	console.log(typeof num);			// number
+	console.log(typeof 3.14);			// number
+	console.log(typeof 'A');			// string
+	console.log(typeof 'Hello');		// string
+	console.log(typeof num2);			// undefined
+	console.log(typeof {});				// object
+	console.log(typeof []);				// object
+	console.log(typeof function(){});	// function
+	console.log(typeof null);			// object
+	// typeof 단항식 문법에서 단순히 null을 object로 지정
+	
+	
+	/*
+		a == b		: a와 b의 값이 같은지 판단
+		(equal operator)
+		
+		a === b		: a와 b의 값과 타입까지 같은지를 판단
+		(strict equal operator)
+	*/
+	// null 검사
+// 	if(value !== null && typeof value === "object") {}
+// 	if(!value && typeof value === "object") {}
+	
+	if(10 == '10') { console.log("같습니다.")}
+	else{ console.log("다릅니다.")}
+	
+	if(10 === '10') { console.log("같습니다.")}
+	else{ console.log("다릅니다.")}
+	
+	val = 20;	// 변수 선언없이 사용 가능, 전역 변수의 성격 (Scope)
+	console.log(val);
+</script>
+</head>
+<body>
+
+</body>
+</html>

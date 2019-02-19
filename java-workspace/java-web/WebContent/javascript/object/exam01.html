@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	// 자바 스크립트로 객체 지향 패러다임 (OOP)
+	
+	// 1. Object 객체 참조를 이용한 생성({ }, object)
+	var Person = { }; // object prototype
+	// var obj = new Object(); // object class
+	// - { } Person 변수에 참조
+	// - object 타입의 객체를 만들어 Person에 참조 시킨 후,
+	// - 내가 원하는 property를 설정할 수 있다.
+	Person['name'] = '매머드';
+	Person['age'] = 30;
+	Person.mobile = '010-1111-2222';
+	
+	// Person 객체에 메소드 추가
+	Person.add = function(a, b){
+		return a + b;
+	}
+	
+	console.log('이름 : %s', Person.name);
+	console.log('나이 : %d', Person.age);
+	console.log('번호 : %s', Person.mobile);
+	console.log('Person.add 메소드 호출 : %d', Person.add(10, 20));
+	
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

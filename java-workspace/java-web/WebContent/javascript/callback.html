@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	/*
+		CallBack
+			- 일반적인 호출자와 피호출자의 호출방향의 "역방향" 호출
+			- read가 익명 함수를 호출하기 위해, 자신의 일부인 익명 함수를 넘기는 것
+				(비동기 방식) 나는 다른일을 할테니 너는 니가 알아서 그거 호출해서 써라
+		
+		동기 입출력과 비동기 입출력 방식의 비교
+		[기능]
+		1. 프로그램에서 파일을 선택
+		2. 파일 업로드 시작
+		3. 파일 업로드가 완료되면 알림메시지를 수신
+		[event handler]
+		1. 사용자가 선택한 파일을 전송할 때 까지 대기
+		2. 업로드 되고 있는 파일에 대한 처리 (rename, save, ...)
+		3. 업로드의  성공 여부를 사용자에게 알림메시지 송신
+		
+			- 동기 입출력 방식
+			1. 사용자가 파일 업로드를 요청
+			2. 서버는 사용자가 업로드할 파일에 대한 처리
+			3. 사용자는 서버가 업로드를 완료할 때 까지 대기 (blocked)
+			4. 서버는 업로드 처리 완료 후 사용자에게 알림을 송신
+			5. 대기 중이던 사용자는 서버로부터 완료 메시지를 수신하고 나서야,
+			       다음 작업을 수행할 수 있다
+				* 서버가 처리를 끝내기 전까지 사용자는 다른일을 하지 못한다
+			
+			- 비동기 입출력 방식
+			1. 사용자가 파일 업로드를 요청
+			2. 서버는 사용자가 업로드할 파일에 대한 처리
+			3. 사용자는 업로드를 요청 후 다른 작업을 계속 수행
+			4. 서버는 업로드 처리 완료 후 사용자에게 알림 송신
+			5. 다른 작업을 수행 중이던 사용자는 파일 업로드의 결과를 수신
+				* 서버의 처리가 끝나지 않더라도 다른 작업 수행이 가능하다
+	*/
+	
+	/*
+	// 동기 방식
+	var contents = file.read('abc.txt');
+	// 파일을 전부 읽을 때까지 대기
+	// file.read()가 10분이면 10분, 100분이면 100분을 대기
+	showContents(contents); // 서버가 읽은 파일 정보를 보여주는 함수
+	// file 관련 수행이 끝나서야 다음 작업을 수행
+	var result = add(10, 20); // 다음 작업
+	console.log(result);
+	
+	// 비동기 방식
+	file.read('abc.txt', function(contents){
+		showContents(contents); // 읽기 완료 후 수행
+	});
+	var result = add(10, 20); // read() 동작 시작 후 수행
+	console.log(result);
+	*/
+	
+	console.log('start...');
+	setTimeout(function(){
+		console.log('callback func called...');
+	}, 3000);
+	console.log('end...');
+</script>
+</head>
+<body>
+
+</body>
+</html>

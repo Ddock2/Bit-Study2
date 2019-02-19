@@ -57,7 +57,6 @@ CREATE TABLE mysite_board(
 		reg_date	DATE			DEFAULT SYSDATE,
 		view_cnt	NUMBER(6)		DEFAULT 0
 );
-	
 CREATE SEQUENCE seq_mysite_board_no;
 
 CREATE TABLE mysite_board_file (
@@ -67,7 +66,6 @@ CREATE TABLE mysite_board_file (
  		file_save_name	VARCHAR2(200)	NOT NULL,
  		file_size		NUMBER(6)		NOT NULL
 );
- 	
 CREATE SEQUENCE seq_mysite_board_file_no;
 
 CREATE TABLE mysite_comment (
@@ -77,5 +75,4 @@ CREATE TABLE mysite_comment (
 		content			VARCHAR2(200)	NOT NULL,
 		reg_date		DATE			DEFAULT SYSDATE
 );
-	
 CREATE SEQUENCE seq_mysite_comment_no;

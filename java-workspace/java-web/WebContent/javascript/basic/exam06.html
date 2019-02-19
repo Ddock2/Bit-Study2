@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	var now = new Date();
+	document.write('Local Time : ' + now + '<br>');
+	
+	var hour = now.getHours();
+	var minute = now.getMinutes();
+	var second = now.getSeconds();
+	var year = now.getFullYear();
+	var month = now.getMonth() + 1;
+	var day = now.getDate();
+	
+	// 요일 판단 함수
+	function getDayOfWeek(){
+		var day = this.getDay();
+		var week = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+		return week[day];
+	}
+	
+	Date.prototype.toDay = getDayOfWeek;
+	
+	document.write('오늘은 ' + year + '-' + month + '-' + day + ' ' );
+	document.write(hour + ':' + minute + ':' + second + '<br>');
+	document.write('오늘은 ' + now.toDay() + '입니다.');
+</script>
+</head>
+<body>
+
+</body>
+</html>

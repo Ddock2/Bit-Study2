@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	// 함수 내부에 함수 선언하고 호출하는 형태
+	function prnTotalSum(val1, val2) {
+		function sum(val1, val2){
+			var s = 0;
+			for(var i = val1; i <= val2; i++){
+				s += i;
+			}
+			return s;
+		}
+		
+		console.log(val1 + '~' + val2 + '의 합계 : ' + sum(val1, val2));
+	}
+	
+	function returnTest1(val){
+		alert(val);
+	}
+	function returnTest2(val){
+		return;
+	}
+	function returnTest3(val){
+		return val;
+	}
+	
+	// 매개변수가 없는 함수를 선언, arguments를 활용
+	function argsTest(){
+		console.log('typeof : ' + typeof arguments);	// object
+		console.log('length : ' + arguments.length);
+		// length : 넘어온 인자의 개수
+		
+		var length = arguments.length;
+		for(var i in arguments){	// foreach
+			console.log(i + ':' + arguments[i]);
+		}
+		if(length == 2){	// 인자가 2개라면 덧셈 결과를 출력
+			console.log('add : ' + add(arguments[0], arguments[1]));
+		}
+	}
+	
+	function add(val1, val2) { return val1 + val2; }
+	
+	function funcCall(){
+		console.log('으이');
+	}
+	
+	function call(funcCall) { // 인자로 함수를 전달
+		for(var i=0; i<3; i++){
+			funcCall();
+		}
+	}
+	
+	prnTotalSum(1,10);
+	returnTest1(10);
+	returnTest2(20);
+	console.log(returnTest3(30));
+	
+	argsTest(10);
+	argsTest(10, 20);
+	
+	call(funcCall);
+</script>
+</head>
+<body>
+
+</body>
+</html>
