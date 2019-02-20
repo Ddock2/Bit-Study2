@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	window.onload = function() {
+// 		var html = '<h1>Hello HTML</h1>';
+// 		html += '<img src="https://i.pinimg.com/originals/70/ea/49/70ea499ec8bedf471d9a5c3264e84e2a.png">';
+// 		document.body.innerHTML = html;
+		
+		// id로 요소를 추출
+		var id = document.getElementById('id');
+		id.innerHTML = '아이디';
+		
+		// tagName으로 요소를 모두 추출
+		var nodes = document.getElementsByTagName('td'); // tagName인 요소들을 배열로 반환
+		nodes[1].innerHTML = '비밀번호';
+		
+		/*
+			CSS 선택자로 요소 접근
+				- querySelector(선택자)
+				- querySelectorAll(선택자)
+		*/
+		var name = document.querySelector('#name');
+		name.innerHTML = '이름';
+		
+		var addr = document.querySelector('.addr-box');
+		addr.innerHTML = '주소';
+		
+		// node 삭제 (태그 내의 요소 삭제, 보이지 않음)
+		var id = document.getElementById('id');
+		id.parentNode.removeChild(id);
+		
+		// 요소를 가져와 해당되는 요소 style 설정 (CSS 적용)
+		var id = document.getElementById('name');
+		name.style.border = '2px solid blue';
+		name.style.color = 'red';
+		name.style.background = 'yellow';
+	};
+	
+</script>
+<style>
+	table {
+		width: 100px;
+		height: 200px;
+		border: 1px solid;
+	}
+	
+	td {
+		border: 1px solid;
+	}
+</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<td id="id">id</td>
+		</tr>
+		<tr>
+			<td>password</td>
+		</tr>
+		<tr>
+			<td id="name">name</td>
+		</tr>
+		<tr>
+			<td class="addr-box">addr</td>
+		</tr>
+	</table>
+</body>
+</html>

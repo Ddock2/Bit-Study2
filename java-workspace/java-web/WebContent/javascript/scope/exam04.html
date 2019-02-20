@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		exam.03.html의 global scope 문제 해결
+		function scope를 새로 생성하는 방법으로 해결
+	-->
+	<div id="div1">Click div 1</div>
+	<div id="div2">Click div 2</div>
+	<div id="div3">Click div 3</div>
+	
+	<script>
+		var len = 4;
+		
+	    /*
+		        스코프의 지속성
+		        div1을 위한 onclick event가 설정! // i:1
+		        div2, div3는 각각 i:2 i:3
+		
+		        스코프를 생성하는 것은 일반 언어와 다르지 않으나
+		        스코프의 지속성이라는 특성은 자바 스크립트만의 강점
+		    1. 새로운 스코프 생성 후 스코프 체인을 참조하는 함수를 변수에 넣을 수 있다.
+		          ※ Scope Chain? : EL에서 어떤 식별자를 찾기위해서 Scope영역을 작은 영역부터 큰영역으로 탐색하는 //#endregion
+		        아래의 setDivClick의 함수 영역에서도 function Scope영역에서 idx를 찾지 못해 더 큰 영역에 있는
+		        유지되고 있던 idx를 찾아 참조한 것
+		    2. 다른 함수의 인자로 넣을 수 있다. (callBack)
+		    3. 함수의 리턴 값으로 함수를 활용
+		
+		        함수가 선언된 곳이 아닌 전혀 다른 곳에서 호출 될 경우가 있기에
+		        해당 함수가 참조하는 스코프를 지속해야 한다.
+		*/
+		
+		for(var i=1; i<len; i++){
+			setDivClick(i);
+		}
+		
+		function setDivClick(idx){
+			document.getElementById('div' + idx).addEventListener('click', function() {
+				console.log('Clicked div #' + idx);
+			}, false);
+		}
+		
+	</script>
+	
+	
+</body>
+</html>

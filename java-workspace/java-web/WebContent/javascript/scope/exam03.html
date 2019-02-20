@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="div1">Click div 1</div>
+	<div id="div2">Click div 2</div>
+	<div id="div3">Click div 3</div>
+<script>
+	var len = 4; // global scope : 스크립트 전역에서 접근 가능한 범위
+	
+	for(var i = 1; i < len; i++){
+		document.getElementById('div' + i).addEventListener('click', function() {
+			console.log('Clicked div #' + i);
+		}, false);
+	}
+	
+</script>
+</body>
+</html>

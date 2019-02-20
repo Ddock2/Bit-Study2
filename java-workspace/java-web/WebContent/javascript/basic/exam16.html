@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function calculate(){
+		var form = document.calForm;
+		form.out.value = eval(form.in.value);
+		/*
+			eval() : 자바 스크립트 소스를 동적으로 실행
+			3+4 입력 시 코드 실행으로 결과는 7이된다
+			
+			입력을 다른 스크립트 코드로 넣어보자
+			location.href='https://www.naver.com'
+				-> 네이버 페이지 이동
+		*/
+	}
+	
+</script>
+</head>
+<body>
+	<form name="calForm" >
+		수식 입력
+		<input type="text" name="in" size="20"><br>
+		계산 결과
+		<input type="text" name="out" size="20"><br>
+		<input type="button" value="계산" onclick="calculate()"><br>
+	</form>
+</body>
+</html>

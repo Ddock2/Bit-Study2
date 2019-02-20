@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	var Person = {};
+	Person.name = '매머드';
+	Person.phone = '010-1234-5678';
+	Person.addr= '천안시 불당동';
+	
+	Person.info = function(){
+		var list = '';
+		
+		// with : 특정 객체를 생략하고 속성이나 메소드를 사용할 수 있도록 스코프 생성
+		with(this){	// Person 객체
+			list += 'name : ' + name + '\n';
+			list += 'phone : ' + phone + '\n';
+			list += 'addr : ' + addr + '\n';
+		}
+		console.log(list);
+	}
+	
+	Person.info();
+	
+	document.write('Hello<br>');
+	with(document){
+		write('JavaScript<br>');
+	}
+	
+	function foo(a, b){
+		var result = a + b;	// function scope	-> line:36 undefined
+// 		result = a + b;		// global scope		-> line:36 number
+		return result;
+	}
+	
+	console.log(foo(3, 4));
+	console.log(typeof result);
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

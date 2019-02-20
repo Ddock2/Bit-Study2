@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	/*
+		동적 문서 객체 생성
+		createElement(tagName)	: tagName의 요소 생성
+		createTextNode(text)	: 요소에 삽입될 text 생성
+		
+	*/
+	
+	window.onload = function() {
+		var tag = document.createElement('h1');
+		var textTag = document.createTextNode('Hello document');
+		
+		// 문서 객체 연결
+		tag.appendChild(textTag); // h1 요소에 text 요소를 연결
+		// <h1>Hello document</h1>
+		document.body.appendChild(tag); // body 요소에 tag를 자식으로 연결
+		// <body><h1>Hello document</h1></body>
+		
+		var imgTag = document.createElement('img');
+		imgTag.setAttribute('src', 'https://i.pinimg.com/originals/70/ea/49/70ea499ec8bedf471d9a5c3264e84e2a.png'); // img 태그의 속성 부여
+		
+		var aTag = document.createElement('a');
+		aTag.setAttribute('href', 'https://www.youtube.com/watch?v=cBC0hRPx07Q');
+		
+		aTag.appendChild(imgTag);
+		document.body.appendChild(aTag);
+	};
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

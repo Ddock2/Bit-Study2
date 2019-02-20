@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	/*
+		자바의 Scope
+			- 자바는 변수를 사용할 수 있는 영역이 { } 형태의 코드 블록으로 나뉜다
+			- 변수의 가시성으로 안에서 밖은 접근이 가능한지만, 밖에서 안은 불가
+		
+		자바 스크립트의 Scope
+			- { }(Blockc Scope)를 작성한 코드 블록으로 나누지 않는다
+			
+	*/
+	var a = 10;
+	if(a == 10){
+		console.log(a);
+		var b = 20;
+		console.log(b);
+	}
+	console.log(b);
+	
+	/*
+		자바 스크립트는 특정 구문이 실행될 때 새로 생성!
+		function	: 함수 (가장 많이 사용)
+		with		: 곧 사라질 구문(ECMAScript6 부터 Deprecated)
+		catch		: 예외처리 구문
+	*/
+	
+	// 1. function을 활용할 스코프 생성
+	function foo(){
+		var val = 'Hello JS';
+	}
+	console.log(typeof val === 'undefined');
+	
+	// 2. with를 활용한 스코프 생성
+	with({inScope : 'Hello'}){
+		var val = 'World';
+		console.log(inScope);		
+		console.log(val);		
+	}
+	console.log(typeof inScope === 'undefined');
+	console.log(val === 'World');
+	// * with 구문은 코드가 모호해질 가능성이 아주 높다
+	
+	// 3. catch를 활용한 스코프 생성
+	try{
+		throw new exception('fake exception');
+	}catch (err){
+		var value = 'catch scope';
+		console.log(err instanceof ReferenceError === true);
+	}
+	console.log(value === 'catch scope');		// true, value 사용 가능
+	console.log(typeof err === 'undefined');	// true, err 사용 불가
+	// catch 구문의 변수인 err는 해당 스코프 내에서만 포함되고,
+	// catch 구문의 { } 내부의 변수는 외부에서도 접근 가능
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>
