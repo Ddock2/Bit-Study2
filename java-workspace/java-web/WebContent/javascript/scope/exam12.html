@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="wrapper">
+		<!-- 
+			Custom Data Attributes (HTML5)
+			 : data-* 형태로 사용하는 속성, 원하는 속성과 값을 부여할 수 있다
+		-->
+		<button data-cb="1">Add div</button>
+		<button data-cb="2">Add img</button>
+		<button data-cb="clear">Clear</button>
+	</div>
+	<br>
+	<div id="append-div"></div>
+	
+	<script>
+		/*
+			클로저의 장점
+				- 퍼포먼스상 유리하게 동작
+				- 최초에 초기화된 고정적인 값이나 변수를 자주 이용하는 경우에,
+				    클로저를 통해 초기화 해두고 콜백 함수에서 지속적으로 참조하는 것
+				- 객체의 속성이 자유롭고 쉬운 자바 스크립트에서 이러한 디자인 패턴이 효율적
+				- DOM Element를 적극적으로 이용할 때 아주 좋은 효율을 보여준다
+				-[대표적인 사용 예]
+					1. 반복적으로 같은 작업을 수행할 때
+					2. 같은 초기화 작업이 지속적으로 필요할 때
+					3. 콜백 함수에 동적인 데이터를 넘겨주고 싶을 때
+					4. static 변수를 이용하고 싶을 때
+					5. 처음에 초기화 했던 값을 유지하고 싶을 때
+					6. 자바 스크립트 라이브러리나 모듈에서 내부 함수의 변수를 private 형태로 활용하고 싶을 때
+		*/
+		/*
+			클로저의 단점
+				- 클로저는 메모리를 소모
+				- 이벤트에 대한 콜백, setTimeout 같은 메소드의 콜백 등
+				    등록했던 함수들이 메모리에 계속 남아있게되면(활용 중 이면),
+				    해당 클로저도 메모리에 계속 남게된다.
+				- 반복문(루프)를 이용한 클로저 생성은 최대한 자제해라
+		*/
+		(function() {
+			var appendDiv = document.getElementById("append-div");
+			document.getElementById("wrapper").addEventListener('click', append);
+			
+			function append(element){
+				var target = element.target 
+							|| element.srcElement 
+							|| event.srcElement;
+				var func = callback[target.getAttribute("data-cb")];
+				appendDiv.appendChild(func());
+			}
+			
+			var callback = {
+					"1" : (function(){
+						var div = document.createElement('div');
+						div.innerHTML = 'new div...';
+						
+						return function(){
+							return div.cloneNode(true);
+						}
+					}()),
+					"2" : (function(){
+						var img = document.createElement('img');
+						img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDnwZqiNEjwBlif6XntUjg7mCfEKLM9QtfE6nGJ_BGT7h3YQj4cA';
+						
+						return function(){
+							return img.cloneNode(true);
+						}
+					}()),
+					"clear" : function() {
+						appendDiv.innerHTML = "";
+						return document.createTextNode("Cleared...")
+					}
+			}
+			
+		}());
+	</script>
+</body>
+</html>

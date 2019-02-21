@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function outer(){
+		var count = 0; // outer의 내부 변수
+		return {	// object return, { }
+					// 객체를 리턴 시켰기에 increase, decrease를 모두 사용
+			increase : function(){
+				return ++count;	// outer 함수의 count에 접근, 클로저가 발생
+			},
+			decrease : function(){
+				return --count;
+			}
+		}
+	}
+	
+	var counter = outer();	// outer()의 스코프 생성
+	// counter는 increase와 decrease 속성을 갖는 객체를 담고 있으니,
+	// 해당 객체의 멤버로 두 함수를 호출
+	console.log(counter.increase()); // 1
+	console.log(counter.increase()); // 2
+	console.log(counter.decrease()); // 1
+	
+	var counter2 = outer();
+	console.log(counter2.increase()); // 1
+	// counter와 별도의 스코프 생성 (counter와 counter2는 서로 다른 스코프)
+	// 새롭게 outer() 함수를 호출 함에 따라 새로운 스코프 생성
+</script>
+</head>
+<body>
+
+</body>
+</html>

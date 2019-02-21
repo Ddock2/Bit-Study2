@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	/*
+		var			: function Scope (with, catch)
+		let			: Blocked Scope
+		const		: Blocked Scope
+		(default)	: Global Scope
+	*/
+	
+	/*
+		var
+		 - function을 이용해 Scope를 나눈다
+		 - { } 기준으로 Scope를 나누지 않는다
+	*/
+// 	if(true){ var a = 10; }
+// 	console.log(a); // 접근 가능
+// 	for(var i=0; i<10; i++){ var j = 20; }
+// 	console.log(i); // 접근 가능
+// 	console.log(j); // 접근 가능
+// 	var foo = function(){ var b = 20;}
+// 	console.log(typeof b); // 접근 불가
+	
+	/*
+		let 선언 시
+		 - { } (Block Scope)를 기준으로 영역을 나눈다
+		 - 자바에서 사용했던 것 처럼 외부에서 내부 접근 불가
+	*/
+// 	if(true){ let a = 10; }
+// 	console.log(typeof a); // 접근 불가
+// 	for(let i=0; i<10; i++){ let j = 20; }
+// 	console.log(typeof i); // 접근 불가
+// 	console.log(typeof j); // 접근 불가
+// 	var foo = function(){ let b = 20;}
+// 	console.log(typeof b); // 접근 불가 
+	
+	/*
+		const
+		 - { } (Block Scope)를 기준으로 영역을 나눈다
+		 - 자바의 final과 같이 상수화 시키기 위한 방법
+		 - 리터럴이나 객체를 담는다면 이후에 변화를 막기 위해 사용
+	*/
+// 	const num = 10;
+// 	num = 20; // 수정 불가
+// 	console.log(num);
+// 	const Person = {
+// 			name : '매머드',
+// 			age : 80
+// 	};
+// 	Person.name = '맘모스'; // 객체의 속성은 변경 가능, name이 상수화가 아니다
+// 	// Person의 상수화이기에 Person에 다른 객체가 담기는 것을 막겠다
+// 	Person = { name : '코끼리' }; // 수정 불가 
+// 	console.log(Person.name);
+	
+	/*
+		(default)
+		 - 아무것도 선언하지 않은 경우
+		 - 선언 키워드가 없어도 변수 사용 가능
+	*/
+// 	a = 10;
+// 	console.log(a); // 접근 가능
+// 	if(true) { b = 20; }
+// 	console.log(b); // 접근 가능
+// 	for(i=0; i<10; i++){ j = 20; }
+// 	console.log(i); // 접근 가능
+// 	console.log(j); // 접근 가능
+// 	(function() { c = 30; return c;}())
+// 	console.log(c);
+	
+	/*
+		"use strict" : 문법을 엄격히 하는 strict mode 실행
+	*/
+// 	"use strict"; // 현재 파일 전부에 모드 적용
+// 	a = 10; // (default), 키워드를 통한 선언을 하지 않은 경우
+// 	console.log(a); // 사용 불가
+	
+// 	(function () {
+// 		"use strict"; // function 내부에서 모드 적용
+// 		b = 20; // 사용 불가
+// 		if(true) { var val = 10; }
+// 		console.log(val);
+// 	}());
+	
+	var public = 10;	// 자바 스크립트는 키워드를 변수명으로 사용 가능
+	console.log(public);
+	
+	"use strict";
+	var public = 20;	// 모드 적용 시 키워드를 변수명으로 사용 불가
+	console.log(public); // error : Unexpected strict mode reserved word
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

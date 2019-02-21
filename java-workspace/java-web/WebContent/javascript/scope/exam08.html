@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	/*
+		exam07.html 에서 보았듯이 새로 실행할 때 마다 새로운 스코프가 생성된다
+		자바의 static(전역 변수의 성격)처럼 값이 유지(공유)하고 싶다
+		즉, counter와 counter2가 하나의 변수를 공유하도록
+	*/
+	var counterFactory = (function(){	// IIFE를 활용하여 선언과 동시에 호출, 최상위 스코프
+		var staticCount = 0;	// 최상위 스코프의 내부 변수
+		return function(){	// 익명 리턴 함수
+			var localCount = 0;	//익명 함수의 내부 변수
+			return {	// increase와 derease 프로퍼티를 가진 객체 리턴
+				increase : function(){
+					return {	// static과 local 프로퍼티에 증가된 count를 가진 객체 리턴
+						staticValue : ++staticCount,
+						localValue : ++localCount
+					}
+				},
+				decrease : function(){
+					return {	// static과 local 프로퍼티에 감소된 count를 가진 객체 리턴
+						staticValue : --staticCount,
+						localValue : --localCount
+					}
+				}
+			}
+		}
+	}());
+	
+	var counter = counterFactory(), counter2 = counterFactory();
+	console.log(counter.increase());	// { staticValue : 1, localValue : 1}
+	console.log(counter2.increase());	// { staticValue : 2, localValue : 1}
+	console.log(counter.increase());	// { staticValue : 3, localValue : 2}
+</script>
+</head>
+<body>
+
+</body>
+</html>

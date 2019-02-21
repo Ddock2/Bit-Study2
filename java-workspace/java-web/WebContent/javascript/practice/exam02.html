@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	window.onunload = function() {
+		alert("!!!");
+		pop();
+	}
+	
+	var onUnload = function(){
+		alert("나갈거야?");
+		pop();
+	}
+	
+	var pop = function(){ window.open('', '', 'width=400, height=400, scrollbar=yes, resizable=yes');};
+	
+	function onLoad() {
+		var btn = document.getElementById("myBtn");
+		btn.onclick = displayDate;
+		btn.onmouseover = displayDate;
+		btn.onmouseout = hideDate;
+	}
+	
+	function displayDate() {
+		document.getElementById("demo").innerHTML = Date();
+	}
+	function hideDate() {
+		document.getElementById("demo").innerHTML = "";
+	}
+</script>
+</head>
+<body onload="onLoad()" onunload="onUnload()">
+	<button id="myBtn">Try it</button>
+	<p id="demo"></p>
+</body>
+</html>

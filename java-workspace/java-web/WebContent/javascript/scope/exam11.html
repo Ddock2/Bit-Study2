@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<button id="btn_toggle">Toggle Pending</button>
+	<div id="div_pending">Pending</div>
+	
+	<script>
+		(function(){
+			var pendingInterval = false;
+			btn = document.getElementById('btn_toggle');
+			div = document.getElementById('div_pending');
+			// HTML 페이지 로딩 후 IIFE로 초기화
+			// getElementById() 한번만 수행
+			
+			function startPending(){
+				if(div.innerHTML.length > 11){
+					div.innerHTML = 'Pending';
+				}
+				div.innerHTML += '.';
+			}
+			
+			btn.addEventListener('click', function(){
+				if(!pendingInterval){
+					pendingInterval = setInterval(startPending, 500);
+					// 이벤트 콜백으로써 호출 될 때도 클로저 발생
+				}else{
+					clearInterval(pendingInterval);
+					pendingInterval = false;
+				}
+			});
+		}());
+	</script>
+</body>
+</html>
