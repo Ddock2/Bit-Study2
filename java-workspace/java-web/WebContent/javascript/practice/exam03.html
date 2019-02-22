@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function onLoad(){
+// 		document.getElementById("myBtn").onclick = function(){
+// 			displayDate();
+// 		};
+		document.getElementById("myBtn").onclick = displayDate;
+	}
+	function displayDate(){
+		document.getElementById("demo").innerHTML = Date();
+	}
+	
+</script>
+</head>
+<body onload="onLoad()">
+	<button id="myBtn">Try it</button>
+	<p id="demo"></p>
+</body>
+</html>

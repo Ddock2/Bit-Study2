@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function() {
+		$('input').focus(function(){
+			$(this).css('background-color', '#AAA');
+		});
+		$('input').blur(function(){
+			$(this).css('background-color', '#777');
+		});
+	});
+</script>
+</head>
+<body>
+	아이디<input type="text" name="name">
+	<br>
+	비밀번호<input type="password" name="password">
+</body>
+</html>

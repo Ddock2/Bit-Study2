@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	/*
+		이벤트 핸들러
+			- Mouse		: click, dblclick, mouseenter, mouseleave
+			- Keyboard	: keydown, keyup, keypress
+			- Form		: submit, focus, blur, change
+			- Document/Window
+				: load, resize, unload, scroll
+	*/
+	$(document).ready(function(){
+// 		$('#mouse').hover(function(){
+// 			$(this).css("background-color", "#A66");
+// 		}, function(){
+// 			$(this).css("background-color", "#66A");			
+// 		});
+
+	$('#mouse').mousedown(function(){
+		console.log('마우스를 눌러버림');
+	});
+	$('#mouse').mouseup(function(){
+		console.log('마우스 떼버림');
+	});
+	$('#mouse').mouseenter(function(){
+		console.log('마우스 드루와');
+	});
+	$('#mouse').mouseleave(function(){
+		console.log('마우스 어디가');
+	});
+	
+	});
+</script>
+</head>
+<body>
+	<span id="mouse">문장에 마우스 이벤트를 시험해볼텨?</span>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	// [ ] : 속성 선택자
+	$(document).ready(function(){
+// 		$('a').hide();			// a 태그 모두
+// 		$('[name]').hide();		// name 속성을 가진 요소
+// 		$('a[href]').hide();	// a 태그의 href 속성을 가진 요소
+		$('a[target="_blank"]').hide();
+		
+		
+	});
+	
+</script>
+</head>
+<body>
+	<a>Naver</a>
+	<br>
+	<a href="https://www.daum.net">Daum</a>
+	<br>
+	<a href="https://www.github.com" target="_blank">Github</a>
+	<br>
+	<input type="button" name="input" value="Input Button">
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function(){
+		// on : 여러 이벤트를 동시에 설정
+		$('h2').on({
+			click : function(){
+				$(this).css('background-color', 'blue');
+			},
+			mouseenter : function(){
+				$(this).css('color', 'yellow');
+			},
+			mouseleave : function(){
+				$(this).css('color', 'orange');
+			}
+		});
+	});
+	
+</script>
+</head>
+<body>
+	<h1>내일 쉰다</h1>
+	<h1>꺄르륵</h1>
+	<h2>점심 뭐먹지</h2>
+	<h2>굶으면 죽어</h2>
+</body>
+</html>

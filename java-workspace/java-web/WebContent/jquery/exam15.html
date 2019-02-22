@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function() {
+		$('#slide').on({
+			click: function(){
+				$('#panel').slideDown(3000);
+			}
+		});
+		$('#panel').dblclick(function(){
+			$(this).stop();
+		});
+		$(':button').click(function(){
+			$('#panel').stop();
+		});
+	});
+</script>
+<style>
+	#slide, #panel {
+		padding: 5px;
+		background-color: #33ddcc;
+		border: 2px solid #a2a2a2;
+	}
+	
+	#panel{
+		padding: 50px;
+		display: none;
+	}
+</style>
+</head>
+<body>
+	<button>Slide STOP</button>
+	<br>
+	<div id="slide">Slide Down</div>
+	<div id="panel">Hello...jQuery</div>
+</body>
+</html>

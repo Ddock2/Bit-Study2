@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#div1').fadeIn(3000);
+		$('#div2').fadeOut('slow');
+		
+		$(':button').click(function(){
+			// fadeIn/fadeOut, ON/OFF
+			$('#div1').fadeToggle();
+			$('#div2').fadeToggle(2000);
+			// 투명도 : 0 ~ 1, 0이면 안보인다
+			$('#div1').fadeTo('slow', 0.5);
+			$('#div2').fadeTo('slow', 0.2);
+		});
+		
+	});
+</script>
+</head>
+<body>
+	<button>Try it</button>
+	<div id="div1" style="width: 100px; height: 100px;
+		background-color: blue; display: none;"></div>
+	<div id="div2" style="width: 100px; height: 100px;
+		background-color: red;"></div>
+</body>
+</html>

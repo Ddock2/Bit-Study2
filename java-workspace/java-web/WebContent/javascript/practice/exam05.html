@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function mouseDown(element){
+		element.style.background = '#23FB56';
+		element.innerHTML = '마우스 버튼을 떼주세요';
+	}
+	
+	function mouseUp(element){
+		element.style.background = '#FCA';
+		element.innerHTML = '마우스 버튼을 꾹 누르세요';
+	}
+</script>
+</head>
+<body>
+	<div onmousedown="mouseDown(this)" onmouseup="mouseUp(this)"
+		style="background-color: #DDD;">
+		Try it
+	</div>
+</body>
+</html>

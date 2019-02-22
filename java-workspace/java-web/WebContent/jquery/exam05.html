@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function(){
+		// css(속성, 값) 메소드를 이용한 스타일 적용
+		$('tr:even').css('background-color', '#5AA');
+		$('tr:odd').css('background-color', '#CCC');
+	});
+	
+</script>
+</head>
+<body>
+	<h2>회원 목록</h2>
+	<table border="1">
+		<tr>
+			<th>이름</th>
+			<th>전화번호</th>
+		</tr>
+		<tr>
+			<td>박신혜</td>
+			<td>010-1111-2222</td>
+		</tr>
+		<tr>
+			<td>임시완</td>
+			<td>010-3333-4444</td>
+		</tr>
+		<tr>
+			<td>박시연</td>
+			<td>010-5555-6666</td>
+		</tr>
+		<tr>
+			<td>김태희</td>
+			<td>010-7777-8888</td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	/*
+	 	수행 순서
+	 	1. Hello jQuery가 빨간색으로 변경
+	 	2. Slide가 올라갔다가, 내려온다
+	 	3. Hello jQuery를 파랑색으로 변경
+	 */
+	$(document).ready(function(){
+		$(':button').click(function(){
+// 			$('p').css('color', 'red');
+// 			$('p').slideUp(1000);
+// 			$('p').slideDown(1000, function(){
+// 				$(this).css('color', 'blue');
+// 			});
+			
+			$('p').css('color', 'red')
+				  .slideUp(1000)
+				  .slideDown(1000, function(){
+					  $(this).css('color', 'blue');
+				  });
+		});
+	});
+</script>
+</head>
+<body>
+	<p style="font-weight: bold; font-size: 2em;">Hello jQuery</p>
+	<button>Try it</button>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function() {
+		$(':button').click(function(){
+			$('p').hide(2000, function(){
+				alert('일요일도 좋아'); // hide가 수행완료 후에 alert가 수행
+			});
+		});
+	});
+	
+</script>
+</head>
+<body>
+	<button>Try it</button>
+	<p>내일은 더 즐거운 토요일</p>
+</body>
+</html>

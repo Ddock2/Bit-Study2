@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function(){
+		
+		$('#q-01').children('h3').click(function(){
+			$(this).parent().children('h3').removeClass('check');
+			$(this).addClass('check');
+		});
+		
+		$('#answer-btn').click(function(){
+			$('#answer').addClass('answer');
+		});
+		
+		$('#erase-chance').click(function(){
+			$('#q-01').children('h3').eq(0).hide();
+		});
+	});
+	
+</script>
+<style>
+	.check{
+		color : blue;
+	}
+	
+	.answer{
+		color : green;
+	}
+</style>
+</head>
+<body>
+	<div id="q-01">
+		<h2>[Q.01]다음 중 자바의 접근제한자가 아닌것은?</h2>
+		<h3>1. public</h3>
+		<h3>2. private</h3>
+		<h3 id="answer">3. extends</h3>
+		<h3>4. default</h3>
+	</div>
+	<button id="answer-btn">정답 확인</button>
+	<button id="erase-chance">지우개 찬스</button>
+</body>
+</html>
