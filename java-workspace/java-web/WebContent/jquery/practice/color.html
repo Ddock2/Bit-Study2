@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function(){
+		// 1. 컬러 요소 클릭 시 가로 세로 크기를 150px로 1초 동안 증가
+		$('.color span').click(function(){
+			$(this).animate({
+				width : '+=50',
+				height : '+=50'
+			}, 1000, function(){
+				$(this).animate({
+					width : '-=50',
+					height : '-=50'
+				}, 1000);
+			});
+		});
+		
+		// 2. 마우스를 올렸을 때 해당 이름의 컬러로 배경색 변경
+		// 3. 마우스가 벗어났을 때 원래 배경색으로 변경
+		$('.color span').hover(function(){
+			$(this).css('background-color', $(this).attr('id'));
+		}, function(){
+			$(this).css('background-color', 'white');
+		});
+		
+		
+		
+	});
+</script>
+<style>
+	.color * {
+		display: black;
+		border: 2px solid gray;
+		color: gray;
+		margin: 10px;
+		padding: 5px;
+		font-weight: bold;
+		font-size: x-large;
+		float: left;
+		cursor: pointer;
+	}
+</style>
+</head>
+<body class="color">
+	<span id="red">RED</span>
+	<span id="yellow">YELLOW</span>
+	<span id="blue">BLUE</span>
+	<span id="purple">PURPLE</span>
+	<span id="green">GREEN</span>
+	<span id="navy">NAVY</span>
+</body>
+</html>

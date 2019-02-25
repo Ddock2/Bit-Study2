@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function(){
+		$('span').parent().css({
+			'color' : 'red',
+			'border' : '2px solid red'
+		});
+		
+		$('span').parents().css({
+			'color' : 'blue',
+			'border' : '2px solid blue'
+		});
+		
+		$('span').parents('ul').css({
+			'color' : 'navy',
+			'border' : '2px solid navy'
+		});
+		
+		$('span').parentsUntil('div').css({
+			'color' : 'green',
+			'border' : '2px solid green'
+		});
+	});
+	
+</script>
+<style>
+	.ancestor *{
+		display: black;
+		border: 2px solid gray;
+		color: gray;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+</head>
+<body>
+	<div class="ancestor">
+		<div style="width:500px;">
+			div
+			<ul>
+				ul
+				<li>
+					li
+					<span>span</span>
+				</li>
+			</ul>
+		</div>
+		
+		<div style="width:500px;">
+			div
+			<p>
+				p
+				<span>span</span>
+			</p>
+		</div>
+	</div>
+</body>
+</html>

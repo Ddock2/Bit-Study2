@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function(){
+		// 처음
+// 		$('div p').first().css('background-color', 'red');
+		
+		// 마지막
+// 		$('div p').last().css('background-color', 'blue');
+		
+		// eq() : 0, 1, 2, ... 번째 p 요소 적용
+		$('p').eq(2).css('background-color', 'orange');
+		
+		// filter() : 선택자를 기준으로 적용
+		$('p').filter('.select').css('background-color', 'pink');
+		
+		// not() : 선택자를 제외하고 적용
+		$('p').not('.select').css('background-color', 'yellow');
+	});
+	
+</script>
+</head>
+<body>
+	<h2>KBO 구단리스트</h2>
+	<div style="border: 2px solid black;">
+		<p>넥센 히어로즈</p>
+		<p class="select">롯데 자이언츠</p>
+		<p>기아 타이거즈</p>
+		<p>두산 베어스</p>
+		<p>삼성 라이온즈</p>
+		<p class="select">한화 이글스</p>
+	</div>
+</body>
+</html>

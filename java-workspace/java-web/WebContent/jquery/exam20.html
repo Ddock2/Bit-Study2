@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#btn-header').click(function(){
+// 			$('div').append('<h2>세 번째 제목</h2>');
+			$('div').prepend('<h2>세 번째 제목</h2>');
+		});
+		
+		$('#btn-list').click(function(){
+// 			$('ol').append('<li>분홍</li>');
+			$('ol').prepend('<li>분홍</li>');
+		});
+		
+		$('#btn-body').click(function(){
+			var text1 = '<h4>추가된 내용 (일반적인 방법)</h4>';
+			var text2 = $('<h4></h4>').text('추가된 내용 (제이쿼리)');
+			var text3 = document.createElement('h4');
+			text3.innerHTML = '추가된 내용 (innerHTML)';
+			
+			$('body').append(text1, text2, text3);
+		});
+	});
+	
+</script>
+</head>
+<body>
+	<div>
+		<h2>첫 번째 제목</h2>
+		<h2>두 번째 제목</h2>
+	</div>
+	
+	색상
+	<ol>
+		<li>빨</li>
+		<li>파</li>
+		<li>검</li>
+	</ol>
+	
+	<button id="btn-header">제목 추가</button>
+	<button id="btn-list">색상 추가</button>
+	<button id="btn-body">본문 추가</button>
+</body>
+</html>

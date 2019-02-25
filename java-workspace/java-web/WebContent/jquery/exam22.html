@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	// class 적용
+	$('document').ready(function(){
+		$('h1, h2, p').addClass('obj');		// class selector '.'을 붙이지 마라
+		
+		$('div').addClass('important obj');	// 2개 이상 선택 시 띄어쓰기(공백)로 구분
+		
+		$('h1').removeClass('obj');			// h1 요소의 obj 클래스 제거
+		
+		$('h1, h2, p').toggleClass('obj');	// 반대로 적용
+		
+		console.log($('h1').css('color'));	// h1 태그에 적용된 css의 color를 추출	rgb(0, 0, 255)
+		
+		$('h1').css({						// css 적용
+			'background-color' : 'gray',
+			'font-size' : '20px'
+		});
+	});
+	
+</script>
+<style>
+	.important {
+		font-weight: bold;
+		font-size: xx-large;
+	}
+	
+	.obj { color: blue; }
+</style>
+</head>
+<body>
+	<h1 class="obj">Header 1</h1>
+	<h2 class="obj">Header 2</h2>
+	<p>Content</p>
+	<div>Block</div>
+</body>
+</html>

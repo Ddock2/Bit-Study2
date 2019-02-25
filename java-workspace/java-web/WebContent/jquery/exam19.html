@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#btn-text').click(function(){
+			$('#text1').text('Hello jQuery');
+		});
+		
+		$('#btn-html').click(function(){
+			$('#text2').html('<b>Hello JavaScript</b>');
+		});
+		
+		$('#btn-value').click(function(){
+			$('#text3').val('Hello Ajax');
+		});
+		
+		$('#btn-update').click(function(){
+			// text 	: 변환 후 text
+			// oriText 	: 변환 전 text
+			// idx	 	: p 태그 요소들에 대한 위치
+			var text = $('p').text(function(idx, oriText){
+				return oriText + '!!!' + ' index : ' + idx;
+			})
+		});
+		
+		// 네이버 날씨의 대표 링크 : https://weather.naver.com
+		// 네이버 날씨의 지역별 날씨 링크 : 대표링크 + /rgn/cityWetrMain.nhn
+		$('#site').attr('href', 'https://weather.naver.com');
+		$('#site').attr('href', function(idx, oriValue){
+			return oriValue + '/rgn/cityWetrMain.nhn';
+		});
+	});
+</script>
+</head>
+<body>
+	<a href="https://www.daum.net" title="다음 홈페이지" id="site">다음</a>
+	<p id="text1">첫 번째 문단입니다.</p>
+	<p id="text2">두 번째 문단입니다.</p>
+	<input type="text" value="default value" id="text3">
+	<br><br>
+	
+	<button id="btn-text">TEXT 변환</button>
+	<button id="btn-html">HTML 변환</button>
+	<button id="btn-value">VALUE 변환</button>
+	<button id="btn-update">변환</button>
+</body>
+</html>

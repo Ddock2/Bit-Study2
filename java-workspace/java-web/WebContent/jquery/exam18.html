@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function(){
+		console.log('HTML 추출 : ' + $('#info').html() + '\n'
+				  + 'TEXT 추출 : ' + $('#info').text());
+		console.log('주소 추출 : ' + $('#site').attr('href'));	// 링크 추출
+		
+		$(':button').click(function(){
+			console.log('이름 추출 : ' + $('#name').val());
+		})
+	});
+	
+</script>
+</head>
+<body>
+	<a href="https://www.naver.com" id="site">네이버</a>
+	<p id="info">제 이름은 <b>매머드</b>이고, 1리터 <i>커피</i>입니다.</p><br>
+	이름 입력 : <input type="text" id="name"/>
+	<button>입력 완료</button>
+</body>
+</html>

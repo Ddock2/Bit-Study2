@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	// servlet 호출
+	var httpRequest = null;
+	
+	function requestMsg(){
+		if(window.XMLHttpRequest){
+			httpRequest = new XMLHttpRequest();
+		}else{
+			httpRequest = null;
+		}
+		
+		httpRequest.onreadystatechange = responseMsg;
+		
+		httpRequest.open('GET', '/java-web/HelloAjax', true);
+		
+		httpRequest.send(null);
+	}
+	
+	function responseMsg(){
+		/*
+			httpRequest.readyState
+				0	: uninitialized 초기화가 안된 상태
+				1	: loading		서버에 연결이 완료된 상태
+				2	: loaded		서버가 request를 받은 상태
+				3	: interactive	서버가 request를 처리하고 있는 상태
+				4	: complete		request가 끝나고 response가 준비된 상태
+				
+			httpRequest.status
+				: HTTP 서버 응답에 대한 상태 코드
+				200	: 정상 처리된 상태
+			
+			상태 코드 문서
+			https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+				
+		*/
+		if(httpRequest.readyState == 4){	// complete
+			if(httpRequest.status == 200){
+				var msgView = document.getElementById('msgView');
+				msgView.innerHTML = httpRequest.responseText;
+				/*
+					httpRequest.responseText
+						: 서버의 응답을 Text 처리
+					httpRequest.responseXML
+						: 서버의 응답을 XML document 처리
+				*/
+				console.log(msgView.innerHTML);
+			}
+		}
+	}
+	
+</script>
+</head>
+<body>
+	<h1>서버에서 받은 메시지</h1>
+	<div id="msgView"></div>
+	<br>
+	<input type="button" value="서버에 자료 요청" onclick="requestMsg()">
+</body>
+</html>
