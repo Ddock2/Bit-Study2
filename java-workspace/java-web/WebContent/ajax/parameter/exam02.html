@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	/*
+		1단계 : 브라우저 확인
+		2단계 : 전송방식 확인 (GET, POST)
+		3단계 : open(),send()
+		[ readyState / status ]
+	*/
+	var httpRequest = null;
+	
+	function getXMLHttpRequest(){
+		if(window.XMLHttpRequest){
+			return new XMLHttpRequest();
+		}else{
+			return null;
+		}
+	}
+	
+	function sendProcess(method, param, target){
+		var msg = '';
+		msg = '\n----------------------------------------\n';
+		msg += '전송 방식 : ' + method + '\n';
+		msg += '전송 방향 : ' + target + '\n';
+		
+		clearDebugBox();
+		debugTrace(msg);
+		
+		var jspPath = 'param02.jsp';
+		var servletPath = '/java-web/Param02';
+		var args = 'name=' + encodeURIComponent(param);
+		
+		httpRequest = getXMLHttpRequest();
+		httpRequest.onreadystatechange = callback;
+		
+		if(method == 'GET') {
+			if(target == 'servlet')		// GET 방식 servlet 호출
+				httpRequest.open(method, servletPath + '?' + args, true);
+			if(target == 'jsp')			// GET 방식 jsp 호출
+				httpRequest.open(method, jspPath + '?' + args, true);
+			httpRequest.send();
+		}
+		if(method == 'POST') {
+			if(target == 'servlet')		// POST 방식 servlet 호출
+				httpRequest.open(method, servletPath + '?' + args, true);
+			if(target == 'jsp')			// POST 방식 jsp 호출
+				httpRequest.open(method, jspPath + '?' + args, true);
+			
+			// POST 방식일 경우 요청 헤더 추가
+			httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			httpRequest.send(args);
+		}
+		
+	}
+	
+	function callback(){
+		var msg = '';
+		switch(httpRequest.readyState){
+		case 1:
+			debug.value += 'Loading...\n';
+			break;
+		case 2:
+			debug.value += 'Loaded...\n';
+			break;
+		case 3:
+			debug.value += 'Interactive...\n';
+			break;
+		case 4:
+			debug.value += 'Complete...\n';
+			if(httpRequest.status == 200){
+				console.log(httpRequest.responseText);
+				msg += '웹 서버에서 정상적으로 수행...\n';
+				msg += '[결과]\n';
+				msg += httpRequest.responseText;
+				msg += '\n----------------------------------------\n';
+			}else{
+				msg += '웹 서버에서 오류 발생...\n';
+				msg += '오류 코드 : ' + httpRequest.status + '\n';
+			}
+			break;
+		}
+		debugTrace(msg);
+	}
+	
+	function clearDebugBox(){
+		var debug = document.getElementById('debug');
+		debug.value = '';
+	}
+	
+	function debugTrace(msg) {
+		var debug = document.getElementById('debug');
+		debug.value += msg;
+	}
+</script>
+</head>
+<body>
+	<h2>인자 전달 방법</h2>
+	<textarea rows="15" cols="80" id="debug" name="debug"></textarea>
+	<br>
+	<h3>JSP</h3>
+	<input type="button" value="GET 영문인자 호출" onclick="sendProcess('GET', 'ajax', 'jsp')">
+	<input type="button" value="GET 한글인자 호출" onclick="sendProcess('GET', '에이젝스', 'jsp')">
+	<input type="button" value="POST 영문인자 호출" onclick="sendProcess('POST', 'ajax', 'jsp')">
+	<input type="button" value="POST 한글인자 호출" onclick="sendProcess('POST', '에이젝스', 'jsp')">
+	
+	<h3>Servlet</h3>
+	<input type="button" value="GET 영문인자 호출" onclick="sendProcess('GET', 'ajax', 'servlet')">
+	<input type="button" value="GET 한글인자 호출" onclick="sendProcess('GET', '에이젝스', 'servlet')">
+	<input type="button" value="POST 영문인자 호출" onclick="sendProcess('POST', 'ajax', 'servlet')">
+	<input type="button" value="POST 한글인자 호출" onclick="sendProcess('POST', '에이젝스', 'servlet')">
+</body>
+</html>

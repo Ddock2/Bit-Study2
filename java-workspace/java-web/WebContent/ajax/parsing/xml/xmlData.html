@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="httpRequest.js"></script>
+<script>
+	function sendOnClick(){
+		sendRequest('sample.jsp', null, callback, 'POST');	
+	}
+	
+	function callback(){
+		var msg = '';
+		if(httpRequest.readyState == 4){
+			if(httpRequest.status == 200){
+				var xmlDoc = httpRequest.responseXML;
+				
+				var mList = xmlDoc.getElementsByTagName('member');
+				msg = '회원 수 : ' + mList.length + '명\n';
+				for(var i=0; i<mList.length; i++){
+					var member = mList[i];
+					var id = member.getElementsByTagName('id')[0].firstChild.nodeValue;
+					var name = member.getElementsByTagName('name')[0].firstChild.nodeValue;
+					msg += id + '(' + name + ')\n';
+				}
+			}
+		}
+		debugTrace(msg);
+	}
+	
+	function debugTrace(msg){
+		var debug = document.getElementById('debug');
+		debug.value += msg;
+	}
+	
+	function clearOnClick(){
+		var debug = document.getElementById('debug');
+		debug.value = '';
+	}
+</script>
+</head>
+<body>
+	<h3>XML Data Parsing 1</h3>
+	<hr>
+	<form name="mForm">
+		<textarea rows="15" cols="80" id="debug" name="debug"></textarea>
+		<br>
+		<input type="button" value="서버에 자료 요청" onclick="sendOnClick()">
+		<input type="button" value="초기화" onclick="clearOnClick()">
+	</form>
+</body>
+</html>

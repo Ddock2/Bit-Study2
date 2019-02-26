@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(document).ready(function(){
+		$(':button').on('click', function(){
+			// ajax를 활용한 비동기 요청
+			$.ajax({
+				url : 'basic.jsp',
+				success : function(data){
+					$('#msgView').append(data);
+				}	// data : 요청에 대한 응답 성공시 데이터를 받는 인자
+			});
+		});
+	});
+</script>
+</head>
+<body>
+	<h1>서버에서 받은 메시지</h1>
+	<div id="msgView"></div>
+	<br>
+	<input type="button" value="서버에 자료 요청">
+</body>
+</html>
