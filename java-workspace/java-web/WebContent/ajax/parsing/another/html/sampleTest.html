@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+	$(function(){
+		$(':button').click(function(){
+			$('div').load('./sample.html p');	// sample.html의 p 태그를 읽어들여라
+		});
+	});
+</script>
+</head>
+<body>
+	<button>sample.html Load</button>
+	<div><p>Not Loaded...</p></div>
+</body>
+</html>

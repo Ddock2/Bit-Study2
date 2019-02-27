@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+	$(function(){
+		$.ajax({
+			url : 'sample.xml',
+			dataType : 'xml',
+			success : function(data){
+				$('item', data).each(function() {
+					$('dl').append("<dt><a href='" + $('link', this).text() + "'>"
+							+ $('title', this).text() + "</a></dt><dd>"
+							+ $('description', this).text() + "</dd>");
+				});
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	<dl></dl>
+</body>
+</html>
