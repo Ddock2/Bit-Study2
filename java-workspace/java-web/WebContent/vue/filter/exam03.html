@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<h1>조건에 의한 필터링 (대사검색)</h1>
+		<h3>박신혜의 대사</h3>
+		<ul class="list-group">
+			<li v-for="story in storiesBy('박신혜')" class="list-group-item">
+				{{ story.actor }} said {{ story.speech }}
+			</li>
+		</ul>
+		<h3>임시완의 대사</h3>
+		<ul class="list-group">
+			<li v-for="story in storiesBy('임시완')" class="list-group-item">
+				{{ story.actor }} said {{ story.speech }}
+			</li>
+		</ul>
+		
+		<div class="form-group">
+			<label for="query">대사를 검색하세요</label>
+			<input v-model="query" class="form-control">
+		</div>
+		<h3>검색 결과입니다.</h3>
+		<ul class="list-group">
+			<li v-for="story in search" class="list-group-item">
+				{{ story.actor }} said {{ story.speech }}
+			</li>
+		</ul>
+		<hr>
+		<pre>{{ $data }}</pre>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : ".container",
+		data : {
+			stories : [
+				{
+					speech : '날씨가 풀렸어요',
+					actor : '박신혜',
+					upvotes : 8
+				},
+				{
+					speech : '봄이 오나요',
+					actor : '임시완',
+					upvotes : 23
+				},
+				{
+					speech : '졸음이 오네요',
+					actor : '박신혜',
+					upvotes : 29
+				},
+				{
+					speech : '한숨 자고 싶어요',
+					actor : '임시완',
+					upvotes : 17
+				}
+			],
+			query : ''	// 검색 시 사용할 query 변수
+		},
+		methods : {
+			storiesBy : function(actor){
+				return this.stories.filter(function(story){
+					return story.actor == actor;
+				});
+			}
+		},
+		computed : {
+			search : function(){
+				var query = this.query;
+				return this.stories.filter(function(story){
+					return story.speech.includes(query);
+					// includes : 문자열 포함 여부를 반환
+				});
+			}
+		}
+	});
+</script>
+</html>

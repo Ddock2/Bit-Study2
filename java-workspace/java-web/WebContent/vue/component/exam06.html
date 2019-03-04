@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<!-- 
+		부모-자식 간 통신
+			: HTML 엘리먼트 또는 Vue의 컴포넌트가 중첩된 형태
+	-->
+	
+	<!-- 부모 container 컴포넌트 템플릿 -->
+	<div class="container text-center">
+		<p style="font-size: 120px">
+			{{ votes }}
+			<food @voted="countVote" name="초밥">
+			<pre style="text-align: left;">{{ $data }}</pre>
+		</p>
+	</div>
+	
+	<!-- 자식 food 컴포넌트 템플릿 -->
+	<template id="food">
+		<!-- (2) name을 표시하는 버튼을 추가 (클릭 시 doVote 호출) -->
+		<button class="btn btn-default" @click="doVote">{{ name }}</button>
+	</template>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	// food 컴포넌트 (자식 컴포넌트)
+	// (1) name 프로퍼티를 가진 food 컴포넌트 생성
+	Vue.component('food', {
+		template : '#food',
+		props : ['name'],
+		methods : {
+			// (3) (2)의 버튼 클릭 시 실행되는 함수
+			doVote : function(event){
+				// (4) 함수가 실행되면 voted 이벤트를 청취
+				// 		바인딩돼서 이벤트의 발생을 기다리는 곳에 이벤트를 발생
+				//		voted 이벤트를 기다리고 있는 것은 부모 쪽이 된다 (v-on, @)
+				//
+				// *부모 컴포넌트는 자식이 보내는 이벤트에 대해 대기(v-on, @)하고 있어야 하며,
+				//  자식 컴포넌트는 부모 컴포넌트가 데이터를 전달 받을 수 있도록,
+				//  이벤트 발생($emit('event'))을 해야한다
+				//  	-> event라는 이벤트 리스너 콜백 함수를 등록!
+				//  	-> 부모에게 이벤트 전달!
+				this.$emit('voted');
+			}
+		}
+	});
+	
+	// container 컴포넌트 (부모 컴포넌트)
+	new Vue({
+		el : ".container",
+		data : {
+			votes : 0
+		},
+		methods : {
+			countVote : function(food){
+				this.votes++;
+			}
+		}
+	});
+</script>
+</html>

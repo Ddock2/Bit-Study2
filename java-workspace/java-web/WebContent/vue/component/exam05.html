@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<div id="app">
+			<div id="row">
+				<!-- 루프를 돌면서 snacks내부의 객체 snack을 template으로 전달 -->
+				<snack-component v-for="snack in snacks" :snack="snack">
+				</snack-component>
+			</div>
+			<pre>{{ $data }}</pre>
+		</div>
+	</div>
+	
+	<template id="snack-template">
+		<div class="col-lg-3">
+			<div class="thumbnail">
+				<div class="caption">
+					<h3>{{ snack.productName }}</h3>
+					<p>수량 : {{ snack.quantity }}</p>
+					<p>
+						<button class="btn btn-primary" @click="buy" :disabled="!available">
+							구매
+						</button>
+					</p>
+				</div>
+			</div>
+		</div>
+	</template>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	Vue.component('snack-component', {
+		template : '#snack-template',
+		props : ['snack'],
+		
+		// 컴포넌트 별 methods와 computed properties 지정 가능!
+		methods : {
+			buy : function(){
+				this.snack.quantity--;
+			}
+		},
+		computed : {
+			available : function(){
+				return this.snack.quantity > 0;
+			}
+		}
+	});
+	
+	new Vue({
+		el : "#app",
+		data : {
+			snacks : [
+				{
+					productName : '스윙칩',
+					quantity : 20
+				},
+				{
+					productName : '나초',
+					quantity : 30
+				},
+				{
+					productName : '썬칩',
+					quantity : 40
+				},
+				{
+					productName : '고래밥',
+					quantity : 25
+				}
+			]
+		}
+	});
+</script>
+</html>

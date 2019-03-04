@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<h1>인기 순 정렬하기 (투표 수)</h1>
+		<ul class="list-group">
+<!-- 			<li v-for="story in orderedStories" class="list-group-item"> -->
+			<li v-for="story in orderedActor" class="list-group-item">
+				{{ story.actor }} said "{{ story.speech }}"<br>
+				투표 수 : <strong>[{{ story.upvotes }}]</strong>
+			</li>
+			<br>
+			<li class="list-group-item">
+				<button @click="order = order * -1" class="btn btn-primary">
+					<span v-if="order>0">내림차순 정렬</span>
+					<span v-else>오름차순 정렬</span>
+				</button>
+			</li>
+		</ul>
+		<pre> {{ $data }}</pre>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : ".container",
+		data : {
+			stories : [
+				{
+					speech : '날씨가 풀렸어요',
+					actor : '박신혜',
+					upvotes : 8
+				},
+				{
+					speech : '봄이 오나요',
+					actor : '임시완',
+					upvotes : 23
+				},
+				{
+					speech : '졸음이 오네요',
+					actor : '박신혜',
+					upvotes : 29
+				},
+				{
+					speech : '한숨 자고 싶어요',
+					actor : '임시완',
+					upvotes : 17
+				}
+			],
+			order : -1	// 정렬 기준을 위한 변수 (오름, 내림)
+		},
+		computed : {
+			// 투표 정렬
+			orderedStories : function(){
+				 var order = this.order;
+				 // sort : 정렬함수
+				 return this.stories.sort(function(a, b){
+					 return (a.upvotes - b.upvotes) * order;
+					 // 정렬 기준을 order의 변화에 따라 다르게 주겠다
+					 // order -1 내림차순 1 오름차순
+				});
+			},
+			// 문자열 정렬
+			orderedActor : function(){
+				 var order = this.order;
+				 return this.stories.sort(function(a, b){
+					 if(a.actor < b. actor){
+						 return -order;
+					 }
+					 return order;
+				});
+			}
+		}
+	});
+</script>
+</html>

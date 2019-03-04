@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		Filter (필터)
+			- 원본 데이터를 변경하지 않고 원하는 계산이나 조건으로 인한 필터링된 데이터 표시
+	-->
+	<div class="container">
+		<h1>조건에 의한 필터링 (배우별)</h1>
+		<h3>박신혜의 대사</h3>
+		<ul class="list-group">
+			<li v-for="story in storiesBy('박신혜')" class="list-group-item">
+				{{ story.actor }} said {{ story.speech }}
+			</li>
+		</ul>
+		<h3>박효신의 대사</h3>
+		<ul class="list-group">
+			<li v-for="story in storiesBy('박효신')" class="list-group-item">
+				{{ story.actor }} said {{ story.speech }}
+			</li>
+		</ul>
+		
+<!-- 		{{ $data }} -->
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : ".container",
+		data : {
+			stories : [
+				{
+					speech : '월요일이네요',
+					actor : '박신혜'
+				},
+				{
+					speech : '커피 한잔 사주세요',
+					actor : '박효신'
+				},
+				{
+					speech : '오늘 점심 뭐 먹을래요?',
+					actor : '박신혜'
+				},
+				{
+					speech : '아이스 아메리카노 마실래요?',
+					actor : '박효신'
+				}
+			]
+		},
+		methods : {
+			storiesBy : function(actor){
+				return this.stories.filter(function(story){
+					return story.actor == actor;
+				});
+			}
+		}
+	});
+</script>
+</html>

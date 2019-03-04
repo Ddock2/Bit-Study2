@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<h1>사용자 정의 필터</h1>
+		<ul class="list-group">
+			<li v-for="member in members" class="list-group-item">
+				{{ member | snitch }}
+			</li>
+		</ul>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	// 커스텀 필터, member 정보를 받아와 filter function 생성
+	Vue.filter('snitch', function(member){
+		return member.secretId + ' is '
+				+ member.firstname + ' '
+				+ member.lastname + ' in real life!';
+	});
+	
+	new Vue({
+		el : ".container",
+		data : {
+			members : [
+				{
+					firstname : 'Bruce',
+					lastname : 'Wayne',
+					secretId : 'Bat-Man'
+				},
+				{
+					firstname : 'Clark',
+					lastname : 'Kent',
+					secretId : 'Super-Man'
+				},
+				{
+					firstname : 'Peter',
+					lastname : 'Parker',
+					secretId : 'Spider-Man'
+				}
+			]
+	
+		}
+	});
+</script>
+</html>

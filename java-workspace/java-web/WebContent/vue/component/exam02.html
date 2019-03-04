@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<member></member>
+		<member></member>
+		<member></member>
+	</div>
+	
+	<!-- Vue 컴포넌트 등록 / template 태그 방식 -->
+	<template id="member-template">
+		<h1>컴포넌트 템플릿 허허</h1>
+	</template>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	Vue.component('member', {
+		template : '#member-template'
+		
+		// 컴파일러 언어와 인터프린터 언어의 실행 방식에 따른 오류 표현이 다르다
+		// 컴파일러 언어는 키워드(단어) 기준으로 번역을 시도하기에.
+		// 문법 에러(Syntax error)로 명확히 오류를 표현 해주지만,
+		// 인터프린터는 미리 컴파일된 기준을 잡아놓고 수행하기에,
+		// template에서 단어 오타 시에 단순히 문법 에러가 아니라,
+		// 정의되지 않은 것으로 인식
+	});
+
+	new Vue({
+		el : ".container",
+		data : {
+			
+		}
+	});
+</script>
+</html>

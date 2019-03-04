@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<h1>filter - compouted를 활용한 조건 사용</h1>
+		<h3>유명한 명대사 ({{ famous.length }})</h3>
+		<ul class="list-group">
+			<li v-for="story in famous" class="list-group-item">
+				{{ story.actor }} : "{{ story.speech }}" / 투표수 : {{ story.upvotes }}
+			</li>
+		</ul>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : ".container",
+		data : {
+			stories : [
+				{
+					speech : '배고파요',
+					actor : '한채영',
+					upvotes : 27
+				},
+				{
+					speech : '커피 한잔 하실래요?',
+					actor : '박보검',
+					upvotes : 15
+				},
+				{
+					speech : '한돈 가실래요?',
+					actor : '한채영',
+					upvotes : 8
+				},
+				{
+					speech : '디저트는 제가 살게요',
+					actor : '박보검',
+					upvotes : 21
+				}
+			]
+		},
+		computed : {
+			famous : function() {
+				return this.stories.filter(function(item){
+					return item.upvotes > 20;
+				});
+			}
+		}
+	});
+</script>
+</html>
