@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!--
+		 v-on을 활용한 이벤트 처리
+		 	: jQuery에서 on 메소드를 활용한 이벤트 처리를 
+		 	  Vue.js에서 v-on 프로퍼티 활용
+	-->
+	<div class="container">
+		<!-- 버튼 클릭 시 update 변수의 값을 하나씩 증가 -->
+		<button v-on:click="update++">
+			Update Count : {{ update }}
+		</button>
+		<pre>{{ $data }}</pre>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : '.container',
+		data : {
+			update : 0
+		}
+	});
+</script>
+</html>

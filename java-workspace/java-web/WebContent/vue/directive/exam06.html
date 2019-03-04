@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<h1>v-for directive 객체 프로퍼티 순회</h1>
+		<ul class="list-group">
+			<li v-for="value in member" class="list-group-item">
+				{{ value }}
+			</li>
+		</ul>
+		<ul class="list-group">
+			<li v-for="(value, key, index) in member" class="list-group-item">
+				{{ index }} : {{ key }} -> {{ value }}
+			</li>
+		</ul>
+		<pre>{{ $data }}</pre>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : ".container",
+		data : { 
+			member : {
+				name : '매머드',
+				age : 80,
+				addr : '서울시 서초구',
+				upvotes : 16
+			}
+		}
+	});
+</script>
+</html>

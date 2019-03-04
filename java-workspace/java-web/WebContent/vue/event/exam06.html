@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		[키보드 이벤트]
+		대표적인 event.keyCode
+		ENTER	= 13
+		SAPCE	= 32
+		A		= 65
+		INSERT	= 45
+		DELETE	= 46
+		HOME	= 36
+		END		= 35
+		...
+		
+		<input v-on:keyup.13 = "submit">
+		<input @keyup.13 = "submit">
+		<input @keyup.enter = "submit">
+		
+		keyCode를 기억하기 어려우니 alias를 활용
+		.enter
+		.tab
+		.delete
+		.up
+		.down
+		.left
+		.right
+		.space
+		...
+	-->
+	<div class="container">
+		<h1>Key Event Calculator</h1>
+		<form class="form-inline" @submit.prevent="calculate"><!-- submit prevent -->
+			<input v-model.number="a" class="form-control" @keyup.13 = "calculate">
+			<select v-model="operator" class="form-control">
+				<option>+</option>
+				<option>-</option>
+				<option>*</option>
+				<option>/</option>
+			</select>
+			<input v-model.number="b" class="form-control" @keyup.enter="calculate">
+		</form>
+		<h2>Result : {{ a }} {{ operator }} {{ b }} = {{ c }}</h2>
+		<pre>{{ $data }}</pre>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : '.container',
+		data : {
+			a : 1,
+			b : 2,
+			c : null,
+			operator : '+'
+		},
+		methods : {
+			calculate : function(){
+				switch(this.operator){
+				case '+' : this.c = this.a + this.b; break;
+				case '-' : this.c = this.a - this.b; break;
+				case '*' : this.c = this.a * this.b; break;
+				case '/' : this.c = this.a / this.b; break;
+				}
+			}
+		}
+		
+	});
+</script>
+</html>

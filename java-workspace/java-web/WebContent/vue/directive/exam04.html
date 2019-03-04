@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		members 배열에서 요소를 하나씩 꺼내 출력
+			-> 자바 스크립트 객체 형태
+	-->
+	<div class="container">
+		<h1>v-for directive 배열 순회</h1>
+		<ul class="list-group">
+			<li v-for="member in members" class="list-group-item">
+				{{ member }}
+			</li>
+		</ul>
+		<pre>{{ $data }}</pre>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : ".container",
+		data : {
+				members : [
+					'손흥민',
+					'에릭센',
+					'케인'
+				]
+		}
+	});
+</script>
+</html>

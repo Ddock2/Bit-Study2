@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="app">
+		<h1>{{ message }}</h1>
+		<!-- 
+			{{ }} : 스크립트 코드
+			 - 내부에 바인딩 표현식 (Binding Expression)
+			 - 자바스크립트에 있는 객체 내부의 데이터를 DOM에서 표현
+			
+			데이터 바인딩 (Data Binding)
+			 - 브라우저 메모리의 데이터와 화면에 보이는 데이터를 일치시킨다
+			 - 연결 기능 제공
+			
+		-->
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	var vue_data = { message : 'Vue에서 보내는 메시지'};
+
+	new Vue({
+		el : '#app',
+		data : vue_data
+	})
+</script>
+</html>

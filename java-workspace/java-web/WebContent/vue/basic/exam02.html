@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="app">
+		<h1>{{ message }}</h1>
+		<input v-model="message">
+		<!-- 
+			v-model : 양방향 바인딩을 지원하는 지시자 (Directive)
+					  input이 어느 변수와 바인딩 됐는지 알려주는 역할
+			
+			Vue Directive
+				- 라이브러리에서 DOM 엘리먼트가 무언가를 수행하도록 지시하는 속성
+				- 제어문(조건, 반복)같이 사용되며, 조건에 따라 DOM 엘리먼트 내용을 제어
+				
+				v-show	: 조건에 따라 엘리먼트 표시
+				v-if	: v-show 대신 사용, v-else-if v-else 또한 제공
+				v-for	: 반복문, 배열 내부에 있는 항목을 출력할 때 사용
+		-->
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : '#app',
+		data : { message : 'Hello Vue' }
+	});
+</script>
+</html>

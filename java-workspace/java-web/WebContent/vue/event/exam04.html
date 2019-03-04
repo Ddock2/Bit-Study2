@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		Computed Properties (계산된 프로퍼티)
+			- Vue의 인라인 표현식도 좋지만, 로직이 복잡할 경우 계산된 프로퍼티를 활용
+			- 계산된 프로퍼티는 함수처럼 동작
+			- methods 필드를 이용하는 것과 다르게,
+			  computed는 의존하고 있는 요소가 변경 될 때마다 함수를 실행
+	-->
+	<div class="container">
+		a = {{ a }}, b = {{ b }}<br>
+		<input v-model.number="a">
+		<pre>{{ $data }}</pre>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : '.container',
+		data : {
+			a : 1
+		},
+		computed : {
+			// 계산된 프로퍼티 -> b는 a의 값에 따라 변화 (b = a + 1)
+			// b는 a에 의존
+			b : function(){
+				return this.a + 1;
+			}
+		}
+	});
+</script>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		v-if는 엘리먼트를 생성/삭제하는 동작!
+			-> 화면이 자주 변경될 가능성이 낮은 경우
+		v-show는 단순히 엘리먼트를 만들어놓고 display 상태만 변경
+			-> 화면의 변화가 많은 경우
+	-->
+	<div id="app">
+		<template v-if="!message">
+			<h1>message가 없당</h1>
+			<p>내용 좀...</p>
+		</template>
+		<h2 v-else>{{ message }}</h2>
+		<textarea v-model="message"></textarea>
+		<pre>{{ $data }}</pre>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : "#app",
+		data : { message : 'Hello Vue' }
+	});
+</script>
+</html>

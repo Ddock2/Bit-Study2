@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<button v-on:click="upCount">Update Count : {{ update }}</button>
+		<br><br>
+		<!-- 축약형 이벤트 -->
+		<button @click="upCount">축약형 Count : {{ update }}</button>
+		<!-- 
+			v-on:click="upCount"
+			@click="upCount"
+			-> 같은 동작!
+			
+			두 버튼 모두 동일한 update와 바인딩이기에,
+			변수를 공유하는 형태
+		-->
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : '.container',
+		data : {
+			update : 0
+		},
+		// Vue에서 동작할 method (function)
+		methods : {
+			upCount : function() {
+				// this는 Vue 인스턴스
+				this.update++;
+			}
+		}
+	});
+</script>
+</html>

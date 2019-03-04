@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <!-- 사용자 CSS -->
 <link rel="stylesheet" href="/jgame/css/layout.css"/>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
 	$(document).ready(function(){
 		$('#play').mouseenter(function(){

@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/jgame/css/tutorials.css" />
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
 	$(document).ready(function(){
 		$('#start').hide();

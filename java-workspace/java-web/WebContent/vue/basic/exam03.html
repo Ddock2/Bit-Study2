@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="app">
+		<h1>Hello jQuery</h1>
+		<input id="message">
+	</div>
+</body>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#message').keyup(function(){
+			var input = $(this).val();
+			$('#app').children('h1').eq(0).text(input);
+		});
+	});
+</script>
+</html>

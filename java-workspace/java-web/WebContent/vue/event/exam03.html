@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		 이벤트 한정자
+		 	- 자주 사용되는 기능을 프로퍼티 형태로 간단히 호출
+		 	- 손쉽게 여러 이벤트 관련 처리를 가능	
+	-->
+	<div class="container">
+		<h1>계산기</h1>
+		<form class="form-inline">
+			<!-- 입력을 숫자로 자동 파싱하는 한정자 number -->
+			<input v-model.number="a" class="form-control">
+			<select v-model="operator" class="form-control">
+				<option>+</option>
+				<option>-</option>
+				<option>*</option>
+				<option>/</option>
+			</select>
+			<input v-model.number="b" class="form-control">
+<!-- 			<button type="submit" @click="calculate" class="btn btn-primary">계산</button> -->
+			<!-- 
+				버튼 타입이 submit이기 때문에 form의 동작이 처리된다
+				이벤트를 멈추는 preventDefault 활용
+				
+				클릭 이벤트(@click)를 실행하는 함수에서 event를 받아 preventDefault를 실행
+			-->
+			
+			<button type="submit" @click.prevent="calculate" class="btn btn-primary">계산</button>
+		</form>
+		<h2>Result : {{ a }} {{ operator }} {{ b }} = {{ c }}</h2>
+		<pre>{{ $data }}</pre>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : '.container',
+		data : {
+			a : 1,
+			b : 2,
+			c : null,
+			operator : '+'
+		},
+		methods : {
+			calculate : function(/*event*/){
+				// 이벤트 전달을 멈추는 preventDefault 대신
+				// 이벤트 한정자 @click.prevent 활용도 가능
+// 				event.preventDefault();
+				switch(this.operator){
+				case '+' :
+					this.c = this.a + this.b; break;
+				case '-' :
+					this.c = this.a - this.b; break;
+				case '*' :
+					this.c = this.a * this.b; break;
+				case '/' :
+					this.c = this.a / this.b; break;
+				}
+			}
+		}
+	});
+</script>
+</html>

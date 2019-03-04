@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<h1>v-for directive 배열 순회</h1>
+		<ul class="list-group">
+			<li v-for="member in members" class="list-group-item">
+				<strong>{{ member.name }}</strong>의 주소는 {{ member.addr }}입니다.
+			</li>
+		</ul>
+		<ul class="list-group">
+			<li v-for="(member, index) in members" class="list-group-item">
+				<!-- index, value 형태로 지정 -->
+				{{ index }}. {{ member.name }} {{ member.addr }}
+			</li>
+		</ul>
+		
+		
+		<pre>{{ $data }}</pre>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : ".container",
+		data : { 
+			members : [
+				{
+					name : '박신혜',
+					addr : '서울시 서초동'
+				},
+				{
+					name : '박지성',
+					addr : '인천시 구월동'
+				},
+				{
+					name : '손흥민',
+					addr : '천안시 불당동'
+				}
+			]
+		}
+	});
+</script>
+</html>

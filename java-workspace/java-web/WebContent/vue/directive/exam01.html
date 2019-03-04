@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		v-show	: 조건이 맞지 않으면 엘리먼트 객체는 그대로 유지한 채,
+				    사용자에게 보여지지만 않게 한다
+		v-if	: 엘리먼트 자체를 생성하지 않는다
+	-->
+	<div id="app">
+		<textarea v-model="message"></textarea>
+		<pre>{{ $data }}</pre>
+		<!-- {{$data }} : JSON 형태로 data 속성을 표현 -->
+		
+		<!-- 
+			message가 존재한다면 엘리먼트가 보인다.
+			textarea에 문자열이 하나도 없다면,
+			버튼의 display는 none으로 설정 (display : none)
+		-->
+		<button v-show="message">
+			데이터가 입력되면 보인당
+		</button>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : "#app",
+		data : { message : '' }
+	});
+</script>
+</html>
