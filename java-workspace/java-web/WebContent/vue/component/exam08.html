@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<body>
+	<!-- 
+		bus (버스)
+			: 이벤트를 주고 받을 컴포넌트 사이에 bus를 두어 서로 간의 이벤트를 발생!
+				*bus : 데이터를 전달하는 개념, 데이터를 실어 나르겠다!
+	-->
+	<div class="container text-center">
+		<p style="font-size: 60px;">
+			{{ votes.count }}
+		</p>
+		<div class="row">
+			<food name="족발"></food>
+			<food name="보쌈"></food>
+			<food name="골뱅이"></food>
+			<!-- 
+				<food @voted="countVote">
+					부모 입장에서 자식이 보내는 이벤트를 청취,
+					자식이 보내는 voted 이벤트를 수행하면 countVote 함수를 호출
+					*자식 컴포넌트로 이벤트 전달과는 다른 개념
+			-->
+		</div>
+		<br>
+		<button class="btn btn-primary" @click="reset">초기화</button>
+		<h2>투표 로그</h2>
+		<ul class="list-group">
+			<li class="list-group-item" v-for="vote in votes.log">{{ vote }}</li>
+		</ul>
+		<pre style="text-align: left;">{{ $data }}</pre>
+	</div>
+	
+	<template id="food">
+		<div class="text-center col-lg-4">
+			<p style="font-size: 40px;">
+				{{ foodVotes }}
+			</p>
+			<button class="btn btn-default" @click="doVote">{{ name }}</button>
+		</div>
+	</template>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	// 서로 다른 컴포넌트 사이에 이벤트를 실어 나를 bus 객체 생성
+	var bus = new Vue();
+
+	Vue.component('food',{
+		template : '#food',
+		props : ['name'],
+		data : function(){
+			return { foodVotes : 0 }
+		},
+		methods : {
+			// 투표 이벤트를 실행 했을 때 bus를 이용해 voted 이벤트를 발생
+			doVote : function(event){
+				// this.name 대신에 이벤트의 엘리먼트 텍스트에 접근
+				var food = event.srcElement.textContent;
+				this.foodVotes++;
+				bus.$emit('voted', food);
+			},
+			reset : function(){
+				this.foodVotes = 0;
+			},
+		},
+		// food 컴포넌트가 만들어 졌을 때 bus 잉ㄴ스턴스에 reset 이벤트를 바인딩
+		created(){
+			bus.$on('reset', this.reset);
+		}
+	});
+	
+	new Vue({
+		el : ".container",
+		data : {
+			votes : {
+				count : 0,
+				log : []
+			}
+		},
+		methods : {
+			countVote : function(food){
+				this.votes.count++;
+				this.votes.log.push(food + ' 투표!');
+			},
+			reset : function(){
+				this.votes = {
+						count : 0,
+						log : []
+				};
+				// reset 함수 호출 시 reset 이벤트를 실행
+				bus.$emit('reset');
+			}
+		},
+		// 부모 인스턴스가 만들어지면 voted 이벤트를 바인딩
+		created(){
+			bus.$on('voted', this.countVote);
+		}
+	});
+</script>
+</html>

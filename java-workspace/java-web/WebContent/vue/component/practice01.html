@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<style>
+	.white{
+		background-color: white;
+	}
+	.yellow{
+		background-color: yellow;
+	}
+</style>
+</head>
+<body>
+	<!-- 
+		exam08.html에서 '좋아요'버튼을 만들어
+		사용자가 '좋아요' 버튼을 누르면 좋아하는 리스트를 따로 출력(추가)하고,
+		다시 '좋아요'를 누르면 취소되고 리스트에서 삭제하는 기능을 추가하기
+	-->
+	<div class="container text-center">
+		<p style="font-size: 60px;">
+			{{ votes.count }}
+		</p>
+		<div class="row">
+			<food name="족발"></food>
+			<food name="보쌈"></food>
+			<food name="골뱅이"></food>
+		</div>
+		<br>
+		<button class="btn btn-primary" @click="reset">초기화</button>
+		<h2>좋아하는 음식 리스트</h2>
+		<ul class="list-group">
+			<li class="list-group-item" v-for="like in votes.likeList">{{ like }}</li>
+		</ul>
+		<h2>투표 로그</h2>
+		<ul class="list-group">
+			<li class="list-group-item" v-for="vote in votes.log">{{ vote }}</li>
+		</ul>
+		<pre style="text-align: left;">{{ $data }}</pre>
+	</div>
+	
+	<template id="food">
+		<div class="text-center col-lg-4">
+			<p style="font-size: 40px;">
+				{{ foodVotes }}
+			</p>
+			<button class="btn btn-default" @click="doVote">{{ name }}</button>
+			<button class="btn btn-default" @click="like" :name='name' v-bind:class="[foodLike ? 'yellow' : 'white']">좋아요</button>
+		</div>
+	</template>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	var bus = new Vue();
+
+	Vue.component('food',{
+		template : '#food',
+		props : ['name'],
+		data : function(){
+			return {
+				foodVotes : 0,
+				foodLike : false
+			};
+		},
+		methods : {
+			doVote : function(event){
+				var food = event.srcElement.textContent;
+				this.foodVotes++;
+				bus.$emit('voted', food);
+			},
+			reset : function(){
+				this.foodVotes = 0;
+			},
+			like : function(event){
+				var food = event.srcElement.getAttribute("name");
+				bus.$emit('liked', food, this.foodLike);
+				this.foodLike = !this.foodLike;
+			}
+		},
+		created(){
+			bus.$on('reset', this.reset);
+		}
+	});
+	
+	new Vue({
+		el : ".container",
+		data : {
+			votes : {
+				count : 0,
+				log : [],
+			},
+			likeList : []
+		},
+		methods : {
+			countVote : function(food){
+				this.votes.count++;
+				this.votes.log.push(food + ' 투표!');
+			},
+			reset : function(){
+				this.votes = {
+						count : 0,
+						log : []
+				};
+				this.likeList = [];
+				bus.$emit('reset');
+			},
+			manageLikeList : function(food, mod){
+				if(!mod){
+					this.likeList.push(food);
+				}else{
+					var index = this.likeList.indexOf(food);
+					this.likeList.splice(index, 1);
+				}
+			}
+		},
+		created(){
+			bus.$on('voted', this.countVote);
+			bus.$on('liked', this.manageLikeList);
+		}
+	});
+</script>

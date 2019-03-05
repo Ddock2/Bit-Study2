@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container text-center">
+		<p style="font-size: 60px;">
+			{{ votes }}
+		</p>
+		<div class="row">
+			<food @voted="countVote" name="치킨"></food>
+			<food @voted="countVote" name="족발"></food>
+			<food @voted="countVote" name="닭발"></food>
+		</div>
+		<h2>투표 로그</h2>
+		<ul class="list-group">
+			<li class="list-group-item" v-for="vote in log">{{ vote }}</li>
+		</ul>
+		<pre style="text-align: left;">{{ $data }}</pre>
+	</div>
+	
+	<!-- food 컴포넌트 테블릿 -->
+	<template id="food">
+		<div class="text-center col-lg-4">
+			<p style="font-size: 40px">
+				{{ foodVotes }}
+			</p>
+			<button class="btn btn-default" @click="doVote">{{ name }}</button>
+		</div>
+	</template>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	Vue.component('food', {
+		template : '#food',
+		props : ['name'],
+		// 컴포넌트의 data는 함수 반환 형식으로 정의
+		// *개별적인 컴포넌트의 투표 수 객체를 리턴
+		data : function(){
+			return { foodVotes : 0}
+		},
+		
+		// 아래와 같다면 컴포넌트 전체에서 공유하는 데이터
+// 		data : {
+// 			foodVotes : 0
+// 		},
+		methods : {
+			doVote : function(event) {
+				this.foodVotes++;
+				// 부모에게 이벤트를 전달
+				// event.srcElement.textContent
+				//  -> 이벤트가 발생한 엘리먼트의 텍스트를 함께 전달
+				
+				// $emit('event_name', arg1, arg2, arg3, ...)
+				//  첫번째 인자		: 발생시킬 이벤트의 이름
+				//  다음 인자들		: 이벤트 리스너 콜백 함수에 전달할 인자들
+				//  -> event_name이라는 이벤트 리스너 콜백 함수에 arg1, arg2, arg3 전달
+				this.$emit('voted', event.srcElement.textContent);
+			}
+		}
+	});
+	
+	new Vue({
+		el : ".container",
+		data : {
+			votes : 0,
+			log : []
+		},
+		methods : {
+			countVote : function(food){
+				this.votes++;
+				this.log.push(food + ' 투표!');
+			}
+		}
+	});
+</script>
+</html>

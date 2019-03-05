@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<!-- 
+		스타일 바인딩
+			- 객체 문법 : 자바 스크립트 객체를 활용하여 스타일 선언
+			- 배열 문법 : 2개 이상의 스타일 객체를 동시에 적용 시키기 위해 배열 활용
+	-->
+	<div class="container">
+		<div :style="oriStyle">객체 문법 활용</div>
+		<div :style="{'color':'red', 'fontSize':'20px'}">인라인 활용</div>
+		<div :style="{'color':oriStyle.color, 'fontSize':oriStyle.fontSize}">
+			스타일 객체 내부에서 인라인 참조
+		</div>
+		<div :style="[oriStyle, subStyle]">배열 문법 활용</div>
+	</div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el : ".container",
+		data : {
+			oriStyle : {
+				color : 'blue',
+				fontSize : '20px'
+				// camelCase -> 문서 상에는 kebob-case로 표현
+			},
+			subStyle : {
+				fontStyle : 'italic'
+			}
+		}
+	});
+</script>
+</html>
