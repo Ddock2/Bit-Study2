@@ -27,6 +27,10 @@
 			})
 		});
 	});
+	
+	function doAction(target){
+		location.href =  target;
+	}
 </script>
 </head>
 <body>
