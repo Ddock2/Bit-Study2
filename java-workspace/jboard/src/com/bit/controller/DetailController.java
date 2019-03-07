@@ -15,7 +15,7 @@ public class DetailController implements Controller {
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		int no = Integer.parseInt(request.getParameter("no"));
-		String type = request.getParameter("type");
+//		String type = request.getParameter("type");
 		
 		BoardDAO dao = new BoardDAO();
 		dao.updateViewCnt(no);							// 조회수 증가

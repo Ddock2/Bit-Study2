@@ -25,8 +25,8 @@
 		<div class="navbar-collapse collapse">
 			<div class="row">
 				<ul class="nav navbar-nav">
-					<li><a href="/jgame/signUpForm.do">회원가입</a></li>
-					<li><a href="/jgame/loginForm.do">로그인</a></li>
+					<li><a href="/jgame/controller/member?a=join">회원가입</a></li>
+					<li><a href="/jgame/controller/member?a=login">로그인</a></li>
 				</ul>
 			</div>
 		</div>

@@ -35,12 +35,12 @@
 </head>
 <body>
 	<div id="header">
-		<jsp:include page="/include/top.jsp" />
+		<jsp:include page="/jsp/include/top.jsp" />
 	</div>
 	<div id="page-content-wrapper">
 		<div class="container-fluid">
 			<div style="height:50px;"></div>
-			<a href="javascript:doAction('/jgame/moleGameIntro.do')">
+			<a href="javascript:doAction('/jgame/game/moleGameIntro')">
 				<img id="play" src="/jgame/image/digda.png" style="border-style: dashed; width: 225px; height:225px;"/>
 			</a>
 		</div>

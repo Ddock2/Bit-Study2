@@ -8,28 +8,26 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
 <link rel="stylesheet" href="/jgame/css/layout.css">
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
    function checkInput() {
       var f = document.forms['signUpForm'];
 
       if (f.inputID.value == '') {
-            alert('아이디를 입력해 주세요');
-            return false;
+          alert('아이디를 입력해 주세요');
+          return false;
+      } else if ($('#result-check-id').text() != "사용가능한 아이디 입니다"){
+    	  alert('아이디 중복확인을 해주세요');
+    	  return false;
       } else if (f.inputPassword.value == ''){
-            alert('비밀번호를 입력해 주세요');
-            return false;
+          alert('비밀번호를 입력해 주세요');
+          return false;
       } else if (f.inputName.value == ''){
-            alert('이름를 입력해 주세요');
-            return false;
-      } else if (f.inputEmail.value == ''){
-            alert('이메일를 입력해 주세요');
-            return false;
-      } else if (f.inputNumber.value == ''){
-            alert('전화번호가 정확히지 않습니다');
-            return false;
+          alert('이름를 입력해 주세요');
+          return false;
       } else if (f.inputPassword.value != f.inputPasswordCheck.value){
-            alert('비밀번호가 일치하지 않습니다');
-            return false;
+          alert('비밀번호가 일치하지 않습니다');
+          return false;
       } else {
          document.signUp.submit();
       }
@@ -38,16 +36,26 @@
    function checkID() {
       var id = document.signUpForm.inputID.value;
       if (id == '') {
-         alert('확인할 아이디를 입력해주세요')
+         alert('확인할 아이디를 입력해주세요');
       } else {
-         window.open('/jgame/checkID.do?id=' + id, '', 'width=400; height=400')
+         $.ajax({
+        	 url: "/jgame/controller/checkID",
+        	 Type: "post",
+        	 data: { inputID : $('#inputID').val() },
+        	 success: function(data){
+        		 $('#result-check-id').text(data);
+        	 },
+        	 error: function(){
+        		 alert('중복확인 실패');
+        	 }
+         });
       }
    }
 </script>
 </head>
 <body>
    <div id="header">
-      <jsp:include page="/include/top.jsp"/>
+      <jsp:include page="/jsp/include/top.jsp"/>
     </div>
    <div class="contentwrap">
       <article class="container">
@@ -56,10 +64,12 @@
          </div>
          <form class="form-horizontal" name="signUpForm" action="/jgame/signUp.do"
          	method="POST" onsubmit="return checkInput()">
+         	
             <div class="form-group">
                <label for="inputID" class="col-sm-2 control-label">아이디</label>
                <div class="col-sm-4">
-                  <input type="text" class="form-control" name="inputID" placeholder="아이디 입력">
+                  <input type="text" class="form-control" name="inputID" id="inputID" placeholder="아이디 입력">
+                  <p class="help-block" id="result-check-id">중복확인을 해주세요</p>
                </div>
                <div class="col-sm-2">
                   <a class="btn btn-default" href="javascript:checkID()" role="button">중복확인</a>
@@ -74,7 +84,7 @@
             </div>
             
             <div name="inputCHKPW" class="form-group">
-               <label for="inputPasswordCheck" class="col-sm-2 control-label">비밀번호확인</label>
+               <label for="inputPasswordCheck" class="col-sm-2 control-label">비밀번호 확인</label>
                <div name="child" class="col-sm-6">
                   <input type="password" class="form-control" name="inputPasswordCheck" placeholder="비밀번호 확인">
                   <p class="help-block">비밀번호를 한번 더 입력하세요</p>
@@ -85,26 +95,16 @@
                <label for="inputName" class="col-sm-2 control-label">이름</label>
                <div class="col-sm-6">
                   <input type="text" class="form-control" name="inputName" placeholder="이름 입력">
-                  <p class="help-block">이름을 한번 더 입력하세요</p>
                </div>
             </div>
             
             <div class="form-group">
-               <label for="inputEmail" class="col-sm-2 control-label">이메일</label>
+               <label for="inputProfileImg" class="col-sm-2 control-label">프로필 사진</label>
                <div class="col-sm-6">
-                  <input type="email" class="form-control" name="inputEmail" placeholder="이메일 입력">
-                  <p class="help-block">이메일을 입력하세요</p>
+                  <input type="file" class="form-control" name="profileImg" size="40"/>
+                  <p class="help-block">선택사항 입니다</p>
                </div>
             </div>
-            
-            <div class="form-group">
-               <label for="inputNumber" class="col-sm-2 control-label">전화번호</label>
-               <div class="col-sm-6">
-                  <input type="text" class="form-control" name="inputNumber" placeholder="전화번호 입력">
-                  <p class="help-block">- 없이 입력해 주세요</p>
-               </div>
-            </div>
-            
             
             <div class="form-group">
                <label for="signUp" class="col-sm-2 control-label"></label>
