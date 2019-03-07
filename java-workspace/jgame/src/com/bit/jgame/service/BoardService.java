@@ -1,7 +1,5 @@
 package com.bit.jgame.service;
 
-import java.io.File;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,10 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.bit.jgame.dao.BoardDAO;
 import com.bit.jgame.vo.BoardVO;
 import com.bit.jgame.vo.CommentVO;
-import com.bit.jgame.vo.FileVO;
 import com.bit.jgame.vo.MemberVO;
-import com.bit.util.MyFileNamePolicy;
-import com.oreilly.servlet.MultipartRequest;
 
 public class BoardService {
 	private BoardDAO dao = new BoardDAO();
@@ -69,55 +64,26 @@ public class BoardService {
 		
 		// 게시글 정보
 		boardVO = dao.selectBoardByNo(no);
-		List<FileVO> fileList = dao.selectFileByBoardNo(no);
 		List<CommentVO> commentList = dao.selectCommentByBoardNo(no);
 		
 		request.setAttribute("boardVO", boardVO);
-		request.setAttribute("fileList", fileList);
 		request.setAttribute("commentList", commentList);
 	}
 	
 	// 게시글 작성 처리
 	public void writeProcess(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String saveFolder = "D:/git/bit2/java-workspace/mysite/WebContent/upload";
-		MultipartRequest multi = new MultipartRequest(request, saveFolder, 1024*1024*3, "utf-8", new MyFileNamePolicy());
-		
 		int boardNo = dao.getBoardNo();
-		String title = multi.getParameter("title");
-		String writer = multi.getParameter("writer");
-		String content = multi.getParameter("content");
+		String title = request.getParameter("title");
+		String writer = request.getParameter("writer");
+		String content = request.getParameter("content");
 		
 		boardVO = new BoardVO(boardNo, title, writer, content);
 		
 		request.setAttribute("check", dao.write(boardVO));
-		
-		// 첨부파일 처리
-		@SuppressWarnings("rawtypes")
-		Enumeration files = multi.getFileNames();
-		while(files.hasMoreElements()) {
-			String fileName = (String) files.nextElement();
-			File f = multi.getFile(fileName);
-			
-			if(f != null) {
-				String file_ori_name = multi.getOriginalFileName(fileName);
-				String file_save_name = multi.getFilesystemName(fileName);
-				int file_size = (int) f.length();
-				
-				FileVO fileVO = new FileVO();
-				fileVO.setBoard_no(boardNo);
-				fileVO.setFile_ori_name(file_ori_name);
-				fileVO.setFile_save_name(file_save_name);
-				fileVO.setFile_size(file_size);
-				
-				dao.insertFile(fileVO);
-			}
-		}
 	}
 	
 	// 게시글 삭제 처리
 	public void deleteBoard(HttpServletRequest request, HttpServletResponse response) {
-		String saveFolder = "D:/git/bit2/java-workspace/mysite/WebContent/upload";
-		
 		int no = Integer.parseInt(request.getParameter("no"));
 		MemberVO userVO = (MemberVO) request.getSession().getAttribute("userVO");
 		boardVO = new BoardVO();
@@ -129,8 +95,6 @@ public class BoardService {
 		
 		request.setAttribute("check", check);
 		
-		// 첨부파일 제거
-		deleteFileInFolder(saveFolder, no);
 		// 댓글 삭제
 		dao.deleteCommentByBoardNo(no);
 	}
@@ -146,42 +110,14 @@ public class BoardService {
 	
 	// 게시글 수정 처리
 	public void updateProcess(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String saveFolder = "D:/git/bit2/java-workspace/mysite/WebContent/upload";
-		MultipartRequest multi = new MultipartRequest(request, saveFolder, 1024*1024*3, "utf-8", new MyFileNamePolicy());
-		
-		int boardNo = Integer.parseInt(multi.getParameter("no"));
-		String title = multi.getParameter("title");
-		String writer = multi.getParameter("writer");
-		String content = multi.getParameter("content");
+		int boardNo = Integer.parseInt(request.getParameter("no"));
+		String title = request.getParameter("title");
+		String writer = request.getParameter("writer");
+		String content = request.getParameter("content");
 		
 		boardVO = new BoardVO(boardNo, title, writer, content);
 		
 		request.setAttribute("check", dao.updateBoard(boardVO));
-		
-		// 첨부파일 제거
-		deleteFileInFolder(saveFolder, boardNo);
-		
-		// 첨부파일 등록
-		@SuppressWarnings("rawtypes")
-		Enumeration files = multi.getFileNames();
-		while(files.hasMoreElements()) {
-			String fileName = (String) files.nextElement();
-			File f = multi.getFile(fileName);
-			
-			if(f != null) {
-				String file_ori_name = multi.getOriginalFileName(fileName);
-				String file_save_name = multi.getFilesystemName(fileName);
-				int file_size = (int) f.length();
-				
-				FileVO fileVO = new FileVO();
-				fileVO.setBoard_no(boardNo);
-				fileVO.setFile_ori_name(file_ori_name);
-				fileVO.setFile_save_name(file_save_name);
-				fileVO.setFile_size(file_size);
-				
-				dao.insertFile(fileVO);
-			}
-		}
 	}
 	
 	// 댓글 등록
@@ -198,25 +134,6 @@ public class BoardService {
 	}
 	
 	//------------------------------------- 기능 -------------------------------------
-	// 첨부파일 삭제
-	private void deleteFileInFolder(String saveFolder, int boardNo) {
-		List<FileVO> fileList = dao.selectFileByBoardNo(boardNo);
-		
-		for(FileVO f : fileList) {
-			File file = new File(saveFolder + "/" + f.getFile_save_name());
-			if(file.exists()) {
-				if(file.delete()) {
-					System.out.println("파일 삭제 성공");
-				}else {
-					System.out.println("파일 삭제 실패");
-				}
-			}else {
-				System.out.println("삭제하려는 파일이 존재하지 않음");
-			}
-		}
-		
-		dao.deleteFileByBoardNo(boardNo);
-	}
 	
 	// 페이지 범위 넘어간지 확인 후 정정
 	private int curPageCheck(String paramPage, int lastPage) {

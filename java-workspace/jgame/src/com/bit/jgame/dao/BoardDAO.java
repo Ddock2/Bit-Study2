@@ -8,7 +8,6 @@ import java.util.List;
 
 import com.bit.jgame.vo.BoardVO;
 import com.bit.jgame.vo.CommentVO;
-import com.bit.jgame.vo.FileVO;
 import com.bit.util.ConnectionFactory;
 import com.bit.util.JDBCClose;
 
@@ -263,44 +262,6 @@ public class BoardDAO {
 	}
 	
 	/**
-	 * 글번호로 첨부파일 조회
-	 */
-	public List<FileVO> selectFileByBoardNo(int board_no) {
-		List<FileVO> fileList = new ArrayList<>();
-		
-		try {
-			con = new ConnectionFactory().getConnection();
-			sql = new StringBuilder();
-			
-			sql.append(" SELECT file_ori_name, file_save_name, file_size ");
-			sql.append("   FROM mysite_board_file ");
-			sql.append("   WHERE board_no = ? ");
-			
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, board_no);
-			
-			ResultSet rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				String file_ori_name = rs.getString("file_ori_name");
-				String file_save_name = rs.getString("file_save_name");
-				int file_size = rs.getInt("file_size");
-				
-				FileVO file = new FileVO(board_no, file_ori_name, file_save_name, file_size);
-				
-				fileList.add(file);
-			}
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			JDBCClose.close(con, pstmt);
-		}
-		
-		return fileList;
-	}
-	
-	/**
 	 * 게시글 번호로 댓글 조회
 	 */
 	public List<CommentVO> selectCommentByBoardNo(int board_no) {
@@ -370,32 +331,6 @@ public class BoardDAO {
 		}
 		
 		return result;
-	}
-	
-	/**
-	 * 첨부파일 정보 입력
-	 */
-	public void insertFile(FileVO fileVO) {
-		try {
-			con = new ConnectionFactory().getConnection();
-			StringBuilder sql = new StringBuilder();
-			
-			sql.append(" INSERT INTO mysite_board_file(no, board_no, file_ori_name, file_save_name, file_size) ");
-			sql.append(" VALUES(seq_mysite_board_file_no.nextVal, ?, ?, ?, ?) ");
-			
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, fileVO.getBoard_no());
-			pstmt.setString(2, fileVO.getFile_ori_name());
-			pstmt.setString(3, fileVO.getFile_save_name());
-			pstmt.setInt(4, fileVO.getFile_size());
-			
-			pstmt.executeUpdate();
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			JDBCClose.close(con, pstmt);
-		}
 	}
 	
 	public boolean insertComment(CommentVO comment) {

@@ -35,9 +35,9 @@ public class FrontController extends HttpServlet{
 				case "/game":
 					controller = new GameController();
 					break;
-				case "/checkID":
-					checkID(request, response);
-					break;
+				case "/ajaxProcess":
+					if(ajaxProcess(request, response))
+						break;
 				default :
 					controller = new ErrorController();
 			}
@@ -54,7 +54,24 @@ public class FrontController extends HttpServlet{
 		}
 	}
 	
-	private void checkID(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	//----------------------------------------------------------------------------------------------------------------------------
+	// Ajax로 요청된 데이터 처리
+	private boolean ajaxProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String paramA = request.getParameter("a");
+		boolean result = true;
+		
+		switch(paramA) {
+			case "checkID" :
+				checkID(request, response);
+				break;
+			default :
+				result = false;
+		}
+		
+		return result;
+	}
+	
+	private void checkID(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		MemberService service = new MemberService();
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf8");

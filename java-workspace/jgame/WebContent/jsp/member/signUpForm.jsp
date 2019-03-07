@@ -39,7 +39,7 @@
          alert('확인할 아이디를 입력해주세요');
       } else {
          $.ajax({
-        	 url: "/jgame/controller/checkID",
+        	 url: "/jgame/controller/ajaxProcess?a=checkID",
         	 Type: "post",
         	 data: { inputID : $('#inputID').val() },
         	 success: function(data){
@@ -62,8 +62,8 @@
          <div class="page-header">
             <h2>회원가입 <small>일반회원가입</small></h2>
          </div>
-         <form class="form-horizontal" name="signUpForm" action="/jgame/signUp.do"
-         	method="POST" onsubmit="return checkInput()">
+         <form class="form-horizontal" name="signUpForm" action="/jgame/controller/member?a=joinProcess"
+         	method="POST" onsubmit="return checkInput()" enctype="multipart/form-data">
          	
             <div class="form-group">
                <label for="inputID" class="col-sm-2 control-label">아이디</label>

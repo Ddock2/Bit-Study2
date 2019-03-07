@@ -1,25 +1,59 @@
 package com.bit.jgame.service;
 
+import java.io.File;
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.bit.jgame.dao.MemberDAO;
+import com.bit.jgame.vo.FileVO;
 import com.bit.jgame.vo.MemberVO;
+import com.bit.util.MyFileNamePolicy;
+import com.oreilly.servlet.MultipartRequest;
 
 public class MemberService {
 	private MemberDAO dao = new MemberDAO();
 	private MemberVO memberVO = null;
 	
 	// 가입 처리
-	public void joinProcess(HttpServletRequest request, HttpServletResponse response) {
-		String id = request.getParameter("id");
-		String password = request.getParameter("password");
-		String name = request.getParameter("name");
+	public void joinProcess(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String saveFolder = "D:/git/bit2/java-workspace/jgame/WebContent/profile_img";
+		MultipartRequest multi = new MultipartRequest(request, saveFolder, 1024*1024*3, "utf-8", new MyFileNamePolicy());
+		
+		String id = multi.getParameter("inputID");
+		String password = multi.getParameter("inputPassword");
+		String name = multi.getParameter("inputName");
+		boolean result = false;
 		
 		memberVO = new MemberVO(id, password, name);
 		
-		request.setAttribute("check", dao.join(memberVO));
+		result = dao.join(memberVO);
+		request.setAttribute("check", result);
+		
+		if(!result)
+			return;
+		
+		// 프로필 이미지 파일 처리
+		@SuppressWarnings("rawtypes")
+		Enumeration files = multi.getFileNames();
+		while(files.hasMoreElements()) {
+			String fileName = (String) files.nextElement();
+			File f = multi.getFile(fileName);
+			
+			if(f != null) {
+				String file_ori_name = multi.getOriginalFileName(fileName);
+				String file_save_name = multi.getFilesystemName(fileName);
+				
+				FileVO fileVO = new FileVO();
+				fileVO.setId(id);
+				fileVO.setFile_ori_name(file_ori_name);
+				fileVO.setFile_save_name(file_save_name);
+				
+				dao.insertFile(fileVO);
+			}
+		}
 	}
 	
 	// 로그인 처리

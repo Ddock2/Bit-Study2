@@ -19,13 +19,13 @@
 				</h1>
 				<div class="accout-wall">
 					<img class="profile-img" src="https://www.ornl.gov/themes/ornl/images/no-profile-img.png" width="350px" height="350px"/>
-					<form class="form-signin" name="loginProcess" action="" method="POST">
+					<form class="form-signin" name="loginProcess" action="/jgame/controller/member?a=loginProcess" method="POST">
 						<input type="text" class="form-control" placeholder="ID" name="id" required autofocus>
 						<input type="password" class="form-control" placeholder="PASSWORD" name="password" required>
 						<button class="btn btn-lg btn-default btn-block" type="submit">Sign in</button>
 					</form>
 				</div>
-				<a href="" class="text-center new-account">Create an account</a>
+				<a href="/jgame/controller/member?a=join" class="text-center new-account">Create an account</a>
 			</div>
 		</div>
 	</div>

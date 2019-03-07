@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+#board-list {
+	text-align: center;
+	width: 70%;
+	border: 1px solid;
+	margin-bottom: 10px;
+}
+
+#board-list th, td {
+	border: 1px solid;
+}

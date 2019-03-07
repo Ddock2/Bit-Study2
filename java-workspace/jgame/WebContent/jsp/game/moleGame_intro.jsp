@@ -56,7 +56,7 @@
 			</div>
 			<br>
 			<div id="start">
-				<button class="btn btn-warning btn-default btn-lg" onclick="location.href='moleGame_Main.do'">
+				<button class="btn btn-warning btn-default btn-lg" onclick="location.href='/jgame/controller/game?a=moleGame'">
 					바로 게임 시작하기
 				</button>
 			</div>
