@@ -43,7 +43,7 @@
         	 Type: "post",
         	 data: { inputID : $('#inputID').val() },
         	 success: function(data){
-        		 $('#result-check-id').text(data);
+        		 $('#result-check-id').text(data.replace('\n', ''));
         	 },
         	 error: function(){
         		 alert('중복확인 실패');

@@ -1,0 +1,33 @@
+*public내의 ???.html(Client) 폴더와 app_???.js(Server)로 예제 작성
+
+	Express 외장 모듈
+		
+		static 미들웨어
+			: 특정 폴더의 파일들을 특정 패스로 접근
+				-> public 폴더에 있는 모든 파일을 웹 서버의 루트 패스('/')로 접근 가능!
+				-> npm install serve-static --save
+		
+		body-parser 미들웨어
+			: POST 요청 파라미터를 받을 수 있도록 하는 미들웨어
+				-> npm install body-parser --save
+		
+		
+	
+	var stat = require('serve-static');
+	app.use(stat(path.join(__dirname, 'public')));
+	
+	Example/public/js/main.js
+	Example/public/css/style.css
+		-> public 폴더 내부에 파일이 존재 시 내부 파일을 접근 할 때
+		-> public 경로는 제거하고 싶을 때 사용!
+	
+	예시)
+	http://localhost:3000/js/main.js
+	http://localhost:3000/css/style.css
+	http://localhost:3000/index.html
+	http://localhost:3000/images/cat.jpg
+	
+	images 폴더에 cat.jpg를 웹 브라우저에서 볼 때
+	res.end('<img src='/images/cat.jpg'>);
+	
+	app.use('/public', stat(path.join(__dirname, 'public')));
