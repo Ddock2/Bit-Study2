@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- 사용자 CSS -->
-<link rel="stylesheet" href="/jgame/css/layout.css"/>
 <link rel="stylesheet" href="/jgame/css/boardDetail.css"/>
 <script>
 	function goTo(page){
@@ -40,7 +39,7 @@
 	</div>
 	
 	<div id="contents" align="center" style="min-height: 15em;">
-		<h2>게시글 상세</h2>
+		<h2>질문</h2>
 		<hr width="80%">
 		<br>
 		<div id="board-detail">
@@ -75,7 +74,7 @@
 					<tr>
 						<th rowspan="2">첨부파일</th>
 						<td style="height: 25px;" colspan="3">
-								<a target="blank" href="/mysite/upload/${ fileList[0].file_save_name }" download="${ fileList[0].file_ori_name }" class="click">
+								<a target="blank" href="/jgame/upload/${ fileList[0].file_save_name }" download="${ fileList[0].file_ori_name }" class="click">
 									${ fileList[0].file_ori_name }
 								</a>
 								&nbsp;&nbsp;(${ fileList[0].file_size }bytes)
@@ -84,7 +83,7 @@
 					<tr>
 						<td style="height: 25px;" colspan="3">
 							<c:if test="${ not empty fileList[1] }">
-								<a target="blank" href="/mysite/upload/${ fileList[1].file_save_name }" download="${ fileList[1].file_ori_name }" class="click">
+								<a target="blank" href="/jgame/upload/${ fileList[1].file_save_name }" download="${ fileList[1].file_ori_name }" class="click">
 									${ fileList[1].file_ori_name }
 								</a>
 								&nbsp;&nbsp;(${ fileList[1].file_size }bytes)
@@ -95,10 +94,10 @@
 			</table>
 			<br>
 			<c:if test="${ userVO.id == boardVO.writer }">
-				<form action="/mysite/controller/board?a=updateBoard" method="post">
+				<form action="/jgame/controller/board?a=updateBoard" method="post">
 					<input type="hidden" name="no" value="${ boardVO.no }"/>
 					<input type="submit" value="글 수정"/>&nbsp;&nbsp;
-					<input type="button" value="글 삭제" onclick="deleteBoard('/mysite/controller/board?a=deleteBoard&no=${ boardVO.no }')"/>
+					<input type="button" value="글 삭제" onclick="deleteBoard('/jgame/controller/board?a=deleteBoard&no=${ boardVO.no }')"/>
 				</form>
 				<br>
 			</c:if>
@@ -107,7 +106,7 @@
 		</div>
 		
 		<div id="comment-input">
-			<form action="/mysite/controller/board" method="post" onsubmit="return loginCheck()">
+			<form action="/jgame/controller/board" method="post" onsubmit="return loginCheck()">
 				<strong class="left">댓글 (${ commentList.size() })</strong><br>
 				<input type="hidden" name="a" value="insertComment"/>
 				<input type="hidden" name="board_no" value="${ boardVO.no }"/>
@@ -130,8 +129,5 @@
 		</div>
 	</div>
 	
-<!-- 	<div id="footer"> -->
-<%-- 		<%@ include file="/jsp/include/footer.jsp" %> --%>
-<!-- 	</div> -->
 </body>
 </html>

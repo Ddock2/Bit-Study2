@@ -5,5 +5,5 @@
 		alert('댓글 작성 실패');
 	}
 	
-	location.href = "/mysite/controller/board?a=boardDetail&no=${ no }";
+	location.href = "/jgame/controller/board?a=boardDetail&no=${ no }";
 </script>

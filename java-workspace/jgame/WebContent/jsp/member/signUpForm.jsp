@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
-<link rel="stylesheet" href="/jgame/css/layout.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
 <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
    function checkInput() {
@@ -28,7 +28,7 @@
       } else if (f.inputPassword.value != f.inputPasswordCheck.value){
           alert('비밀번호가 일치하지 않습니다');
           return false;
-      } else {
+      }else {
          document.signUp.submit();
       }
    }
@@ -51,12 +51,29 @@
          });
       }
    }
+   
+   // 프로필 사진 입력 이미지 파일인지 체크
+   function checkFileType(obj){
+	   var fileKind = obj.value.lastIndexOf('.');
+	   var fileName = obj.value.substring(fileKind+1, obj.length);
+	   var fileType = fileName.toLowerCase();
+	   
+	   var acceptedFileType = new Array();
+	   acceptedFileType = ['jpg', 'gif', 'png', 'jpeg'];
+	   
+	   if(acceptedFileType.indexOf(fileType)==-1){
+		   alert('선택한 파일은 서비스가 지원되지 않는 파일입니다');
+		   document.forms['signUpForm'].profileImg.value = ""
+		   return false;
+	   }
+   }
 </script>
 </head>
 <body>
    <div id="header">
       <jsp:include page="/jsp/include/top.jsp"/>
     </div>
+    
    <div class="contentwrap">
       <article class="container">
          <div class="page-header">
@@ -101,7 +118,7 @@
             <div class="form-group">
                <label for="inputProfileImg" class="col-sm-2 control-label">프로필 사진</label>
                <div class="col-sm-6">
-                  <input type="file" class="form-control" name="profileImg" size="40"/>
+                  <input type="file" class="form-control" name="profileImg" size="40" accept="image/gif,image/jpeg,image/png" onchange='checkFileType(this)'>
                   <p class="help-block">선택사항 입니다</p>
                </div>
             </div>

@@ -21,7 +21,7 @@
 </style>
 <script>
 	function goToBack(){
-		location.href = '/mysite/controller/board?a=boardDetail&no=' + ${ param.no }
+		location.href = '/jgame/controller/board?a=boardDetail&no=' + ${ param.no }
 	}
 	
 	function checkForm(){
@@ -43,7 +43,7 @@
 </head>
 <body>
 	<div id="header">
-		<jsp:include page="/jsp/include/header.jsp"></jsp:include>
+		<jsp:include page="/jsp/include/top.jsp"></jsp:include>
 	</div>
 	
 	<div id="contents" align="center" style="min-height: 15em;">
@@ -51,7 +51,7 @@
 		<hr width="80%">
 		<br>
 		
-		<form action="/mysite/controller/board?a=updateProcess" method="post" onsubmit="return checkForm()" enctype="multipart/form-data">
+		<form action="/jgame/controller/board?a=updateProcess" method="post" onsubmit="return checkForm()">
 			<table id="write-table">
 				<input type="hidden" name="no" value="${ boardVO.no }"/>
 				<tr>
@@ -71,17 +71,6 @@
 						<textarea rows="8" cols="80" name="content" id="content">${ boardVO.content }</textarea>
 					</td>
 				</tr>
-				<tr>
-					<th rowspan="2">첨부파일</th>
-					<td>
-						<input type="file" name="attachFile1" size="40"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="file" name="attachFile2" size="40"/>
-					</td>
-				</tr>
 			</table>
 			<br>
 			<input type="submit" value="수정"/>&nbsp;&nbsp;
@@ -89,8 +78,5 @@
 		</form>
 	</div>
 	
-	<div id="footer">
-		<%@ include file="/jsp/include/footer.jsp" %>
-	</div>
 </body>
 </html>

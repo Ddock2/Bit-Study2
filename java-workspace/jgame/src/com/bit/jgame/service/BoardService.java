@@ -94,9 +94,6 @@ public class BoardService {
 		boolean check = dao.deleteByNo(boardVO);
 		
 		request.setAttribute("check", check);
-		
-		// 댓글 삭제
-		dao.deleteCommentByBoardNo(no);
 	}
 	
 	// 게시글 수정

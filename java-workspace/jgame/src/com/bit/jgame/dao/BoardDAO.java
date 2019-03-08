@@ -28,7 +28,7 @@ public class BoardDAO {
 			con = new ConnectionFactory().getConnection();
 			sql = new StringBuilder();
 			
-			sql.append(" SELECT seq_mysite_board_no.nextVal FROM dual ");
+			sql.append(" SELECT seq_jgame_board_no.nextVal FROM dual ");
 			
 			pstmt = con.prepareStatement(sql.toString());
 			
@@ -58,7 +58,7 @@ public class BoardDAO {
 			sql.append(" SELECT * ");
 			sql.append("   FROM ( ");
 			sql.append(" 		SELECT rownum r, no, title, writer, content, TO_CHAR(reg_date, 'YYYY-MM-DD') reg_date, view_cnt ");
-			sql.append(" 		  FROM mysite_board ");
+			sql.append(" 		  FROM jgame_board ");
 			sql.append(" 		  ORDER BY no DESC ");
 			sql.append(" 		) ");
 			sql.append("   WHERE r > ? AND r <= ? ");
@@ -105,7 +105,7 @@ public class BoardDAO {
 			sql.append(" SELECT * ");
 			sql.append("   FROM ( ");
 			sql.append(" 		SELECT rownum r, no, title, writer, content, TO_CHAR(reg_date, 'YYYY-MM-DD') reg_date, view_cnt ");
-			sql.append(" 		  FROM mysite_board ");
+			sql.append(" 		  FROM jgame_board ");
 			if(searchType.equals("title+content")) {
 				sql.append(" 	  WHERE title LIKE ? OR content LIKE ? ");
 			}else {
@@ -160,7 +160,7 @@ public class BoardDAO {
 			sql = new StringBuilder();
 			
 			sql.append(" SELECT title, writer, content, TO_CHAR(reg_date, 'YYYY-MM-DD') reg_date, view_cnt ");
-			sql.append("   FROM mysite_board ");
+			sql.append("   FROM jgame_board ");
 			sql.append("   WHERE no = ? ");
 			
 			pstmt = con.prepareStatement(sql.toString());
@@ -197,7 +197,7 @@ public class BoardDAO {
 			con = new ConnectionFactory().getConnection();
 			sql = new StringBuilder();
 			
-			sql.append(" SELECT COUNT(*) FROM mysite_board ");
+			sql.append(" SELECT COUNT(*) FROM jgame_board ");
 			
 			pstmt = con.prepareStatement(sql.toString());
 			
@@ -231,7 +231,7 @@ public class BoardDAO {
 			sql = new StringBuilder();
 			
 			sql.append(" SELECT COUNT(*) ");
-			sql.append("   FROM mysite_board ");
+			sql.append("   FROM jgame_board ");
 			if(searchType.equals("title+content")) {
 				sql.append(" WHERE title LIKE ? OR content LIKE ? ");
 			}else {
@@ -272,7 +272,7 @@ public class BoardDAO {
 			sql = new StringBuilder();
 			
 			sql.append(" SELECT writer, content, TO_CHAR(reg_date, 'YYYY/MM/DD HH24:MI:SS') reg_date ");
-			sql.append("   FROM mysite_comment ");
+			sql.append("   FROM jgame_comment ");
 			sql.append("   WHERE board_no = ? ");
 			sql.append("   ORDER BY no desc ");
 			
@@ -312,7 +312,7 @@ public class BoardDAO {
 			con = new ConnectionFactory().getConnection();
 			sql = new StringBuilder();
 			
-			sql.append(" INSERT INTO mysite_board(no, title, writer, content) ");
+			sql.append(" INSERT INTO jgame_board(no, title, writer, content) ");
 			sql.append("   VALUES(? ,?, ?, ?) ");
 			
 			pstmt = con.prepareStatement(sql.toString());
@@ -333,6 +333,9 @@ public class BoardDAO {
 		return result;
 	}
 	
+	/**
+	 * 댓글 작성
+	 */
 	public boolean insertComment(CommentVO comment) {
 		boolean result = true;
 		
@@ -340,8 +343,8 @@ public class BoardDAO {
 			con = new ConnectionFactory().getConnection();
 			sql = new StringBuilder();
 			
-			sql.append(" INSERT INTO mysite_comment(no, board_no, writer, content) ");
-			sql.append("   VALUES(seq_mysite_comment_no.nextVal ,?, ?, ?) ");
+			sql.append(" INSERT INTO jgame_comment(no, board_no, writer, content) ");
+			sql.append("   VALUES(seq_jgame_comment_no.nextVal ,?, ?, ?) ");
 			
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, comment.getBoard_no());
@@ -371,7 +374,7 @@ public class BoardDAO {
 			con = new ConnectionFactory().getConnection();
 			sql = new StringBuilder();
 			
-			sql.append(" DELETE FROM mysite_board ");
+			sql.append(" DELETE FROM jgame_board ");
 			sql.append("   WHERE no = ? AND writer = ? ");
 			
 			pstmt = con.prepareStatement(sql.toString());
@@ -391,52 +394,6 @@ public class BoardDAO {
 		
 		return result;
 	}
-	
-	/**
-	 * 첨부파일 정보 삭제
-	 */
-	public void deleteFileByBoardNo(int boardNo) {
-		try {
-			con = new ConnectionFactory().getConnection();
-			StringBuilder sql = new StringBuilder();
-			
-			sql.append(" DELETE FROM mysite_board_file ");
-			sql.append("   WHERE board_no = ? ");
-			
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, boardNo);
-			
-			pstmt.executeUpdate();
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			JDBCClose.close(con, pstmt);
-		}
-	}
-	
-	/**
-	 * 게시글 번호로 댓글 삭제
-	 */
-	public void deleteCommentByBoardNo(int boardNo) {
-		try {
-			con = new ConnectionFactory().getConnection();
-			StringBuilder sql = new StringBuilder();
-			
-			sql.append(" DELETE FROM mysite_comment ");
-			sql.append("   WHERE board_no = ? ");
-			
-			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, boardNo);
-			
-			pstmt.executeUpdate();
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			JDBCClose.close(con, pstmt);
-		}
-	}
 
 	//--------------------------------UPDATE--------------------------------
 	/**
@@ -447,7 +404,7 @@ public class BoardDAO {
 			con = new ConnectionFactory().getConnection();
 			sql = new StringBuilder();
 			
-			sql.append(" UPDATE mysite_board ");
+			sql.append(" UPDATE jgame_board ");
 			sql.append("    SET view_cnt = view_cnt + 1 ");
 			if(!id.equals("")) {
 				sql.append("WHERE no = ? AND writer != ? ");
@@ -479,7 +436,7 @@ public class BoardDAO {
 			con = new ConnectionFactory().getConnection();
 			sql = new StringBuilder();
 			
-			sql.append(" UPDATE mysite_board ");
+			sql.append(" UPDATE jgame_board ");
 			sql.append("    SET title = ?, content = ? ");
 			sql.append("    WHERE no = ? ");
 				

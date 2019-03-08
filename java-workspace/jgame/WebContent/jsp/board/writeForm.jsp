@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- 사용자 CSS -->
-<link rel="stylesheet" href="/jgame/css/layout.css"/>
 <link rel="stylesheet" href="/jgame/css/writeForm.css"/>
 <script>
 	function goTo(page){
@@ -40,7 +39,7 @@
 		<hr width="80%">
 		<br>
 		
-		<form action="/mysite/controller/board?a=writeProcess" method="post" onsubmit="return checkForm()" enctype="multipart/form-data">
+		<form action="/jgame/controller/board?a=writeProcess" method="post" onsubmit="return checkForm()">
 			<table id="write-table">
 				<tr>
 					<th width="25%">제목</th>
@@ -59,26 +58,12 @@
 						<textarea rows="8" cols="80" name="content" id="content"></textarea>
 					</td>
 				</tr>
-				<tr>
-					<th rowspan="2">첨부파일</th>
-					<td>
-						<input type="file" name="attachFile1" size="40"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="file" name="attachFile2" size="40"/>
-					</td>
-				</tr>
 			</table>
 			<br>
 			<input type="submit" value="등록"/>&nbsp;&nbsp;
-			<input type="button" value="취소" onclick="goTo('/mysite/controller/board?a=boardList')"/>
+			<input type="button" value="취소" onclick="goTo('/jgame/controller/board?a=boardList')"/>
 		</form>
 	</div>
-	
-<!-- 	<div id="footer"> -->
-<%-- 		<%@ include file="/jsp/include/footer.jsp" %> --%>
-<!-- 	</div> -->
+
 </body>
 </html>

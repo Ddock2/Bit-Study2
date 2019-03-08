@@ -3,9 +3,9 @@
 <script>
 	if(${ check }){
 		alert('글 등록 성공!');
-		location.href = "/mysite/controller/board?a=boardList";
+		location.href = "/jgame/controller/board?a=boardList";
 	}else{
 		alert('글 등록 실패');
-		location.href = "/mysite/controller/board?a=write";
+		location.href = "/jgame/controller/board?a=write";
 	}
 </script>

@@ -3,9 +3,8 @@
 <script>
 	if(${ check }){
 		alert('글 수정 성공!');
-		location.href = "/mysite/controller/board?a=boardList";
 	}else{
 		alert('글 수정 실패');
-		location.href = "/mysite/controller/board?a=write";
 	}
+	location.href = "/jgame/controller/board?a=boardList";
 </script>

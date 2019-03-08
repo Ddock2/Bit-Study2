@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- 사용자 CSS -->
-<link rel="stylesheet" href="/jgame/css/layout.css"/>
 <link rel="stylesheet" href="/jgame/css/boardList.css"/>
 <script>
 	function writeBoard(){
@@ -21,22 +20,25 @@
 	</div>
 	
 	<div id="contents" align="center" style="min-height: 15em;">
-		<h2>게시판</h2>
+		<h2>질문 게시판</h2>
 		<hr width="80%">
 		<br>
 		<c:choose>
 			<c:when test="${ not empty boardList }">
-				<table id="board-list">
-					<tr height>
-						<th width="15%" height="40">번호</th>
-						<th width="50%">제목</th>
-						<th width="20%">작성자</th>
-						<th width="15%">조회수</th>
-					</tr>
+				<table id="board-list" class="table">
+					<thead class="thead-light">
+						<tr>
+							<th width="15%" height="40" scope="col">번호</th>
+							<th width="50%" scope="col">제목</th>
+							<th width="20%" scope="col">작성자</th>
+							<th width="15%" scope="col">조회수</th>
+						</tr>
+					</thead>
+					<tbody>
 					<c:forEach var="board" items="${ boardList }">
 						<tr>
-							<td>${ board.no }</td>
-							<td align="left" style="padding-left: 10px;">
+							<td scop"row">${ board.no }</td>
+							<td class="title">
 								<a href="/jgame/controller/board?a=boardDetail&no=${ board.no }" class="click">
 									<c:out value="${ board.title }"/>
 								</a>
@@ -45,6 +47,7 @@
 							<td>${ board.view_cnt }</td>
 						</tr>
 					</c:forEach>
+					</tbody>
 				</table>
 				
 				<div id="page-buttons">
@@ -108,8 +111,5 @@
 		
 	</div>
 	
-<!-- 	<div id="footer"> -->
-<%-- 		<%@ include file="/jsp/include/footer.jsp" %> --%>
-<!-- 	</div> -->
 </body>
 </html>

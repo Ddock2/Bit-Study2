@@ -5,7 +5,6 @@ body {
 	padding: 0;
 	font-family: varnada, sans-serif;
 	font-size: 14px;
-	background: #000;
 }
 
 #header {
@@ -14,7 +13,14 @@ body {
 }
 
 #page-wrapper {
-	padding-left: 250px;
 	text-align: center;
-	
+}
+
+#profile-img {
+	padding: 10px 0;
+}
+
+#profile-img > img {
+	height:30px;
+	width:30px;
 }

@@ -65,6 +65,9 @@ public class MemberService {
 		memberVO = new MemberVO(id, password);
 		
 		if((userVO = dao.login(memberVO)) != null) {
+			if(userVO.getProfile_img_save_name() == null)	// 프로필 사진 없을 시 기본 사진
+				userVO.setProfile_img_save_name("null-profile-image.png");
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("userVO", userVO);
 			request.setAttribute("msg", "로그인 성공!");

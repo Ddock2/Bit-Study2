@@ -7,5 +7,5 @@
 		alert('삭제 실패...');
 	}
 	
-	location.href = '/mysite/controller/board?a=boardList';
+	location.href = '/jgame/controller/board?a=boardList';
 </script>

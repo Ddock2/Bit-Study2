@@ -80,7 +80,7 @@ public class MemberDAO {
 			sql = new StringBuilder();
 			
 			sql.append(" SELECT m.name name, TO_CHAR(m.reg_date, 'YYYY-MM-DD') reg_date, p.profile_img_save_name as profile_img_save_name ");
-			sql.append("   FROM jgame_member m inner join jgame_profile_img p");
+			sql.append("   FROM jgame_member m LEFT OUTER JOIN jgame_profile_img p ");
 			sql.append("   	 ON m.id = p.id ");
 			sql.append("   WHERE m.id = ? AND m.password = ? ");
 			
