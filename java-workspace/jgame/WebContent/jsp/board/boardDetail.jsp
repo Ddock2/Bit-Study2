@@ -6,61 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	th, td {
-		border: 1px solid;
-	}
-	
-	#detail-table{
-		width: 60%;
-		border: 1px solid;
-	}
-	
-	#detail-table td {
-		padding: 0 5px;
-	}
-	
-	#comment-input {
-		width: 50%;
-	}
-	
-	.left {
-		float: left;
-	}
-	
-	.right {
-		float: right;
-		font-weight: lighter;
-	}
-	
-	#input-comment-content {
-		resize: none;
-		width: 100%;
-		height: 70px;
-		margin: 10px 0;
-	}
-	
-	div.board-comment {
-		margin-bottom: 5px;
-	}
-	
-	div.comment-writer { 
-		border-radius:5px 5px 0 0;
-		border:1px solid #ccc;
-		border-bottom:0;
-		font-weight:bold;
-		text-align: left;
-		width:50%;
-		padding: 10px 20px;
-	}
-	div.comment-content {
-		border-radius:0 0 5px 5px;
-		border:1px solid #ccc;
-		text-align: left;
-		width:50%;
-		padding: 10px 20px;
-	}
-</style>
+<!-- 사용자 CSS -->
+<link rel="stylesheet" href="/jgame/css/layout.css"/>
+<link rel="stylesheet" href="/jgame/css/boardDetail.css"/>
 <script>
 	function goTo(page){
 		location.href = page;
@@ -88,7 +36,7 @@
 </head>
 <body>
 	<div id="header">
-		<jsp:include page="/jsp/include/header.jsp"></jsp:include>
+		<jsp:include page="/jsp/include/top.jsp"></jsp:include>
 	</div>
 	
 	<div id="contents" align="center" style="min-height: 15em;">
@@ -154,7 +102,7 @@
 				</form>
 				<br>
 			</c:if>
-			<input type="button" value="뒤로" onclick="goTo('/mysite/controller/board?a=boardList')"/>
+			<input type="button" value="뒤로" onclick="goTo('/jgame/controller/board?a=boardList')"/>
 			<br><br>
 		</div>
 		
@@ -182,8 +130,8 @@
 		</div>
 	</div>
 	
-	<div id="footer">
-		<%@ include file="/jsp/include/footer.jsp" %>
-	</div>
+<!-- 	<div id="footer"> -->
+<%-- 		<%@ include file="/jsp/include/footer.jsp" %> --%>
+<!-- 	</div> -->
 </body>
 </html>
