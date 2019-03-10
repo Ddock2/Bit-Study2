@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+#dude {
+	display: inline-block;
+	background-color: #fff;
+}
+
+td {
+	width: 150px;
+	height: 120px;
+	border-radius: 100px;
+}
+
+span {
+	width: 150px;
+	height: 120px;
+	border-radius: 700px;
+}

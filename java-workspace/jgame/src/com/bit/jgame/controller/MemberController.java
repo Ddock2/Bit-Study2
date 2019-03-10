@@ -33,8 +33,12 @@ public class MemberController implements Controller{
 				service.logoutProcess(request, response);
 				result = "/jsp/member/logoutProcess.jsp";
 				break;
-			case "mypage" :	// 로그아웃 처리
+			case "mypage" :	// 마이 페이지
 				result = "/jsp/member/mypage.jsp";
+				break;
+			case "updateUserInfo" :	// 개인정보 수정 처리
+				service.updateUserInfo(request, response);
+				result = "/jsp/member/mypageProcess.jsp";
 				break;
 		}
 		

@@ -5,24 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	#dude {
-		display: inline-block;
-		background-color: #fff;
-	}
-	
-	td {
-		width: 150px;
-		height: 120px;
-		border-radius: 100px;
-	}
-	
-	span {
-		width: 150px;
-		height: 120px;
-		border-radius: 700px;
-	}
-</style>
+<!-- 사용자 CSS -->
+<link rel="stylesheet" href="/jgame/css/gameMain.css"/>
 <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
 	var players = {

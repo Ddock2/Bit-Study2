@@ -35,7 +35,6 @@ public class MemberService {
 		if(!result)
 			return;
 		
-		// 프로필 이미지 파일 처리
 		@SuppressWarnings("rawtypes")
 		Enumeration files = multi.getFileNames();
 		while(files.hasMoreElements()) {
@@ -88,5 +87,81 @@ public class MemberService {
 		
 		String msg = dao.checkID(id) ? "사용가능한 아이디 입니다" : "중복되는 아이디가 이미 존재합니다";
 		return msg;
+	}
+	
+	// 개인 정보 수정 처리
+	public void updateUserInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String saveFolder = "D:/git/bit2/java-workspace/jgame/WebContent/profile_img";
+		MultipartRequest multi = new MultipartRequest(request, saveFolder, 1024*1024*3, "utf-8", new MyFileNamePolicy());
+		
+		HttpSession session = request.getSession();
+		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+		
+		String password = multi.getParameter("curPassword");
+		userVO.setPassword(password);
+		
+		if((userVO = dao.login(userVO)) != null) {	// 비밀번호 일치 시
+			userVO.setName(multi.getParameter("userName"));
+			if((password = multi.getParameter("newPassword")).length() != 0)	// 새 비밀번호가 입력되었을 시
+				userVO.setPassword(password);
+			
+			dao.updateUserInfo(userVO);	// 유저 정보 처리
+			
+			// 프로필 이미지 처리
+			String profile_img_save_name = userVO.getProfile_img_save_name();
+			
+			@SuppressWarnings("rawtypes")
+			Enumeration files = multi.getFileNames();
+			while(files.hasMoreElements()) {
+				
+				String fileName = (String) files.nextElement();
+				File f = multi.getFile(fileName);
+				
+				if(f != null) {
+					// 기존 파일 존재 시 기존 파일 제거
+					if(profile_img_save_name != null)
+						deleteFileInFolder(saveFolder, profile_img_save_name);
+					
+					String file_ori_name = multi.getOriginalFileName(fileName);
+					String file_save_name = multi.getFilesystemName(fileName);
+					profile_img_save_name = file_save_name;
+					
+					FileVO fileVO = new FileVO();
+					fileVO.setId(userVO.getId());
+					fileVO.setFile_ori_name(file_ori_name);
+					fileVO.setFile_save_name(file_save_name);
+					
+					dao.insertFile(fileVO);
+				}
+			}
+			
+			if(profile_img_save_name != null) {
+				userVO.setProfile_img_save_name(profile_img_save_name);
+			}else {
+				userVO.setProfile_img_save_name("null-profile-image.png");				
+			}
+			
+			request.setAttribute("msg", "개인정보가 수정되었습니다");			
+		}else {
+			request.setAttribute("msg", "현재 비밀번호가 일치하지 않습니다");			
+		}
+	}
+	
+	//------------------------------------- 기능 -------------------------------------
+	// 프로필 파일 삭제
+	private void deleteFileInFolder(String saveFolder, String file_save_name) {
+		File file = new File(saveFolder + "/" + file_save_name);
+		
+		if(file.exists()) {
+			if(file.delete()) {
+				System.out.println("파일 삭제 성공");
+			}else {
+				System.out.println("파일 삭제 실패");
+			}
+		}else {
+			System.out.println("삭제하려는 파일이 존재하지 않음");
+		}
+		
+		dao.deleteProfileImg(file_save_name);
 	}
 }

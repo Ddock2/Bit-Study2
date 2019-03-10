@@ -175,4 +175,55 @@ public class MemberDAO {
 		return profile_img;
 	}
 	
+	/**
+	 * 개인 정보 수정
+	 */
+	public void updateUserInfo(MemberVO memberVO) {
+		try {
+			con = new ConnectionFactory().getConnection();
+			sql = new StringBuilder();
+			
+			sql.append(" UPDATE jgame_member ");
+			sql.append("    SET password = ?, ");
+			sql.append("        name = ? ");
+			sql.append("    WHERE id = ? ");
+			
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, memberVO.getPassword());
+			pstmt.setString(2, memberVO.getName());
+			pstmt.setString(3, memberVO.getId());
+			
+			pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCClose.close(con, pstmt);
+		}
+	}
+	
+	/**
+	 * 프로필 이미지 파일 삭제
+	 */
+	public void deleteProfileImg(String file_save_name) {
+		try {
+			con = new ConnectionFactory().getConnection();
+			StringBuilder sql = new StringBuilder();
+			
+			sql.append(" DELETE FROM jgame_profile_img ");
+			sql.append("    WHERE profile_img_save_name = ? ");
+			
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, file_save_name);
+			
+			pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCClose.close(con, pstmt);
+		}
+	}
+	
+	
 }

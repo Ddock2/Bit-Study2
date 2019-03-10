@@ -5,20 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	#write-table {
-		width: 60%;
-		border: 1px solid;
-	}
-
-	#write-table th, td {
-		border: 1px solid;
-	}
-	
-	#write-table td {
-		padding: 0 5px;
-	}
-</style>
+<!-- 사용자 CSS -->
+<link rel="stylesheet" href="/jgame/css/writeForm.css"/>
 <script>
 	function goToBack(){
 		location.href = '/jgame/controller/board?a=boardDetail&no=' + ${ param.no }

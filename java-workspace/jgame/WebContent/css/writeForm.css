@@ -2,11 +2,16 @@
 
 #write-table {
 	width: 60%;
-	border: 1px solid;
+	border: 1px solid #dee2e6;
 }
 
-#write-table th, td {
-	border: 1px solid;
+#write-table th, #write-table td {
+	border: 1px solid #dee2e6;
+}
+
+#write-table th {
+	text-align: center;
+	padding: 0 5px;
 }
 
 #write-table td {

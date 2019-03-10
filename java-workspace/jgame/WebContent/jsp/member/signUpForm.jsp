@@ -10,6 +10,7 @@
 
 <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
+	// 입력 확인
    function checkInput() {
       var f = document.forms['signUpForm'];
 
@@ -33,6 +34,7 @@
       }
    }
    
+	// 아이디 확인
    function checkID() {
       var id = document.signUpForm.inputID.value;
       if (id == '') {
@@ -63,7 +65,7 @@
 	   
 	   if(acceptedFileType.indexOf(fileType)==-1){
 		   alert('선택한 파일은 서비스가 지원되지 않는 파일입니다');
-		   document.forms['signUpForm'].profileImg.value = ""
+		   document.forms['signUpForm'].profileImg.value = "";
 		   return false;
 	   }
    }

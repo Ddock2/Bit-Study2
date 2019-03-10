@@ -1,7 +1,9 @@
 @charset "UTF-8";
 
-th, td {
-	border: 1px solid;
+#detail-table th,
+#detail-table td {
+	text-align: center;
+	border: 1px solid #dee2e6;
 }
 
 #detail-table{
