@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+#game-result-table{
+	width: 50%;
+	border: 1px solid #dee2e6;
+}
+#game-result-table th, #game-result-table td {
+	text-align: center;
+	border: 1px solid #dee2e6;
+	height: 100px;
+	width: 50%;
+	font-size: 1.5em;
+}
+#game-result-table th {
+	color: #495057;
+	background-color: #e9ecef;
+}
+#game-result-table input {
+    border: none;
+    text-align: center;
+}
+#game-result-table input:focus {
+    outline: none;
+}

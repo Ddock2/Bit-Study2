@@ -124,7 +124,7 @@ CREATE TABLE jgame_ranking(
     no          NUMBER(6)       PRIMARY KEY,
     id          VARCHAR2(20)    NOT NULL,
     item        VARCHAR2(20)    NOT NULL,
-    reg_date    DATE            DEFAULT SYSDATE,
+    score       NUMBER(6)       NOT NULL,
     CONSTRAINT jgame_ranking_no_fk
         FOREIGN KEY(id)
         REFERENCES jgame_member(id)

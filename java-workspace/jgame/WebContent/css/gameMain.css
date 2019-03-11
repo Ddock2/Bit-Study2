@@ -16,3 +16,7 @@ span {
 	height: 120px;
 	border-radius: 700px;
 }
+
+#hidden-form {
+	display: none;
+}

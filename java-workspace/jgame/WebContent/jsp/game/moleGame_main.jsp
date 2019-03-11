@@ -133,9 +133,11 @@
 			time();
 			if(gameTime == 10) weapon(2);
 			if(gameTime == 0){
-				alert('Score : ' + score);
+				alert('게임 끝!');
 				// 결과 페이지로 이동
-// 				location.href='moleGame_Result.do?score=' + score + '&type=' + type;
+				$('#input-type').val(tool[toolIdx]);
+				$('#input-score').val(score);
+				$('#hidden-form').submit();
 			}
 		});
 		
@@ -175,5 +177,10 @@
 			</table>
 		</div>
 	</div>
+	
+	<form id="hidden-form" action="/jgame/controller/game?a=moleGame_result" method="post">
+		<input id="input-type" name="type">
+		<input id="input-score" name="score">
+	</form>
 </body>
 </html>

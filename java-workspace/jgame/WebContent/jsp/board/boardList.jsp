@@ -97,7 +97,7 @@
 			<div style="clear: both;"></div>
 		</div>
 		
-		<form action="/mysite/controller/board" method="get">
+		<form action="/jgame/controller/board" method="get">
 			<input type="hidden" name="a" value="boardList"/>
 			<select name="searchType">
 				<option value="title">제목</option>

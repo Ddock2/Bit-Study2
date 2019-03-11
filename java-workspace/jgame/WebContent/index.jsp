@@ -39,7 +39,7 @@
 	<div id="page-content-wrapper">
 		<div class="container-fluid">
 			<div style="height:50px;"></div>
-			<a href="javascript:doAction('/jgame/game/moleGameIntro')">
+			<a href="javascript:doAction('/jgame/controller/game?a=moleGame_intro')">
 				<img id="play" src="/jgame/image/digda.png" style="border-style: dashed; width: 225px; height:225px;"/>
 			</a>
 		</div>

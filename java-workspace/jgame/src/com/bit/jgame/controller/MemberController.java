@@ -29,6 +29,13 @@ public class MemberController implements Controller{
 				service.loginProcess(request, response);
 				result = "/jsp/member/loginProcess.jsp";
 				break;
+			case "popLogin" :			// 로그인 페이지
+				result = "/jsp/member/popLoginForm.jsp";
+				break;
+			case "popLoginProcess" :	// 팝업 로그인 처리
+				service.loginProcess(request, response);
+				result = "/jsp/member/popLoginProcess.jsp";
+				break;
 			case "logoutProcess" :	// 로그아웃 처리
 				service.logoutProcess(request, response);
 				result = "/jsp/member/logoutProcess.jsp";
