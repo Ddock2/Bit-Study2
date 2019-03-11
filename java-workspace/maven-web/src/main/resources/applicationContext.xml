@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- Unit 클래스를 Unit01 식별자로 등록 -->
+	<bean id="unit01" class="Basic.Unit"></bean>
+	<bean id="unit02" class="Basic.Unit"></bean>
+</beans>

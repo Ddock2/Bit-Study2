@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Hello Maven World~</h1>
+	<h1>Hello</h1>
+	<p>http://localhost:8080/[artifactId]/[@RequestMapping URL]</p>
+	<p>페이지 요청 -> http://localhost:8080/maven-web/hello</p>
 </body>
 </html>
