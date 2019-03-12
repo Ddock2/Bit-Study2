@@ -16,6 +16,7 @@ public class Development {
 	//	- Programmer Bean이 존재할 경우에만 본 생성자를 수행!
 	//	- @Autowired의 require를 false로 두면, 예외 무시!
 	//	- 예외를 무시했다면, 기본 생성자 호출로 Bean을 생성
+	//	  *Bean 생성 시 의존 주입에 여부에 대한 보장성
 	@Autowired/*(required=false)*/
 	public Development(@Qualifier(value="programmer") Emp emp) {
 		this.emp = emp;
