@@ -34,5 +34,14 @@ public class UserMain02 {
 		my.sub();
 		my.mul();
 		my.div();
+		
+		System.out.println();
+		
+		my = new MyCalculator(7, 3, calculator);
+		my.add();
+		my.sub();
+		my.mul();
+		my.div();
+		
 	}
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- 의존 주입할 영문 계산기 클래스 -->
+	<bean id="calculator" class="DI.CalculatorEN"/>
+	
+	<!-- 
+		MyCalculator my = new MyCalculator(7, 3, calculator);
+	-->
+	<bean id="myCalculator" class="DI.MyCalculator">
+		<constructor-arg>
+			<value type="int">7</value>
+		</constructor-arg>
+		<constructor-arg value="3"/>
+		<constructor-arg ref="calculator"/>
+	</bean>
+	
+</beans>

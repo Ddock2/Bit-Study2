@@ -1,4 +1,7 @@
-package DI;
+package Anno.practice;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 public class MyCalculator {
 	private int firstNum;
@@ -6,19 +9,17 @@ public class MyCalculator {
 	private Calculator calculator;
 	
 	public MyCalculator() {
-		calculator = new CalculatorEN();
+//		calculator = new Calculator();
+	}
+	public MyCalculator(Calculator calculator) {
+		this.calculator = calculator;
+		System.out.println("생성자 의존 주입...");
 	}
 	public MyCalculator(int firstNum, int secondNum) {
 		this();
 		this.firstNum = firstNum;
 		this.secondNum = secondNum;
 	}
-	// MyCalculator는 전달된 Calculator 객체에 의존하도록
-	public MyCalculator(Calculator calculator) {
-		this.calculator = calculator;
-	}
-	
-	// 의존 주입과 동시에 생성자에 value까지 전달
 	public MyCalculator(int firstNum, int secondNum, Calculator calculator) {
 		this.firstNum = firstNum;
 		this.secondNum = secondNum;
@@ -53,8 +54,14 @@ public class MyCalculator {
 	public Calculator getCalculator() {
 		return calculator;
 	}
+	
+	@Autowired
+//	@Qualifier("calEN")
+	@Qualifier("calKR")
 	public void setCalculator(Calculator calculator) {
 		this.calculator = calculator;
+		System.out.println("Setter 의존 주입...");
+		System.out.println("주입 대상 : " + calculator);
 	}
 	
 }

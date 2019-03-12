@@ -1,25 +1,26 @@
-package DI;
+package Anno.type01;
 
-public class MyCalculator {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+public class MyCalculator02 {
 	private int firstNum;
 	private int secondNum;
 	private Calculator calculator;
 	
-	public MyCalculator() {
-		calculator = new CalculatorEN();
+	public MyCalculator02() {
+//		calculator = new Calculator();
 	}
-	public MyCalculator(int firstNum, int secondNum) {
+	public MyCalculator02(Calculator calculator) {
+		this.calculator = calculator;
+		System.out.println("생성자 의존 주입...");
+	}
+	public MyCalculator02(int firstNum, int secondNum) {
 		this();
 		this.firstNum = firstNum;
 		this.secondNum = secondNum;
 	}
-	// MyCalculator는 전달된 Calculator 객체에 의존하도록
-	public MyCalculator(Calculator calculator) {
-		this.calculator = calculator;
-	}
-	
-	// 의존 주입과 동시에 생성자에 value까지 전달
-	public MyCalculator(int firstNum, int secondNum, Calculator calculator) {
+	public MyCalculator02(int firstNum, int secondNum, Calculator calculator) {
 		this.firstNum = firstNum;
 		this.secondNum = secondNum;
 		this.calculator = calculator;
@@ -53,8 +54,14 @@ public class MyCalculator {
 	public Calculator getCalculator() {
 		return calculator;
 	}
+	// @Autowired를 활용해 자동 연결을 하지만,
+	// 한정자(@Qualifier)를 추가해 대상을 식별할 수 있도록
+	@Autowired
+	@Qualifier("type01")
 	public void setCalculator(Calculator calculator) {
 		this.calculator = calculator;
+		System.out.println("Setter 의존 주입...");
+		System.out.println("주입 대상 : " + calculator);
 	}
 	
 }

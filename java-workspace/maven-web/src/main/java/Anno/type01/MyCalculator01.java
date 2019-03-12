@@ -1,25 +1,25 @@
-package DI;
+package Anno.type01;
 
-public class MyCalculator {
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class MyCalculator01 {
 	private int firstNum;
 	private int secondNum;
 	private Calculator calculator;
 	
-	public MyCalculator() {
-		calculator = new CalculatorEN();
+	public MyCalculator01() {
+//		calculator = new Calculator();
 	}
-	public MyCalculator(int firstNum, int secondNum) {
+	public MyCalculator01(Calculator calculator) {
+		this.calculator = calculator;
+		System.out.println("생성자 의존 주입...");
+	}
+	public MyCalculator01(int firstNum, int secondNum) {
 		this();
 		this.firstNum = firstNum;
 		this.secondNum = secondNum;
 	}
-	// MyCalculator는 전달된 Calculator 객체에 의존하도록
-	public MyCalculator(Calculator calculator) {
-		this.calculator = calculator;
-	}
-	
-	// 의존 주입과 동시에 생성자에 value까지 전달
-	public MyCalculator(int firstNum, int secondNum, Calculator calculator) {
+	public MyCalculator01(int firstNum, int secondNum, Calculator calculator) {
 		this.firstNum = firstNum;
 		this.secondNum = secondNum;
 		this.calculator = calculator;
@@ -53,8 +53,11 @@ public class MyCalculator {
 	public Calculator getCalculator() {
 		return calculator;
 	}
+	// Bean의 사항에 맞도록 자동적으로 AppCtx의 의존을 자동으로 연결!
+	@Autowired
 	public void setCalculator(Calculator calculator) {
 		this.calculator = calculator;
+		System.out.println("Setter 의존 주입...");
 	}
 	
 }

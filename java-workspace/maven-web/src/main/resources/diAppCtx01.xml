@@ -31,4 +31,15 @@
 				: 어노테이션 설정 기반으로 bean을 찾기 위한 정보 설정
 		</bean>
 	-->
+	
+	<!-- Calculator calculator = new CalculatorEN() -->
+	<bean id="calculator" class="DI.CalculatorEN"/>
+	
+	<!-- MyCalculator my = new MyCalculator(calculator) -->
+	<bean id="myCalculator" class="DI.MyCalculator">
+		<constructor-arg ref="calculator"/>
+<!-- 		<constructor-arg> -->
+<!-- 			<ref bean="calculator"/> -->
+<!-- 		</constructor-arg> -->
+	</bean>
 </beans>

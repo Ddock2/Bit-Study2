@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+	">
+	
+	<!-- 어노테이션 활성화 (@Autowired, @Qualifier) -->
+	<context:annotation-config/>
+	<bean id="calculator01" class="Anno.type01.Calculator"/>
+	<!-- @Autowired : 동일한 Bean객체가 있을 시 연결의 모호성 -->
+<!-- 	<bean id="calculator02" class="Anno.type01.Calculator"/> -->
+	<bean id="myCalculator" class="Anno.type01.MyCalculator01"/>
+	
+</beans>

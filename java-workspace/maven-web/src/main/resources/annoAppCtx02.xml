@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+	">
+	
+	<!-- 
+		@Autowired만을 사용하는 경우, 동일 Type이 둘 이상 존재할 때
+		의존성 주입 대상 찾을 수 없다. (No Unique)
+		그래서 연결될 대상의 한정자 활용
+		@Qualifier 를 활용하여 Bean의 대상을 지정. (집합을 축소하라)
+			
+			-> 생성자 나 인자에도 사용 가능!
+	-->
+	<context:annotation-config/>
+	<bean id="calculator01" class="Anno.type01.Calculator">
+		<qualifier value="type01"/>
+	</bean>
+	<bean id="calculator02" class="Anno.type01.Calculator">
+		<qualifier value="type02"/>
+	</bean>
+	<bean id="myCalculator" class="Anno.type01.MyCalculator02"/>
+	
+</beans>
