@@ -20,6 +20,7 @@ public class GameVO {
 	private String id;
 	private String item;
 	private int score;
+	private String profile_img_save_name;
 	
 	public GameVO() {
 		super();
@@ -31,7 +32,16 @@ public class GameVO {
 		this.item = item;
 		this.score = score;
 	}
-	
+	public GameVO(int no, String id, String item, int score, String profile_img_save_name) {
+		super();
+		this.no = no;
+		this.id = id;
+		this.item = item;
+		this.score = score;
+		this.profile_img_save_name = profile_img_save_name;
+	}
+
+
 	public int getNo() {
 		return no;
 	}
@@ -55,6 +65,12 @@ public class GameVO {
 	}
 	public void setScore(int score) {
 		this.score = score;
+	}
+	public String getProfile_img_save_name() {
+		return profile_img_save_name;
+	}
+	public void setProfile_img_save_name(String profile_img_save_name) {
+		this.profile_img_save_name = profile_img_save_name;
 	}
 	
 	@Override

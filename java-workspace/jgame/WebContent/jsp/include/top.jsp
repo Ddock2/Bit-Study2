@@ -29,7 +29,7 @@
 			<div class="row">
 				<ul class="nav navbar-nav">
 					<li><a href="/jgame/controller/game?a=moleGame_intro">게임하기</a></li>
-					<li><a href="/jgame/controller/ranking?a=">게임 순위</a></li>
+					<li><a href="/jgame/controller/game?a=ranking_page">게임 순위</a></li>
 					<li><a href="/jgame/controller/board?a=boardList">질문 게시판</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">

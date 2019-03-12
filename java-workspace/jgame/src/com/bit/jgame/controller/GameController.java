@@ -13,24 +13,32 @@ public class GameController implements Controller {
 		String paramA = request.getParameter("a");
 		String result = "/jsp/error/error.jsp";
 //		System.out.println(paramA);
-		
-		switch(paramA) {
-			case "moleGame_intro" :
-				result = "/jsp/game/moleGame_intro.jsp";
-				break;
-			case "moleGame" :
-				result = "/jsp/game/moleGame_main.jsp";
-				break;
-			case "moleGame_result" :
-				service.moleGame_result(request, response);
-				result = "/jsp/game/moleGame_result.jsp";
-				break;
-			case "save_moleGame_result" :
-				service.save_moleGame_result(request, response);
-				result = "/jsp/game/save_moleGame_result.jsp";
-				break;
+		if(paramA != null) {
+			switch(paramA) {
+				case "moleGame_intro" :
+					result = "/jsp/game/moleGame_intro.jsp";
+					break;
+				case "moleGame" :
+					result = "/jsp/game/moleGame_main.jsp";
+					break;
+				case "moleGame_result" :
+					service.moleGame_result(request, response);
+					result = "/jsp/game/moleGame_result.jsp";
+					break;
+				case "save_moleGame_result" :
+					service.save_moleGame_result(request, response);
+					result = "/jsp/game/save_moleGame_result.jsp";
+					break;
+				case "ranking_page" :
+					String paramI = request.getParameter("item");
+					if(paramI == "주먹" || paramI == "망치")
+						service.moleGame_ranking(request, response, paramI);
+					else
+						service.moleGame_ranking(request, response);
+					result = "/jsp/game/moleGame_ranking.jsp";
+					break;
+			}
 		}
-		
 		return result;
 	}
 	
