@@ -16,6 +16,21 @@
 				$('.rank').eq(i).parent().addClass('ranker');
 			}
 		}
+		
+		switch('${ item }'){
+			case '주먹' :
+				$('.rank-type').children().eq(1).addClass('selected-type');
+				break;
+			case '망치' :
+				$('.rank-type').children().eq(2).addClass('selected-type');
+				break;
+			default :
+				$('.rank-type').children().eq(0).addClass('selected-type');
+		}
+		
+		$('.rank-type th').click(function(){
+			location.href = '/jgame/controller/game?a=ranking_page&item=' + $(this).children().eq(0).text();
+		});
 	});
 </script>
 </head>
@@ -28,10 +43,10 @@
 		<h2>게임 순위</h2>
 		<hr width="60%">
 		<table class="select">
-			<tr>
-				<th>전체 랭킹</th>
-				<th>주먹 랭킹</th>
-				<th>망치 랭킹</th>
+			<tr class="rank-type">
+				<th><p></p>전체 랭킹</th>
+				<th><p>주먹</p> 랭킹</th>
+				<th><p>망치</p> 랭킹</th>
 			</tr>
 		</table>
 		<c:choose>
@@ -61,27 +76,38 @@
 				
 				<div id="page-buttons">
 					<c:choose>
-						<c:when test="${ empty searchType }">
-							<a href="/jgame/controller/board?a=boardList&page=1" class="click" title="첫 페이지"> < </a>
-							<a href="/jgame/controller/board?a=boardList&page=${ curPage - 1 }" class="click" title="이전 페이지"> < </a>
+						<c:when test="${ (! empty item) && (item == '주먹') }">
+							<a href="/jgame/controller/game?a=ranking_page&page=1&item=주먹" class="click" title="첫 페이지"> < </a>
+							<a href="/jgame/controller/game?a=ranking_page&page=${ curPage - 1 }&item=주먹" class="click" title="이전 페이지"> < </a>
 							<c:forEach var="pageNo" begin="${ curPage }" end="${ curPage + 4 }">
 								<c:if test="${ (pageNo-2 >= 1) and (pageNo-2 <= lastPage) }">
-									<a href="/jgame/controller/board?a=boardList&page=${ pageNo-2 }" class="click"> ${ pageNo-2 } </a>
+									<a href="/jgame/controller/game?a=ranking_page&page=${ pageNo-2 }&item=주먹" class="click"> ${ pageNo-2 } </a>
 								</c:if>
 							</c:forEach>
-							<a href="/jgame/controller/board?a=boardList&page=${ curPage + 1 }" class="click" title="다음 페이지"> > </a>
-							<a href="/jgame/controller/board?a=boardList&page=${ lastPage }" class="click" title="끝 페이지"> > </a>
+							<a href="/jgame/controller/game?a=ranking_page&page=${ curPage + 1 }&item=주먹" class="click" title="다음 페이지"> > </a>
+							<a href="/jgame/controller/game?a=ranking_page&page=${ lastPage }&item=주먹" class="click" title="끝 페이지"> > </a>
+						</c:when>
+						<c:when test="${ (! empty item) && (item == '망치') }">
+							<a href="/jgame/controller/game?a=ranking_page&page=1&item=망치" class="click" title="첫 페이지"> < </a>
+							<a href="/jgame/controller/game?a=ranking_page&page=${ curPage - 1 }&item=망치" class="click" title="이전 페이지"> < </a>
+							<c:forEach var="pageNo" begin="${ curPage }" end="${ curPage + 4 }">
+								<c:if test="${ (pageNo-2 >= 1) and (pageNo-2 <= lastPage) }">
+									<a href="/jgame/controller/game?a=ranking_page&page=${ pageNo-2 }&item=망치" class="click"> ${ pageNo-2 } </a>
+								</c:if>
+							</c:forEach>
+							<a href="/jgame/controller/game?a=ranking_page&page=${ curPage + 1 }&item=망치" class="click" title="다음 페이지"> > </a>
+							<a href="/jgame/controller/game?a=ranking_page&page=${ lastPage }&item=망치" class="click" title="끝 페이지"> > </a>
 						</c:when>
 						<c:otherwise>
-							<a href="/jgame/controller/board?a=boardList&page=1&searchType=${searchType}&keyword=${keyword}" class="click" title="첫 페이지"> < </a>
-							<a href="/jgamae/controller/board?a=boardList&page=${ curPage - 1 }&searchType=${searchType}&keyword=${keyword}" class="click" title="이전 페이지"> < </a>
+							<a href="/jgame/controller/game?a=ranking_page&page=1" class="click" title="첫 페이지"> < </a>
+							<a href="/jgame/controller/game?a=ranking_page&page=${ curPage - 1 }" class="click" title="이전 페이지"> < </a>
 							<c:forEach var="pageNo" begin="${ curPage }" end="${ curPage + 4 }">
 								<c:if test="${ (pageNo-2 >= 1) and (pageNo-2 <= lastPage) }">
-									<a href="/jgame/controller/board?a=boardList&page=${ pageNo-2 }&searchType=${searchType}&keyword=${keyword}" class="click"> ${ pageNo-2 } </a>
+									<a href="/jgame/controller/game?a=ranking_page&page=${ pageNo-2 }" class="click"> ${ pageNo-2 } </a>
 								</c:if>
 							</c:forEach>
-							<a href="/jgame/controller/board?a=boardList&page=${ curPage + 1 }&searchType=${searchType}&keyword=${keyword}" class="click" title="다음 페이지"> > </a>
-							<a href="/jgame/controller/board?a=boardList&page=${ lastPage }&searchType=${searchType}&keyword=${keyword}" class="click" title="끝 페이지"> > </a>
+							<a href="/jgame/controller/game?a=ranking_page&page=${ curPage + 1 }" class="click" title="다음 페이지"> > </a>
+							<a href="/jgame/controller/game?a=ranking_page&page=${ lastPage }" class="click" title="끝 페이지"> > </a>
 						</c:otherwise>
 					</c:choose>
 				</div>

@@ -92,7 +92,7 @@
 		
 		<div style="width: 70%;">
 			<c:if test="${ not empty userVO }">
-				<input type="button" value="글 등록" onclick="writeBoard()" style="margin-bottom: 10px; float: right;"/>
+				<input type="button" class="btn btn-default" value="글 등록" onclick="writeBoard()" style="margin-bottom: 10px; float: right;"/>
 			</c:if>
 			<div style="clear: both;"></div>
 		</div>
@@ -106,7 +106,7 @@
 				<option value="title+content">제목+내용</option>
 			</select>&nbsp;
 			<input type="text" placeholder="아무것도 안쓰면 전체게시글" name="keyword" maxlength="20"/>&nbsp;
-			<input type="submit" value="검색"/>
+			<input type="submit" class="btn btn-default btn-sm" value="검색"/>
 		</form>
 		
 	</div>

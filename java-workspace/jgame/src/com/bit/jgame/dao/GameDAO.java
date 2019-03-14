@@ -16,7 +16,7 @@ public class GameDAO {
 	private StringBuilder sql = null;
 	
 	/**
-	 * 기록 입력시 번호 구하기
+	 * 랭킹 입력시 번호 구하기
 	 */
 	public int getRankingNo() {
 		int no = 0;
@@ -74,7 +74,7 @@ public class GameDAO {
 	}
 	
 	/**
-	 * 전체 기록 조회
+	 * 전체 랭킹 조회
 	 */
 	public List<GameVO> selectMoleGameRankingList(int page) {
 		List<GameVO> recordList = new ArrayList<>();
@@ -124,9 +124,62 @@ public class GameDAO {
 		
 		return recordList;
 	}
+	/**
+	 * 아이템 랭킹 조회
+	 */
+	public List<GameVO> selectMoleGameItemRankingList(int page, String paramI) {
+		List<GameVO> recordList = new ArrayList<>();
+		
+		try {
+			con = new ConnectionFactory().getConnection();
+			sql = new StringBuilder();
+			
+			sql.append(" SELECT * ");
+			sql.append("   FROM ( ");			
+			sql.append(" 		SELECT rownum r, s.* ");
+			sql.append(" 		  FROM ( ");
+			sql.append(" 				SELECT r.no, r.id, r.item, r.score, p.profile_img_save_name ");
+			sql.append(" 				  FROM jgame_ranking r LEFT OUTER JOIN jgame_profile_img p ");
+			sql.append("					ON r.id = p.id ");
+			sql.append("				  WHERE r.item = ? ");
+			sql.append(" 				  ORDER BY score DESC ");
+			sql.append(" 				) s ");
+			sql.append(" 	  ) ");
+			sql.append("   WHERE r > ? AND r <= ? ");
+			
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, paramI);
+			pstmt.setInt(2, (page-1)*10);
+			pstmt.setInt(3, page*10);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int no = rs.getInt("r");
+				String id = rs.getString("id");
+				String item = rs.getString("item");
+				int score = rs.getInt("score");
+				String profile_img_save_name = rs.getString("profile_img_save_name");
+				if(profile_img_save_name == null) {
+					profile_img_save_name = "null-profile-image.png";
+				}
+				
+				GameVO record = new GameVO(no, id, item, score, profile_img_save_name);
+				
+				recordList.add(record);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			JDBCClose.close(con, pstmt);
+		}
+		
+		return recordList;
+	}
 	
 	/**
-	 * 기록 마지막 페이지 조회
+	 * 랭킹 마지막 페이지 조회
 	 */
 	public int selectRankingLastPage(int boardCntInOnePage) {
 		int lastPage = 1;
@@ -155,5 +208,38 @@ public class GameDAO {
 		
 		return lastPage;
 	}
+	/**
+	 * 아이템 랭킹 마지막 페이지 조회
+	 */
+	public int selectItemRankingLastPage(int boardCntInOnePage, String paramI) {
+		int lastPage = 1;
+		
+		try {
+			con = new ConnectionFactory().getConnection();
+			sql = new StringBuilder();
+			
+			sql.append(" SELECT COUNT(*) FROM jgame_ranking WHERE item = ? ");
+			
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, paramI);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				lastPage = rs.getInt(1);
+				lastPage = (lastPage % boardCntInOnePage == 0) ? lastPage/boardCntInOnePage : (lastPage/boardCntInOnePage + 1);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			lastPage = 1;
+		}finally {
+			JDBCClose.close(con, pstmt);
+		}
+		
+		return lastPage;
+	}
+	
+	
 
 }

@@ -22,9 +22,8 @@
 }
 
 #slidebox ul li img {
-	background: #0080ff;
 	font-family: sans-serif;
-	width: 100%;
+	width: auto;
 	height: 100%;
 }
 

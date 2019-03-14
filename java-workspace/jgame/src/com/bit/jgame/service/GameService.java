@@ -22,7 +22,7 @@ public class GameService {
 		request.setAttribute("type", type);
 	}
 	
-	// 게임 기록 등록
+	// 게임 랭킹 등록
 	public void save_moleGame_result(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		
@@ -36,7 +36,7 @@ public class GameService {
 		request.setAttribute("msg", msg);
 	}
 	
-	// 게임 기록 전체 조회
+	// 게임 랭킹 전체 조회
 	public void moleGame_ranking(HttpServletRequest request, HttpServletResponse response) {
 		List<GameVO> recordList = null;
 		String paramPage = request.getParameter("page");
@@ -52,8 +52,9 @@ public class GameService {
 		request.setAttribute("recordList", recordList);
 		request.setAttribute("curPage", curPage);
 		request.setAttribute("lastPage", lastPage);
+		request.setAttribute("item", "all");
 	}
-	// 게임 기록 아이템 조회
+	// 게임 아이템 랭킹 조회
 	public void moleGame_ranking(HttpServletRequest request, HttpServletResponse response, String paramI) {
 		List<GameVO> recordList = null;
 		String paramPage = request.getParameter("page");
@@ -61,10 +62,10 @@ public class GameService {
 		int boardCntInOnePage = 10;	// 페이지당 기록 수
 		int lastPage = 1;
 		
-		lastPage = dao.selectRankingLastPage(boardCntInOnePage);
+		lastPage = dao.selectItemRankingLastPage(boardCntInOnePage, paramI);
 		curPage = curPageCheck(paramPage, lastPage);
 		
-		recordList = dao.selectMoleGameRankingList(curPage);
+		recordList = dao.selectMoleGameItemRankingList(curPage, paramI);
 		
 		request.setAttribute("recordList", recordList);
 		request.setAttribute("curPage", curPage);

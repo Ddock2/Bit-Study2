@@ -15,26 +15,34 @@ public class GameController implements Controller {
 //		System.out.println(paramA);
 		if(paramA != null) {
 			switch(paramA) {
-				case "moleGame_intro" :
+				case "moleGame_intro" :		// 게임 튜토리얼
 					result = "/jsp/game/moleGame_intro.jsp";
 					break;
-				case "moleGame" :
+				case "moleGame" :			// 게임 페이지
 					result = "/jsp/game/moleGame_main.jsp";
 					break;
-				case "moleGame_result" :
+				case "moleGame_result" :	// 게임 결과 페이지
 					service.moleGame_result(request, response);
 					result = "/jsp/game/moleGame_result.jsp";
 					break;
-				case "save_moleGame_result" :
+				case "save_moleGame_result" :	// 게임 결과 등록
 					service.save_moleGame_result(request, response);
 					result = "/jsp/game/save_moleGame_result.jsp";
 					break;
-				case "ranking_page" :
+				case "ranking_page" :		// 게임 결과 랭킹 조회
 					String paramI = request.getParameter("item");
-					if(paramI == "주먹" || paramI == "망치")
-						service.moleGame_ranking(request, response, paramI);
-					else
+					if(paramI != null) {
+						switch(paramI) {
+							case "주먹" :
+							case "망치" :
+								service.moleGame_ranking(request, response, paramI);
+								break;
+							default :	
+								service.moleGame_ranking(request, response);
+						}
+					}else {
 						service.moleGame_ranking(request, response);
+					}
 					result = "/jsp/game/moleGame_ranking.jsp";
 					break;
 			}

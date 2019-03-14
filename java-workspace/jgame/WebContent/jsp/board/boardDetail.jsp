@@ -96,12 +96,12 @@
 			<c:if test="${ userVO.id == boardVO.writer }">
 				<form action="/jgame/controller/board?a=updateBoard" method="post">
 					<input type="hidden" name="no" value="${ boardVO.no }"/>
-					<input type="submit" value="글 수정"/>&nbsp;&nbsp;
-					<input type="button" value="글 삭제" onclick="deleteBoard('/jgame/controller/board?a=deleteBoard&no=${ boardVO.no }')"/>
+					<input type="submit" class="btn btn-default btn-sm" value="글 수정"/>&nbsp;&nbsp;
+					<input type="button" class="btn btn-danger btn-sm" value="글 삭제" onclick="deleteBoard('/jgame/controller/board?a=deleteBoard&no=${ boardVO.no }')"/>
 				</form>
 				<br>
 			</c:if>
-			<input type="button" value="뒤로" onclick="goTo('/jgame/controller/board?a=boardList')"/>
+			<input type="button" class="btn btn-default btn-sm" value="뒤로" onclick="goTo('/jgame/controller/board?a=boardList')"/>
 			<br><br>
 		</div>
 		
@@ -112,7 +112,7 @@
 				<input type="hidden" name="board_no" value="${ boardVO.no }"/>
 				<textarea placeholder="남기고 싶은 댓글을 남기세요" name="commentContent" id="input-comment-content"></textarea>
 				<br>
-				<input type="submit" value="댓글쓰기" class="right"/>
+				<input type="submit" class="btn btn-default btn-sm right" value="댓글쓰기"/>
 			</form>
 			<div style="clear: both;"></div>
 			<br>
