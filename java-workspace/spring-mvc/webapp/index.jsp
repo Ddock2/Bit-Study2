@@ -15,5 +15,6 @@
 	<a href="<%= request.getContextPath() %>/resVOBody.json">JSON VO 응답</a><br>
 	<a href="<%= request.getContextPath() %>/resStrListBody.json">JSON List 응답</a><br>
 	<a href="<%= request.getContextPath() %>/resVOListBody.json">JSON List(VO) 응답</a><br>
+	<a href="<%= request.getContextPath() %>/file/uploadForm.do">Form (upload file)</a><br>
 </body>
 </html>

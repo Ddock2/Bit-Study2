@@ -8,8 +8,6 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bit.form.UserVO;
-
 @RestController // @Controller, @ResponseBody
 //@Controller
 public class ResbodyController {
@@ -39,8 +37,8 @@ public class ResbodyController {
 	}
 	
 	@RequestMapping("/resVOBody.json")
-	public UserVO resJsonVOBody() {
-		UserVO result = new UserVO("아이디", "password", "이름");
+	public MemberVO resJsonVOBody() {
+		MemberVO result = new MemberVO("아이디", "password", "이름");
 		
 		return result;
 	}
@@ -57,14 +55,18 @@ public class ResbodyController {
 	}
 	
 	@RequestMapping("/resVOListBody.json")
-	public List<UserVO> resJsonVOListBody() {
-		List<UserVO> result = new ArrayList<UserVO>();
-		for(int i=0; i<=5; i++) {
-			UserVO user = new UserVO("id"+i, "pw"+i, "name"+i);
-			result.add(user);
+	public List<List<MemberVO>> resJsonVOListBody() {
+		List<List<MemberVO>> list = new ArrayList<List<MemberVO>>();
+		List<MemberVO> result = new ArrayList<MemberVO>();
+		for(int j=1; j<4; j++) {
+			for(int i=0; i<=5; i++) {
+				MemberVO user = new MemberVO("id"+i, "pw"+i, "name"+i);
+				result.add(user);
+			}
+			list.add(result);
 		}
 		
-		return result;
+		return list;
 	}
 
 }
