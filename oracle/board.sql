@@ -130,3 +130,12 @@ CREATE TABLE jgame_ranking(
         REFERENCES jgame_member(id)
         ON DELETE CASCADE
 );
+
+------------------------------------------------------------------
+
+CREATE SEQUENCE seq_m_board_no;
+CREATE TABLE m_board(
+    no          NUMBER(6)       PRIMARY KEY,
+    title       VARCHAR2(20)    ,
+    content     VARCHAR2(100)
+);
