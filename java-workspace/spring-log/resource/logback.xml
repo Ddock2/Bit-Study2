@@ -10,6 +10,59 @@
 		</encoder>
 	</appender>
 	
+	<appender name="fileAppender2" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	    <file>c:\MyLogExample\logex02.log</file>
+	    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+	       <charset>UTF-8</charset>
+	       <Pattern>
+	          %d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n
+	       </Pattern>
+	    </encoder>
+	    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+	       <FileNamePattern>c:\MyLogExample\logex02.%i.log.zip</FileNamePattern>
+	       <MinIndex>1</MinIndex>
+	       <MaxIndex>10</MaxIndex>
+	    </rollingPolicy>
+	    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+	       <MaxFileSize>1KB</MaxFileSize>
+	    </triggeringPolicy>
+	 </appender>
+
+	<appender name="fileAppender3" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	    <file>c:\MyLogExample\logex03.log</file>
+	    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+	       <charset>UTF-8</charset>
+	       <Pattern>
+	          %d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n
+	       </Pattern>
+	    </encoder>
+	    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+	       <FileNamePattern>c:\MyLogExample\logex03.%i.log.zip</FileNamePattern>
+	       <MinIndex>1</MinIndex>
+	       <MaxIndex>10</MaxIndex>
+	    </rollingPolicy>
+	    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+	       <MaxFileSize>1MB</MaxFileSize>
+	       <!-- 로그 파일이 1MB를 넘었을 때, c:\MyLogExample\logex03.%i.log.zip로 압축 -->
+	    </triggeringPolicy>
+	 </appender>
+	
+	 <!--
+	   com.bit.log02 하위 패키지 로그들만 C:\MyLogExample\logex02.log 파일에만 출력
+	-->
+	<logger name="com.bit.log02" level="info" additibity="false">
+	   <appender-ref ref="fileAppender2"/>
+	</logger>
+	
+	<!--
+	   com.bit.log03 하위 패키지 로그들만
+	   C:\MyLogExample\logex02.log 파일, 콘솔에 출력
+	-->
+	<logger name="com.bit.log03" level="warn" additibity="false">
+	   <appender-ref ref="fileAppender3"/>
+	   <appender-ref ref="consoleAppender"/>
+	</logger>
+	
 	<!-- 루트(글로벌) 로거 -->
 	<root level="debug">
 		<appender-ref ref="consoleAppender"/>
