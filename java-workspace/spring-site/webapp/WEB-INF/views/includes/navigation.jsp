@@ -12,7 +12,11 @@
 				<li><a href="${pageContext.request.contextPath}">Menu 4</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="${pageContext.request.contextPath}">?</a></li>
+				<li><a href="${pageContext.request.contextPath}">BIT</a></li>
+				<li><a href="${pageContext.request.contextPath}">Menu 1</a></li>
+				<li><a href="${pageContext.request.contextPath}">Menu 2</a></li>
+				<li><a href="${pageContext.request.contextPath}">Menu 3</a></li>
+				<li><a href="${pageContext.request.contextPath}">Menu 4</a></li>
 			</c:otherwise>
 		</c:choose>
 	</ul>
