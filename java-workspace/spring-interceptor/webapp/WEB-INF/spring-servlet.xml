@@ -30,6 +30,13 @@
 			<mvc:mapping path="/logout"/>
 			<bean class="com.bit.interceptor.MyInterceptor02"/>
 		</mvc:interceptor>
+		<!-- login, logout 제외 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/*"/>
+			<mvc:exclude-mapping path="/login"/>
+			<mvc:exclude-mapping path="/logout"/>
+			<bean class="com.bit.annotation.AuthInterceptor"/>
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
 </beans>

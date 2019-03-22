@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,11 +19,6 @@ public class UserController {
 	@RequestMapping("/joinform")
 	public String joinForm(@ModelAttribute UserVO userVO) {
 		return "user/joinform";
-	}
-
-	@RequestMapping("/loginform")
-	public String loginForm() {
-		return "user/loginform";
 	}
 	
 	// @Valid : Bean의 유효성을 자동 검증
@@ -45,6 +41,21 @@ public class UserController {
 	@RequestMapping("/joinsuccess")
 	public String joinSuccess() {
 		return "user/joinsuccess";
+	}
+
+	@RequestMapping("/loginform")
+	public String loginForm() {
+		return "user/loginform";
+	}
+	
+	@RequestMapping("/modifyform")
+	public String modifyForm(UserVO authUser, Model model) {
+		return "user/modifyform";
+	}
+	
+	@RequestMapping("/modify")
+	public String modify(UserVO authUser, @ModelAttribute UserVO vo) {
+		return "redirect:/user/modifyform?update=success";
 	}
 	
 }
