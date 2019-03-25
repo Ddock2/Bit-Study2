@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,11 +12,17 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bit.mysite.service.UserService;
 import com.bit.mysite.vo.UserVO;
+import com.bit.security.Auth;
+import com.bit.security.AuthUser;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
+	@Autowired
+	private UserService userService;
+	
 	@RequestMapping("/joinform")
 	public String joinForm(@ModelAttribute UserVO userVO) {
 		return "user/joinform";
@@ -32,9 +39,8 @@ public class UserController {
 			return "user/joinform";
 		}
 		
-		// TODO
-		// 1. 유저 서비스 join 기능 수행
-		// 2. 가입 성공 여부 반환
+		userService.join(userVO);
+		
 		return "redirect:/user/joinsuccess"; // 리다이렉트
 	}
 	
@@ -48,13 +54,22 @@ public class UserController {
 		return "user/loginform";
 	}
 	
+	@Auth
 	@RequestMapping("/modifyform")
-	public String modifyForm(UserVO authUser, Model model) {
+	public String modifyForm(@AuthUser UserVO authUser, Model model) {
+		UserVO vo = userService.getUser(authUser.getNo());
+		model.addAttribute("userVO", vo);
+		
 		return "user/modifyform";
 	}
 	
+	@Auth
 	@RequestMapping("/modify")
-	public String modify(UserVO authUser, @ModelAttribute UserVO vo) {
+	public String modify(@AuthUser UserVO authUser, @ModelAttribute UserVO vo) {
+		vo.setNo(authUser.getNo());
+		userService.updateUser(vo);
+		authUser.setName(vo.getName());
+		
 		return "redirect:/user/modifyform?update=success";
 	}
 	

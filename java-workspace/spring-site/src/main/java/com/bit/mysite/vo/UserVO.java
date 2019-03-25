@@ -7,6 +7,19 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /*
+	[테이블 생성]
+	CREATE TABLE users (
+		no			NUMBER(6)		PRIMARY KEY,
+		name		VARCHAR2(40)	NOT NULL,
+		password	VARCHAR2(20)	NOT NULL,
+		email		VARCHAR2(80)	NOT NULL,
+		gender		VARCHAR2(10)
+	);
+	
+	[시퀀스 생성]
+	CREATE SEQUENCE user_seq;
+ */
+/*
  	Hibernate 유효성 검사
 	 	@NotEmpty	: 비어있는가
 	 	@Email		: 이메일 형식

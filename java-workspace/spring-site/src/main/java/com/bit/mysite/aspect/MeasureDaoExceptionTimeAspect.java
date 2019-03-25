@@ -9,7 +9,7 @@ import org.springframework.util.StopWatch;
 @Aspect
 @Component
 public class MeasureDaoExceptionTimeAspect {
-	@Around("/execution( * *..repository.*.*(..) ) || execution( * *..service.*.*(..) ) || execution( * *..controller.*.*(..) )")
+	@Around("execution( * *..repository.*.*(..) ) || execution( * *..service.*.*(..) ) || execution( * *..controller.*.*(..) )")
 	public Object around(ProceedingJoinPoint pjp) throws Throwable {
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
