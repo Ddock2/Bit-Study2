@@ -7,8 +7,57 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
 <title>Insert title here</title>
+<link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+$(function(){
+	$('#btn-check-email').click(function(){
+		var email = $('#email').val();
+		if(email == '') return;
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/user/api/checkemail?email=" + email,
+			type : "get",
+			dataType : "json",
+			data : "",
+			success : function(response) {
+				console.log(response);
+				if(response.result == "fail") {
+					console.log(response.message);
+					return;
+				}
+				
+				// success
+				if(response.data == "exist") {
+					alert("이미 존재합니다. 다른 이메일을 사용해 주세요.");
+					$('#email').val("").focus();
+					return;
+				}
+				
+				// 존재하지 않는다면.
+				$("#img-check-email").show();
+				$("#btn-check-email").hide();
+			},
+			error : function(jqXHR, status, e){
+				console.log(status + ":" + e);
+			}
+		});
+	});
+	
+	$("#join-form").submit(function(){
+		if($("#img-check-email").is(":visible") == false) {
+			alert("이메일 중복 체크를 하셔야 합니다.");
+			return false;
+		}
+		
+		if($("#agree-prov").is(":checked") == false) {
+			alert("약관에 동의하셔야 합니다.");
+			return false;
+		}
+	});
+});
+</script>
 </head>
 <body>
 	<div id="container">
@@ -26,7 +75,9 @@
 					
 					<label class="block-label" for="email">이메일</label>
 					<form:input path="email"/>
-					<!-- 이메일 중복체크 (img, input) -->
+					<img id="img-check-email" align="top" style="width:16px; display:none"
+						src="${pageContext.request.contextPath}/assets/images/check.jpg" />
+					<input id="btn-check-email" type="button" value="중복체크">
 					<p style="text-align:left; color:red">
 						<form:errors path="email"/>
 					</p>

@@ -18,8 +18,8 @@
 						action="${pageContext.request.contextPath}/user/login">
 						<label class="block-label" for="email">이메일</label>
 						<input id="email" name="email" type="text" value="" />
-						<label class="block-label" for="password">이메일</label>
-						<input id="password" name="password" type="text" value="" />
+						<label class="block-label" for="password">비밀번호</label>
+						<input id="password" name="password" type="password" value="" />
 						<c:if test="${'fail' == param.result }">
 							<p>로그인이 실패 했습니다</p>
 						</c:if>

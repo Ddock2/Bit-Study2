@@ -10,7 +10,7 @@
 				<li><a href="${pageContext.request.contextPath}/user/joinform">회원가입</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="${pageContext.request.contextPath}/user/modifyform">정보 수정</a></li>
+				<li><a href="${pageContext.request.contextPath}/user/modifyform">정보수정</a></li>
 				<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
 				<li>${authUser.name}님 충성충성 ^^7</li>
 			</c:otherwise>

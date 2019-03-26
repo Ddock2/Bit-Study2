@@ -12,45 +12,44 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 import com.bit.mysite.vo.UserVO;
 
-public class AuthUserHandlerMethodArgumentResolver
-	implements HandlerMethodArgumentResolver {
-	
-	@Override
-	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
-			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-		if(supportsParameter(parameter) == false) {
-			return WebArgumentResolver.UNRESOLVED;
-		}
-		
-		// @AuthUser 붙어있고, 파라미터 타입이 UserVO라면 진행!
-		HttpServletRequest request
-			= webRequest.getNativeRequest(HttpServletRequest.class);
-		
-		HttpSession session = request.getSession();
-		if(session == null) {
-			return WebArgumentResolver.UNRESOLVED;
-		}
-		
-		return session.getAttribute("authUser");
-	}
+public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver{
 
-	@Override
-	public boolean supportsParameter(MethodParameter parameter) {
-		AuthUser authUser = parameter.getParameterAnnotation(AuthUser.class);
-		
-		// @AuthUser가 안붙었다면,
-		if(authUser == null) {
-			return false;
-		}
-		
-		// 파라미터 타입이 UserVO가 아니라면,
-		if(parameter.getParameterType().equals(UserVO.class) == false) {
-			return false;
-		}
-		
-		// @AuthUser가 붙어있는 UserVO 타입이라면!
-		
-		return false;
-	}
-	
+   @Override
+   public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
+         NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+      
+      if (supportsParameter(parameter) == false) {
+         return WebArgumentResolver.UNRESOLVED;
+      }
+      
+      // @AuthUser 붙어있고 파라미터 타입이 UserVO 라면 진행
+      HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
+      
+      HttpSession session = request.getSession();
+      if (session == null) {
+         return WebArgumentResolver.UNRESOLVED;
+      }
+      
+      return session.getAttribute("authUser");
+   }
+   
+   @Override
+   public boolean supportsParameter(MethodParameter parameter) {
+      AuthUser authUser = parameter.getParameterAnnotation(AuthUser.class);
+      
+      // @AuthUser가 안 붙었다면
+      
+      if (authUser == null) {
+         return false;
+      }
+      
+      if (parameter.getParameterType().equals(UserVO.class) == false) {
+         return false;
+      }
+      
+      // @AutherUser가 붙어 있는 User타입 이라면 진행
+      return true;
+   }
+
+   
 }

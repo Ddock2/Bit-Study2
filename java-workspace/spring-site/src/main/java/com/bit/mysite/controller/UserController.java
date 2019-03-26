@@ -57,6 +57,7 @@ public class UserController {
 	@Auth
 	@RequestMapping("/modifyform")
 	public String modifyForm(@AuthUser UserVO authUser, Model model) {
+		System.out.println(authUser);
 		UserVO vo = userService.getUser(authUser.getNo());
 		model.addAttribute("userVO", vo);
 		
@@ -66,6 +67,8 @@ public class UserController {
 	@Auth
 	@RequestMapping("/modify")
 	public String modify(@AuthUser UserVO authUser, @ModelAttribute UserVO vo) {
+		System.out.println(authUser);
+		System.out.println(vo);
 		vo.setNo(authUser.getNo());
 		userService.updateUser(vo);
 		authUser.setName(vo.getName());

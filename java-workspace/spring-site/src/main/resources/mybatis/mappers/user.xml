@@ -23,13 +23,13 @@
 		<![CDATA[
 			name=#{name},
 			gender=#{gender}
-		where no=#{no}
+		where no=#{no, jdbcType=NUMERIC}
 		]]>
 	</update>
 	
 	<select id="getByEmailAndPassword" parameterType="map" resultType="uservo">
 		<![CDATA[
-		SELECT no, name
+		SELECT no, name, gender
 		  FROM users
 		  WHERE email=#{email} and password=#{password}
 		]]>
@@ -47,7 +47,7 @@
 		<![CDATA[
 		SELECT no, email, name, gender
 		  FROM users
-		  WHERE no=#{no}
+		  WHERE no=#{no, jdbcType=NUMERIC}
 		]]>
 	</select>
 </mapper>

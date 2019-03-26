@@ -11,8 +11,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 	CREATE TABLE users (
 		no			NUMBER(6)		PRIMARY KEY,
 		name		VARCHAR2(40)	NOT NULL,
-		password	VARCHAR2(20)	NOT NULL,
 		email		VARCHAR2(80)	NOT NULL,
+		password	VARCHAR2(20)	NOT NULL,
 		gender		VARCHAR2(10)
 	);
 	
