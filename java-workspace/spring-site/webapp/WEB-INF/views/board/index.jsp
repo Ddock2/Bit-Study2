@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">
@@ -32,12 +32,12 @@
 							<c:when test="${vo.depth > 0}">
 								<td class="left" style="padding-left:${20*vo.depth}px">
 									<img src="${pageContext.request.contextPath}/assets/images/reply.png">
-									<a href="${pageContext.request.contextPath}/board/view?no=${vo.no}&p=${vo.currentPage}">${vo.title}</a>
+									<a href="${pageContext.request.contextPath}/board/view?no=${vo.no}&p=${map.currentPage}">${vo.title}</a>
 								</td>
 							</c:when>
 							<c:otherwise>
 								<td class="left">
-									<a href="${pageContext.request.contextPath}/board/view?no=${vo.no}&p=${vo.currentPage}">${vo.title}</a>
+									<a href="${pageContext.request.contextPath}/board/view?no=${vo.no}&p=${map.currentPage}">${vo.title}</a>
 								</td>
 							</c:otherwise>
 						</c:choose>
@@ -49,7 +49,9 @@
 								<c:when test="${not empty authUser && authUser.no == vo.userNo}">
 									<a href="${pageContext.request.contextPath}/board/delete?
 										no=${vo.no}&p=${map.currentPage}&kwd=${map.keyword}"
-										class="del">삭제</a>
+										class="del">
+										삭제<img src="${pageContext.request.contextPath}/assets/images/recycle.png">
+									</a>
 								</c:when>
 								<c:otherwise>
 									&nbsp;

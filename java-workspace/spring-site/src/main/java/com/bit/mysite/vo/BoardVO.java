@@ -8,14 +8,16 @@ public class BoardVO {
 	private Integer hit;
 	private Integer groupNo;
 	private Integer orderNo;
+	private Integer depth;
 	private Long userNo;
 	private String userName;
+	
 	
 	public BoardVO() {
 		super();
 	}
 	public BoardVO(Long no, String title, String content, String regDate, Integer hit, Integer groupNo, Integer orderNo,
-			Long userNo, String userName) {
+			Integer depth, Long userNo, String userName) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -24,6 +26,7 @@ public class BoardVO {
 		this.hit = hit;
 		this.groupNo = groupNo;
 		this.orderNo = orderNo;
+		this.depth = depth;
 		this.userNo = userNo;
 		this.userName = userName;
 	}
@@ -70,6 +73,12 @@ public class BoardVO {
 	public void setOrderNo(Integer orderNo) {
 		this.orderNo = orderNo;
 	}
+	public Integer getDepth() {
+		return depth;
+	}
+	public void setDepth(Integer depth) {
+		this.depth = depth;
+	}
 	public Long getUserNo() {
 		return userNo;
 	}
@@ -86,8 +95,7 @@ public class BoardVO {
 	@Override
 	public String toString() {
 		return "BoardVO [no=" + no + ", title=" + title + ", content=" + content + ", regDate=" + regDate + ", hit="
-				+ hit + ", groupNo=" + groupNo + ", orderNo=" + orderNo + ", userNo=" + userNo + ", userName="
-				+ userName + "]";
+				+ hit + ", groupNo=" + groupNo + ", orderNo=" + orderNo + ", depth=" + depth + ", userNo=" + userNo
+				+ ", userName=" + userName + "]";
 	}
-	
 }

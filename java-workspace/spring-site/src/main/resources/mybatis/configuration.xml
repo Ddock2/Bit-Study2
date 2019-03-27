@@ -5,9 +5,11 @@
  <configuration>
  	<typeAliases>
  		<typeAlias alias="uservo" type="com.bit.mysite.vo.UserVO"/>
+ 		<typeAlias alias="boardvo" type="com.bit.mysite.vo.BoardVO"/>
  	</typeAliases>
  	
  	<mappers>
  		<mapper resource="mybatis/mappers/user.xml"/>
+ 		<mapper resource="mybatis/mappers/board.xml"/>
  	</mappers>
  </configuration>
