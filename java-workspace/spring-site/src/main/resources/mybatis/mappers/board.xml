@@ -17,7 +17,7 @@
 		  set title=#{title},
 		  	  content=#{content}
 		  where no=#{no, jdbcType=NUMERIC}
-		    and users_no=#{userNo, jdbcType=NUMERIC}
+		    and user_no=#{userNo, jdbcType=NUMERIC}
 		]]>
 	</update>
 	
@@ -78,7 +78,7 @@
 				  		   sysdate,
 				  		   0, 
 				  		   #{groupNo},
-				  		   #{orderNo,
+				  		   #{orderNo},
 				  		   #{depth},
 				  		   #{userNo}
 				  		 )	

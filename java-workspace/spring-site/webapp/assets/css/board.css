@@ -48,12 +48,14 @@ input#kwd {width: 250px;}
 	border-top: 2px dashed #333;
 	border-bottom: 2px dashed #333;
 }
+.tbl-ex td.re img {width: auto; height: 1.5em;}
+
 .tbl-ex a {text-decoration: none; font-weight: bold;}
 .tbl-ex a.del img {width: 100%; height: auto;}
 
 .board-form .tbl-ex td {text-align: left;}
 .board-form .tbl-ex td.label {
-	text-align: right;
+	text-align: center;
 	font-weight: bold;
 	width: 60px;
 }

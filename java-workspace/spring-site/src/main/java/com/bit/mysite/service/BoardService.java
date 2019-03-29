@@ -41,7 +41,6 @@ public class BoardService {
 			boardVO.setOrderNo(orderNo + 1);
 			boardVO.setDepth(depth + 1);
 		}
-		
 		return boardDAO.insert(boardVO) == 1;
 	}
 	

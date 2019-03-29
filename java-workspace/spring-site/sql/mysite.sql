@@ -27,3 +27,19 @@ CREATE SEQUENCE board_seq
 	start with 1
 	increment by 1
 	maxvalue 999999;
+	
+-- Galery Test
+CREATE TABLE gallery (
+	no				NUMBER(6)		PRIMARY KEY,
+	org_file_name	VARCHAR2(100)	NOT NULL,
+	save_file_name	VARCHAR2(100)	NOT NULL,
+	comments		VARCHAR2(100)	NOT NULL,
+	file_ext_name	VARCHAR2(100)	NOT NULL,
+	file_size		NUMBER(6)		NOT NULL,
+	reg_date		DATE			DEFAULT SYSDATE,
+	user_no			VARCHAR2(6)		NOT NULL
+);
+CREATE SEQUENCE gallery_seq
+	start with 1
+	increment by 1
+	maxvalue 999999;
