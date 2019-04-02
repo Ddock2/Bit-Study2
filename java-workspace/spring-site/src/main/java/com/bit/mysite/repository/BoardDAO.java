@@ -20,6 +20,7 @@ public class BoardDAO {
 	}
 	
 	public int delete(BoardVO boardVO) {
+		System.out.println(boardVO);
 		return sqlSession.delete("board.delete", boardVO);
 	}
 	

@@ -35,7 +35,7 @@
 		delete
 		  from board
 		  where no = #{no, jdbcType=NUMERIC}
-		    and users_no = #{userNo, jdbcType=NUMERIC}
+		    and user_no = #{userNo, jdbcType=NUMERIC}
 		]]>
 	</delete>
 	

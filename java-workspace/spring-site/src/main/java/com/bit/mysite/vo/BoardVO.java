@@ -1,9 +1,13 @@
 package com.bit.mysite.vo;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class BoardVO {
 	private Long no;
+	@NotEmpty
 	private String title;
-	private String content;
+	@NotEmpty
+	private String content;	
 	private String regDate;
 	private Integer hit;
 	private Integer groupNo;

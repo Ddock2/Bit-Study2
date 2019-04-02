@@ -1,10 +1,15 @@
 package com.bit.mysite.controller;
 
+import java.util.List;
 import java.util.Map;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,13 +51,35 @@ public class BoardController {
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String write(
 			@AuthUser UserVO authUser,
-			@ModelAttribute BoardVO vo,
+			@ModelAttribute @Valid BoardVO vo,
+			BindingResult result,
 			@RequestParam(value="p", required=true, defaultValue="1") Integer page,
 			@RequestParam(value="kwd", required=true, defaultValue="") String keyword
 			) {
+		if(result.hasErrors()) {
+			List<ObjectError> list = result.getAllErrors();
+			for(ObjectError oe : list) {
+				System.out.println("Object Error : " + oe);
+			}
+			return "board/write";
+		}
+		
 		vo.setUserNo(authUser.getNo());
 		boardService.writeMessage(vo);
 		
+		return "redirect:/board" + "?p=" + page + "&kwd=" + WebUtil.encodeURL(keyword, "UTF-8");
+	}
+	
+	@Auth
+	@RequestMapping("/delete")
+	public String delete(
+			@AuthUser UserVO authUser,
+			@ModelAttribute BoardVO boardVO,
+			@RequestParam(value="p", required=true, defaultValue="1") Integer page,
+			@RequestParam(value="kwd", required=true, defaultValue="") String keyword
+			) {
+		boardVO.setUserNo(authUser.getNo());
+		boardService.deleteMessage(boardVO);
 		return "redirect:/board" + "?p=" + page + "&kwd=" + WebUtil.encodeURL(keyword, "UTF-8");
 	}
 	

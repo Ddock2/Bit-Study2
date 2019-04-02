@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +28,20 @@
 						<td><textarea id="content" name="content"></textarea></td>
 					</tr>
 				</table>
+				<spring:hasBindErrors name="boardVO">
+					<c:if test="${errors.hasFieldErrors('title')}">
+						<p style="text-align:center; color:red;">
+						<spring:message
+							code="${errors.getFieldError('title').codes[0]}"
+							text="${errors.getFieldError('title').defaultMessage}"/>
+					</c:if>
+					<c:if test="${errors.hasFieldErrors('content')}">
+						<p style="text-align:center; color:red;">
+						<spring:message
+							code="${errors.getFieldError('content').codes[0]}"
+							text="${errors.getFieldError('content').defaultMessage}"/>
+					</c:if>
+				</spring:hasBindErrors>
 				<div class="bottom">
 					<a href="${pageContext.request.contextPath}/board">취소</a>
 					<input type="submit" value="등록">
