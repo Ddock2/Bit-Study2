@@ -1,0 +1,13 @@
+CREATE user c##ba IDENTIFIED BY ba;
+ALTER user c##ba DEFAULT TABLESPACE users;
+GRANT create session to c##ba;
+GRNAT connect, resource to c##ba;
+
+CONN sys as sysdba
+비밀번호 : sys
+GRANT create any table to c##ba;
+
+alter user c##ba quota unlimited on users;
+
+
+tablespace users 는 생성되어있던것

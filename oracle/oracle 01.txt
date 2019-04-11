@@ -96,6 +96,10 @@ ALTER USER c##bit DEFAULT TABLESPACE users;
 GRANT CREATE session TO c##bit;
 GRANT connect TO c##bit;
 GRANT resource TO c##bit;
+
+[레코드 삽입]
+[테이블 스페이스 설정]
+ALTER USER c##bit QUOTA UNLIMITED ON users; // 컬럼을 변경할 수 있는 권한을 줘야한다
 -------------------------------------------------------------------------------------------------------------
 >alter user [계정명] account unlock;
 
