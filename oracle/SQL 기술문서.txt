@@ -145,7 +145,10 @@ alter user hr identified by hr account unlock;
 /////////////////////////////////////////////////////////////////////////////////
 
 계정생성
-CREATE USER c##bit IDENTIFIED BY bit
+CREATE USER c##bit IDENTIFIED BY bit;
+
+유저계정 잠금해제
+alter user c##bit account unlock;
 
 권환부여
 GRANT CREATE session TO c##bit;
